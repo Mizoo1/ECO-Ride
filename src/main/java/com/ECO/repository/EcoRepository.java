@@ -28,4 +28,12 @@ public class EcoRepository {
     public String getServices() {
         return "services";
     }
+
+    public String getAdminSeite() {
+        return "users";
+    }
+
+    public String getTarifSeite() {
+        return "tarif-form";
+    }
 }

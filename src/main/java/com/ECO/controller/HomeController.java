@@ -21,7 +21,7 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-
+    @Autowired
     private final EcoService ecoService;
 
     public HomeController(EcoService ecoService) {
@@ -36,6 +36,26 @@ public class HomeController {
     @GetMapping("/register")
     public String getRegister() {
         return ecoService.getRegister();
+    }
+    @PostMapping("/register-form")
+    public String registerUser(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
+        try{
+            ecoService.saveUser(user);
+            redirectAttributes.addFlashAttribute("success Message", "Your form has been successfully submitted!");
+            System.out.println("success Message");
+            return ecoService.getTarifSeite();
+
+        }catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "An error occurred while submitting the form. Please try again later."+e.getMessage());
+            System.out.println("Error Message");
+            return ecoService.getRegister();
+        }
+    }
+    @GetMapping("/users")
+    public String getUsers(Model model) {
+        List<User> users = ecoService.getAllUsers();
+        model.addAttribute("users", users);
+        return ecoService.getAdminSeite();
     }
     @GetMapping("/login")
     public String getLogin() {
