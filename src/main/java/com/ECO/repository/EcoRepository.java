@@ -5,10 +5,27 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class EcoRepository {
 
-    private final String home = "index";
-
     public String getHome() {
-        return home;
+        return "index";
     }
 
+    public String getRegister() {
+        return "register";
+    }
+
+    public String getLogin() {
+        return "login";
+    }
+
+    public String getContact() {
+        return "contact";
+    }
+
+    public String getAbout() {
+        return "about";
+    }
+
+    public String getServices() {
+        return "services";
+    }
 }

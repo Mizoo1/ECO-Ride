@@ -14,6 +14,22 @@ public class EcoService {
     public String getHome() {
         return ecoRepository.getHome();
     }
+    public String getRegister() {
+        return ecoRepository.getRegister();
+    }
+    public String getLogin() {
+        return ecoRepository.getLogin();
+    }
 
+    public String getContact() {
+        return ecoRepository.getContact();
+    }
 
+    public String getAbout() {
+        return ecoRepository.getAbout();
+    }
+
+    public String getServices() {
+        return ecoRepository.getServices();
+    }
 }

@@ -33,4 +33,25 @@ public class HomeController {
         return ecoService.getHome();
     }
 
+    @GetMapping("/register")
+    public String getRegister() {
+        return ecoService.getRegister();
+    }
+    @GetMapping("/login")
+    public String getLogin() {
+        return ecoService.getLogin();
+    }
+    @GetMapping("/contact")
+    public String getContact() {
+        return ecoService.getContact();
+    }
+    @GetMapping("/services")
+    public String getServices() {
+        return ecoService.getServices();
+    }
+    @GetMapping("/about")
+    public String getAbout() {
+        return ecoService.getAbout();
+    }
+
 }
