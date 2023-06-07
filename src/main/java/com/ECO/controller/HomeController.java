@@ -18,12 +18,15 @@ public class HomeController {
         this.ecoService = ecoService;
     }
 
-    @GetMapping("/index")
+    @GetMapping("/api/v/registration/index")
+    public String getHomeWithoutLogin() {
+        return ecoService.getHome();
+    }
+    @GetMapping("index")
     public String getHome() {
         return ecoService.getHome();
     }
-
-    @GetMapping("/register")
+    @GetMapping("/api/v/registration/register")
     public String getRegister() {
         return ecoService.getRegister();
     }
