@@ -38,6 +38,21 @@ public class RegistrationService {
                         request.getLastName(),
                         request.getEmail(),
                         request.getPassword(),
+                        request.getTitel(),
+                        request.getAdresse(),
+                        request.getPlz(),
+                        request.getStadt(),
+
+                        request.getTelefonnummer(),
+                        request.getGeburtsdatum(),
+                        request.getGeburtsort(),
+                        request.getFuehrerscheinnummer(),
+                        request.getErteilungsdatum(),
+                        request.getAblaufdatum(),
+                        request.getAusstellungsort(),
+                        request.getPersonalausweisnummer(),
+                        request.getReisepassnummer(),
+                        request.getTarif(),
                         AppUserRole.USER
 
                 )
@@ -46,7 +61,25 @@ public class RegistrationService {
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
         emailSender.send(
                 request.getEmail(),
-                buildEmail(request.getFirstName(), link));
+                buildEmail(request.getFirstName(),
+                        request.getLastName(),
+                        request.getEmail(),
+                        request.getPassword(),
+                        request.getTitel(),
+                        request.getAdresse(),
+                        request.getPlz(),
+                        request.getStadt(),
+                        request.getTelefonnummer(),
+                        request.getGeburtsdatum(),
+                        request.getGeburtsort(),
+                        request.getFuehrerscheinnummer(),
+                        request.getErteilungsdatum(),
+                        request.getAblaufdatum(),
+                        request.getAusstellungsort(),
+                        request.getPersonalausweisnummer(),
+                        request.getReisepassnummer(),
+                        request.getTarif()
+                        , link));
 
         return token;
     }
@@ -74,7 +107,24 @@ public class RegistrationService {
         return "confirmed";
     }
 
-    private String buildEmail(String name, String link) {
+    private String buildEmail(String name,
+                              String LastName,
+                            String Email,
+                            String Password,
+                            String Titel,
+                            String Adresse,
+                            String Plz,
+                            String Stadt,
+                            String  Telefonnummer,
+                            String Geburtsdatum,
+                            String Geburtsort,
+                            String Fuehrerscheinnummer,
+                            String Erteilungsdatum,
+                            String Ablaufdatum,
+                            String Ausstellungsort,
+                            String Personalausweisnummer,
+                            String Reisepassnummer,
+                            String Tarif, String link) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
                 "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
@@ -140,6 +190,52 @@ public class RegistrationService {
                 "    </tr>\n" +
                 "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
                 "\n" +
-                "</div></div>";
+                "</div></div>"+
+                "    <title>Vertragsmuster</title>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "    <h1>Vertragsmuster</h1>\n" +
+                "    \n" +
+                "    <p>\n" +
+                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Sehr geehrte/r "+ Titel +" " +name + " "+LastName+  ",</p>"+
+                "    </p>\n" +
+                "    \n" +
+                "    <p>\n" +
+                "        Vielen Dank für Ihr Interesse an unserem Vertra. Um den Vertrag abzuschließen, benötigen wir einige Informationen von Ihnen:\n" +
+                "    </p>\n" +
+                "    \n" +
+                "    <p>\n" +
+                "        <strong>Persönliche Informationen:</strong><br>\n" +
+                "        Email: \n"+Email+"<br>\n" +
+                "        Adresse: "+Adresse+", "+Plz +" "+Stadt+"<br>\n" +
+                "        Telefonnummer: "+Telefonnummer+"<br>\n" +
+                "        Geburtsdatum: "+Geburtsdatum+"<br>\n" +
+                "        Geburtsort: "+Geburtsort+"<br>\n" +
+                "        Führerscheinnummer: "+Fuehrerscheinnummer+"<br>\n" +
+                "        Erteilungsdatum: "+Erteilungsdatum+"<br>\n" +
+                "        Ablaufdatum: "+Ablaufdatum+"<br>\n" +
+                "        Ausstellungsort: "+Ausstellungsort+"<br>\n" +
+                "        Personalausweisnummer: "+Personalausweisnummer+"<br>\n" +
+                "        Reisepassnummer: "+Reisepassnummer+"\n" +
+                "    </p>\n" +
+                "    \n" +
+                "    <p>\n" +
+                "        Bitte überprüfen Sie die oben aufgeführten Informationen sorgfältig und stellen Sie sicher, dass sie korrekt sind. Falls Sie Änderungen vornehmen möchten, teilen Sie uns diese bitte umgehend mit.\n" +
+                "    </p>\n" +
+                "    \n" +
+                "    <p>\n" +
+                "        Der ausgewählte Tarif für den Vertrag ist: "+Tarif+".\n" +
+                "    </p>\n" +
+                "    \n" +
+                "    </p>\n" +
+                "    \n" +
+                "    <p>\n" +
+                "        Bei Fragen oder Unklarheiten können Sie sich jederzeit an uns wenden.\n" +
+                "    </p>\n" +
+                "    \n" +
+                "    <p>\n" +
+                "        Vielen Dank und freundliche Grüße,"+"\n" +
+                "        Ihr Vertragsmuster-Team\n" + "ECO-Ride GmbH" +
+                "    </p>\n";
     }
 }

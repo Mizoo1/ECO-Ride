@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 public class EcoRepository {
 
     public String getHome() {
-        return "index";
+        return "indexWithoutLogin.html";
     }
     public String getHomeWithoutLogin() {
         return "indexWithoutLogin";

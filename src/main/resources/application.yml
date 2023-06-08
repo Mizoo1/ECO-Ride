@@ -22,12 +22,17 @@ spring:
         dialect: org.hibernate.dialect.MariaDBDialect
         format_sql: true
     show-sql: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
 
   mail:
     host: smtp.gmail.com
     port: 587
-    username: vairussyr97@gmail.com
-    password: nxmhhdwwiyqqlcpo
+    username: eco.ride.germany@gmail.com
+    password: srpyyfidibekflju
     properties:
       mail:
         smtp:
