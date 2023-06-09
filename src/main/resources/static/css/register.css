@@ -185,7 +185,12 @@ p {
   margin-right: 10px;
 }
 .container{
-  max-width: 1400px; /* Beispielwert - passen Sie die Breite nach Bedarf an */
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.card-body{
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
 }

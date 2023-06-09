@@ -31,12 +31,12 @@ public class HomeController {
 
     @GetMapping("/api/v/registration/index")
     public String getHomeWithoutLogin(Model model, HttpSession session) {
-        model.addAttribute("loggedIn", session.getAttribute("loggedIn"));
+        //model.addAttribute("loggedIn", session.getAttribute("loggedIn"));
         return ecoService.getHomeWithoutLogin();
     }
     @GetMapping("index")
     public String getHome(Model model, HttpSession session) {
-        model.addAttribute("logout", session.getAttribute("logout"));
+        //model.addAttribute("logout", session.getAttribute("logout"));
         return ecoService.getHome();
     }
     @GetMapping("/api/v/registration/register")
@@ -50,6 +50,10 @@ public class HomeController {
     @GetMapping("/api/v/registration/login")
     public String getLogin() {
         return ecoService.getLogin();
+    }
+    @GetMapping("/api/v/registration/logout")
+    public String getLogout() {
+        return ecoService.getLogout();
     }
     @GetMapping("/api/v/registration/contact")
     public String getContact() {
@@ -80,7 +84,7 @@ public class HomeController {
         String confirmationResult = registrationService.register(request);
         Context context = new Context();
         context.setVariable("confirmationResult", confirmationResult);
-        String renderedHtml = templateEngine.process("registerSucsses", context);
+        String renderedHtml = templateEngine.process("/registerSucsses", context);
         // Return the rendered HTML as a response with appropriate headers and status
         return ResponseEntity.ok().body(renderedHtml);
     }

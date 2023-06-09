@@ -24,6 +24,9 @@ public class EcoService {
     public String getLogin() {
         return ecoRepository.getLogin();
     }
+    public String getLogout() {
+        return ecoRepository.getLogout();
+    }
 
     public String getContact() {
         return ecoRepository.getContact();

@@ -19,6 +19,9 @@ public class EcoRepository {
     public String getLogin() {
         return "login";
     }
+    public String getLogout() {
+        return "logout";
+    }
 
     public String getContact() {
         return "contact";

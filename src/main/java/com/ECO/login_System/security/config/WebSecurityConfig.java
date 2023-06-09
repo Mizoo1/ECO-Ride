@@ -31,10 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("http://localhost:8080/index")
+                .defaultSuccessUrl("/index")
                 .loginPage("/login")
                 .and()
-                .logout().logoutSuccessUrl("http://localhost:8080/api/v/registration/index");
+                .logout().logoutSuccessUrl("http://localhost:8080/api/v/registration/logout");
     }
 
     @Override
