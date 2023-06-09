@@ -47,16 +47,28 @@ public class HomeController {
     public String getLogin() {
         return ecoService.getLogin();
     }
-    @GetMapping("/contact")
+    @GetMapping("/api/v/registration/contact")
     public String getContact() {
         return ecoService.getContact();
     }
-    @GetMapping("/services")
+    @GetMapping("/contact")
+    public String getContactWithoutLogin() {
+        return ecoService.getContact();
+    }
+    @GetMapping("/api/v/registration/services")
     public String getServices() {
         return ecoService.getServices();
     }
-    @GetMapping("/about")
+    @GetMapping("/services")
+    public String getServicesWithoutLogin() {
+        return ecoService.getServices();
+    }
+    @GetMapping("/api/v/registration/about")
     public String getAbout() {
+        return ecoService.getAbout();
+    }
+    @GetMapping("/about")
+    public String getAboutWithoutLogin() {
         return ecoService.getAbout();
     }
     @PostMapping(path = "api/v1/registration")
@@ -84,6 +96,10 @@ public class HomeController {
     @GetMapping()
     public String registerDone() {
         return "sucess";
+    }
+    @GetMapping(path = "/api/v/registration/term_condition")
+    public String getTerm_condition() {
+        return "term_condition";
     }
 
 }

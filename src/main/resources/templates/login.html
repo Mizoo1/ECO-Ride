@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="icon" href="/img/Logo.png" type="image/png">
   <style>
-
+    /* Fügen Sie hier Ihre benutzerdefinierten Stile hinzu */
   </style>
 </head>
 <body>
@@ -19,7 +19,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <h2 class="text-center mb-4">Anmelden</h2>
-      <form th:action="@{/login}" method="post">
+      <form th:action="@{/index}" method="post">
         <div class="form-group">
           <label for="username">Benutzername</label>
           <input type="text" id="username" name="username" class="form-control" required autofocus>
@@ -30,7 +30,7 @@
         </div>
         <button type="submit" class="btn btn-primary btn-block">Anmelden</button>
       </form>
-      <p class="text-center mt-3">Noch keinen Account? <a href="index">Hier registrieren</a></p>
+      <p class="text-center mt-3">Noch keinen Account? <a href="/api/v/registration/register">Hier registrieren</a></p>
     </div>
   </div>
 </div>
