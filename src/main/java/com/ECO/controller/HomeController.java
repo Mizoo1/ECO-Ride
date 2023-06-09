@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
-
-
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -31,17 +30,22 @@ public class HomeController {
     }
 
     @GetMapping("/api/v/registration/index")
-    public String getHomeWithoutLogin() {
+    public String getHomeWithoutLogin(Model model, HttpSession session) {
+        model.addAttribute("loggedIn", session.getAttribute("loggedIn"));
         return ecoService.getHomeWithoutLogin();
     }
-
     @GetMapping("index")
-    public String getHome() {
+    public String getHome(Model model, HttpSession session) {
+        model.addAttribute("logout", session.getAttribute("logout"));
         return ecoService.getHome();
     }
     @GetMapping("/api/v/registration/register")
     public String getRegister() {
         return ecoService.getRegister();
+    }
+    @GetMapping("/register")
+    public String getPersonlicheSeite() {
+        return "/name";
     }
     @GetMapping("/api/v/registration/login")
     public String getLogin() {

@@ -31,7 +31,9 @@
         }
     </style>
 </head>
-<body>
+<body><!-- Navigation -->
+<div th:replace="fragments/nav.html::nav"></div>
+
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
@@ -47,4 +49,5 @@
     </div>
 </div>
 </body>
+<div th:replace="fragments/footer.html::footer"></div>
 </html>

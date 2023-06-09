@@ -21,13 +21,13 @@
     <form th:action="@{http://localhost:8080/api/v1/registration}" method="post" enctype="multipart/form-data" >
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12">
-                    <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                <div class="col-18">
+                    <div class="card card-registration card-registration-2" style="border-radius: 30px;">
                         <div class="card-body p-0">
                             <div class="row g-0">
                                 <div class="col-lg-6">
                                     <div class="p-5">
-                                        <h3 class="fw-normal mb-5" style="color: #4835d4;">General Infomation</h3>
+                                        <h3 class="fw-normal mb-5" style="color: #4835d4;">Persönliche  Infomationen</h3>
 
                                         <div class="mb-1 pb-2">
                                             <select id="form_salutation"  name="titel" class="form-control  " required="required" data-error="Anrede.">
@@ -160,7 +160,7 @@
                                 </div>
                                 <div class="col-lg-6 bg-indigo text-white">
                                     <div class="p-5">
-                                        <h3 class="fw-normal mb-5">Contact Details</h3>
+                                        <h3 class="fw-normal mb-5">Kontakt Informationen</h3>
 
                                         <div class="mb-4 pb-2">
                                             <div class="form-outline form-white">
@@ -237,4 +237,5 @@
 <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
 <script src="/js/register.js"></script>
 </body>
+<div th:replace="fragments/footer.html::footer"></div>
 </html>

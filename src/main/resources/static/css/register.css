@@ -1,6 +1,7 @@
 @media (min-width: 1025px) {
   .h-custom {
     height: 100vh !important;
+
   }
 }
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
@@ -27,24 +28,19 @@
 .bg-indigo {
   background-color: #4835d4;
 }
-@media (min-width: 992px) {
+@media (min-width: 1025px) {
   .card-registration-2 .bg-indigo {
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
   }
 }
-@media (max-width: 991px) {
+@media (max-width: 1025px) {
   .card-registration-2 .bg-indigo {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
   }
 }
 
-
-
-body {
-  background-color: #8E24AA
-}
 
 .mt-100 {
   margin-top: 100px
@@ -175,10 +171,21 @@ p {
 
 .my-cta-button{
   background:    #15d798;
-  border-radius: 11px;
+  border-radius: 15px;
   padding:       20px 45px;
   color:         #ffffff;
   display:       inline-block;
   font:          normal bold 26px/1 "Open Sans", sans-serif;
   text-align:    center;
+}
+.btn-secondary{
+  margin-left: 60px;
+}
+.btn-group-toggle .btn {
+  margin-right: 10px;
+}
+.container{
+  max-width: 1400px; /* Beispielwert - passen Sie die Breite nach Bedarf an */
+  margin-left: auto;
+  margin-right: auto;
 }
