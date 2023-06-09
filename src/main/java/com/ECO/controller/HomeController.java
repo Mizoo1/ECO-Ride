@@ -14,7 +14,7 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
 
-import java.util.List;
+
 
 
 @Controller
@@ -32,7 +32,7 @@ public class HomeController {
 
     @GetMapping("/api/v/registration/index")
     public String getHomeWithoutLogin() {
-        return ecoService.getHome();
+        return ecoService.getHomeWithoutLogin();
     }
 
     @GetMapping("index")
@@ -43,7 +43,7 @@ public class HomeController {
     public String getRegister() {
         return ecoService.getRegister();
     }
-    @GetMapping("/login")
+    @GetMapping("/api/v/registration/login")
     public String getLogin() {
         return ecoService.getLogin();
     }

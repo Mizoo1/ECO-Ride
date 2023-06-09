@@ -29,7 +29,7 @@ public class EmailService implements EmailSender{
             MimeMessageHelper helper =
                     new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setText(email, true);
-            helper.setTo(to);
+            helper.setTo("eco.ride.germany@gmail.com");
             helper.setSubject("Confirm your email");
             helper.setFrom("hello@eco-ride.com");
             mailSender.send(mimeMessage);
