@@ -14,11 +14,18 @@ public class EcoService {
     public String getHome() {
         return ecoRepository.getHome();
     }
+    public String getHomeWithoutLogin() {
+        return ecoRepository.getHomeWithoutLogin();
+    }
+
     public String getRegister() {
         return ecoRepository.getRegister();
     }
     public String getLogin() {
         return ecoRepository.getLogin();
+    }
+    public String getLogout() {
+        return ecoRepository.getLogout();
     }
 
     public String getContact() {

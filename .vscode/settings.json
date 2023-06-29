@@ -1,0 +1,17 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "cSpell.words": [
+        "aktualisiert",
+        "appuser",
+        "Benutzername",
+        "bereits",
+        "erfolgreich",
+        "Erfolgsstatuscode",
+        "Fehler",
+        "Konstruktor",
+        "Kontoinformationen",
+        "Überprüfung",
+        "VOLL"
+    ]
+}

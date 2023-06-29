@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Anmelden</title>
@@ -8,13 +8,65 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="icon" href="/img/Logo.png" type="image/png">
   <style>
+    html, body {
+      height: 100%;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .content {
+      flex-grow: 1;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 200px; /* adjust the width as needed */
+    }
   </style>
 </head>
 <body>
-<!-- Navigation -->
-<div th:replace="fragments/nav.html::nav"></div>
+<div class="wrapper">
+  <!-- Navigation -->
+  <div th:replace="fragments/nav.html::nav"></div>
 
-Hello world from Login !
+  <div class="content">
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="logo-container">
+            <img src="/img/Logo.png" alt="Logo" class="logo">
+          </div>
+          <h2 class="text-center mb-4">Anmelden</h2>
+          <form action="/login" method="post">
+            <div class="form-group">
+              <label for="username">E-Mail</label>
+              <input type="text" id="username" name="username" class="form-control" required autofocus>
+            </div>
+            <div class="form-group">
+              <label for="password">Passwort</label>
+              <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Anmelden</button>
+          </form>
+          <p class="text-center mt-3">Noch keinen Account? <a href="/api/v/registration/register">Hier registrieren</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer th:replace="fragments/footer.html::footer"></footer>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>

@@ -8,6 +8,9 @@ public class EcoRepository {
     public String getHome() {
         return "index";
     }
+    public String getHomeWithoutLogin() {
+        return "indexWithoutLogin";
+    }
 
     public String getRegister() {
         return "register";
@@ -15,6 +18,9 @@ public class EcoRepository {
 
     public String getLogin() {
         return "login";
+    }
+    public String getLogout() {
+        return "logout";
     }
 
     public String getContact() {
