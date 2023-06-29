@@ -12,7 +12,7 @@ spring:
   datasource:
     url: jdbc:mariadb://localhost:3306/registration
     username: root
-    password:
+    password: james2
 
   jpa:
     hibernate:
@@ -20,7 +20,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MariaDBDialect
-        format_sql: true
+        format-sql: true
     show-sql: true
   servlet:
     multipart:
