@@ -1,28 +1,31 @@
 package com.ECO.service;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.ECO.model.Booking;
 import com.ECO.model.User;
 import com.ECO.model.Vehicle;
 import com.ECO.repository.BookingRepository;
 import com.ECO.repository.UserRepository;
 import com.ECO.repository.VehicleRepository;
-import com.ECO.repository.userRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class BookingService {
-    @Autowired
-    private VehicleRepository vehicleRepository;
+    private final VehicleRepository vehicleRepository;
+    private final BookingRepository bookingRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    private BookingRepository bookingRepository;
+    public BookingService(VehicleRepository vehicleRepository, BookingRepository bookingRepository, UserRepository userRepository) {
+        this.vehicleRepository = vehicleRepository;
+        this.bookingRepository = bookingRepository;
+        this.userRepository = userRepository;
+    }
 
-    public void createBooking(Long vehicleId, User userId, LocalDateTime startTime, LocalDateTime endTime) {
+    public void createBooking(Long vehicleId, Long userId, LocalDateTime startTime, LocalDateTime endTime) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid vehicle ID: " + vehicleId));
 
@@ -30,13 +33,13 @@ public class BookingService {
             throw new IllegalStateException("Vehicle is not available for the specified dates");
         }
 
-        userRepository.findById(userId)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + userId));
 
         Booking booking = new Booking();
         booking.setVehicle(vehicle);
-        booking.setUser(userId);
-        booking.setStarTime(startTime);
+        booking.setUser(user);
+        booking.setStartTime(startTime);
         booking.setEndTime(endTime);
 
         vehicle.getBookings().add(booking);
@@ -48,7 +51,7 @@ public class BookingService {
     private boolean isVehicleAvailable(Vehicle vehicle, LocalDateTime startTime, LocalDateTime endTime) {
         List<Booking> bookings = vehicle.getBookings();
         for (Booking booking : bookings) {
-            if (startTime.isBefore(booking.getEndTime()) && endTime.isAfter(booking.getStarTime())) {
+            if (startTime.isBefore(booking.getEndTime()) && endTime.isAfter(booking.getStartTime())) {
                 return false;
             }
         }
@@ -59,11 +62,9 @@ public class BookingService {
         return bookingRepository.findAll();
     }
 
-    public List<Booking> getBookingsByUser(User userId) {
-        Vehicle user = UserRepository
-    public List<Booking> getBookingsByUser(User userId) {
-        User user = UserRepository.findById(userId)
-                .oElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + userId));
+    public List<Booking> getBookingsByUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + userId));
         return bookingRepository.findByUser(user);
     }
 
@@ -73,13 +74,13 @@ public class BookingService {
         return bookingRepository.findByVehicle(vehicle);
     }
 
-    public Vehicle getBookingById(Long bookingId) {
+    public Booking getBookingById(Long bookingId) {
         return bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid booking ID: " + bookingId));
     }
 
     public void cancelBooking(Long bookingId) {
-        Vehicle booking = bookingRepository.findById(bookingId)
+        Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid booking ID: " + bookingId));
 
         Vehicle vehicle = booking.getVehicle();
@@ -89,5 +90,4 @@ public class BookingService {
         vehicleRepository.save(vehicle);
         bookingRepository.delete(booking);
     }
-
 }

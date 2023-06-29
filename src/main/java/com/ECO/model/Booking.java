@@ -1,13 +1,8 @@
 package com.ECO.model;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import java.time.chrono.ChronoLocalDateTime;
 
 @Entity
 public class Booking {
@@ -67,4 +62,10 @@ public class Booking {
         this.endTime = endTime;
     }
 
+    public void setStartTime(LocalDateTime startTime) {
+    }
+
+    public ChronoLocalDateTime<?> getStartTime() {
+        return null;
+    }
 }

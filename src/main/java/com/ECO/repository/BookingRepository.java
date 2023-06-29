@@ -1,33 +1,18 @@
 package com.ECO.repository;
 
+import com.ECO.model.Booking;
+import com.ECO.model.User;
+import com.ECO.model.Vehicle;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.List;
 import java.util.Optional;
 
-import com.ECO.model.Booking;
-import com.ECO.model.Vehicle;
+public interface BookingRepository extends JpaRepository<Booking, Long> {
 
-public class BookingRepository {
+    List<Booking> findByUser(User user);
 
-    public void save(Booking booking) {
-    }
+    List<Booking> findByVehicle(Vehicle vehicle);
 
-    public List<Booking> findAll() {
-        return null;
-    }
-
-    public List<Booking> findByUser(Vehicle user) {
-        return null;
-    }
-
-    public List<Booking> findByVehicle(Vehicle vehicle) {
-        return null;
-    }
-
-    public Optional<Vehicle> findById(Long bookingId) {
-        return null;
-    }
-
-    public void delete(Vehicle booking) {
-    }
-
+    Optional<Booking> findById(Long bookingId);
 }

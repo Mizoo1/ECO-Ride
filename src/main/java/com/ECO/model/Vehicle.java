@@ -1,5 +1,7 @@
 package com.ECO.model;
 
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,7 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Vehicle {
+@NoArgsConstructor
+public class Vehicle extends Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +27,7 @@ public class Vehicle {
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
-    // Konstruktor
+    // Constructor
 
     public Vehicle(Long id, String make, String model, int year, boolean availability, double latitude,
             double longitude) {
