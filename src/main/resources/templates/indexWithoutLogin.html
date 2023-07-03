@@ -8,15 +8,106 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="icon" href="/img/Logo.png" type="image/png">
     <style>
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cookie-banner-buttons {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 <!-- Navigation -->
-<div th:replace="fragments/nav.html::nav"></div>
+<div th:replace="fragments/navWithoutLogin.html::nav"></div>
 <h1 class="Omar">Hello world from Home !</h1>
 <img src="/img/signup-bg.jpg" alt="Description of the image">
-<footer th:replace="fragments/footer.html::footer"></footer>
+<!-- Footer -->
+<div class="footer">
+    <div th:replace="fragments/footer.html::footer"></div>
+</div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+    // Funktion zum Überprüfen, ob der Benutzer die Cookies akzeptiert hat
+    function checkCookieConsent() {
+        var consent = getCookie("cookie_consent");
+        if (consent === "true") {
+            // Der Benutzer hat bereits zugestimmt
+            hideCookieBanner();
+        } else {
+            // Der Benutzer hat noch nicht zugestimmt, zeige den Cookie-Banner an
+            showCookieBanner();
+        }
+    }
+
+    // Funktion zum Anzeigen des Cookie-Banners
+    function showCookieBanner() {
+        var banner = document.createElement("div");
+        banner.classList.add("cookie-banner");
+        banner.innerHTML = `
+            <p>Diese Website verwendet Cookies, um Ihr Erlebnis zu verbessern.</p>
+            <div class="cookie-banner-buttons">
+                <button onclick="acceptCookies()">Akzeptieren</button>
+                <button onclick="rejectCookies()">Ablehnen</button>
+            </div>
+        `;
+        document.body.appendChild(banner);
+    }
+
+    // Funktion zum Ausblenden des Cookie-Banners
+    function hideCookieBanner() {
+        var banner = document.querySelector(".cookie-banner");
+        if (banner) {
+            banner.remove();
+        }
+    }
+
+    // Funktion zum Akzeptieren der Cookies
+    function acceptCookies() {
+        setCookie("cookie_consent", "true", 30);
+        hideCookieBanner();
+    }
+
+    // Funktion zum Ablehnen der Cookies
+    function rejectCookies() {
+        // Fügen Sie hier den Code ein, um die Verwendung von Cookies abzulehnen
+        // und ggf. Cookies zu löschen
+        hideCookieBanner();
+    }
+
+    // Funktion zum Erstellen eines Cookies
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    // Funktion zum Lesen eines Cookies
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    // Überprüfen Sie beim Laden der Seite, ob der Benutzer die Cookies akzeptiert hat
+    checkCookieConsent();
+</script>
 </body>
 </html>

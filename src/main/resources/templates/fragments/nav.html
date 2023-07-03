@@ -29,23 +29,31 @@
             <li class="nav-item">
                 <a class="nav-link" href="contact">Contact</a>
             </li>
-            <li  class="nav-item">
-                <a class="nav-link" href="login">
-                    <i class="fas fa-sign-in-alt"></i> Login
+            <li class="nav-item">
+                <a class="nav-link" href="reservierung">
+                    Reservierung
+                    <i class="fas fa-plus ml-2"></i>
                 </a>
             </li>
-            <li  class="nav-item">
-                <a class="nav-link" href="register">
-                    <i class="fas fa-user-plus"></i> Register
+            <li class="nav-item">
+                <a class="nav-link" href="profile">
+                    <div class="d-flex align-items-center">
+                        <span class="mr-2" th:text="${firstname}"></span>
+                        <i class="fas fa-user"></i>
+                    </div>
                 </a>
             </li>
-            <li  class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="logout">
-                    <i class="fas fa-sign-out-alt"></i> Logout
+                    <div class="d-flex align-items-center">
+                        <span class="mr-2">Logout</span>
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
                 </a>
             </li>
         </ul>
     </div>
+
 </nav>
 
 </body>

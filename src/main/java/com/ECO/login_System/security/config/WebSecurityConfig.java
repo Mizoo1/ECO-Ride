@@ -1,6 +1,5 @@
 package com.ECO.login_System.security.config;
 
-
 import com.ECO.login_System.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
@@ -19,11 +20,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AppUserService appUserService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .cors()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/api/v*/registration/**")
                 .permitAll()
@@ -31,17 +35,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/index")
                 .loginPage("/login")
+                .successHandler(authenticationSuccessHandler) // Set the custom authentication success handler
+                .permitAll()
                 .and()
-                .logout().logoutSuccessUrl("http://localhost:8080/api/v/registration/logout");
+                .logout()
+                .permitAll();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**").and().ignoring().antMatchers("/api/v*/registration/**");
-        web.ignoring().antMatchers("/img/**").and().ignoring().antMatchers("/api/v*/registration/**");
-        web.ignoring().antMatchers("/js/**").and().ignoring().antMatchers("/api/v*/registration/**");
+        web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/api/v*/registration/**");
     }
 
     @Override

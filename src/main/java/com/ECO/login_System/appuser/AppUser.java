@@ -8,7 +8,7 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import java.util.List;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -21,6 +21,8 @@ import java.util.Collections;
 @Entity
 public class AppUser implements UserDetails {
 
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
+    private List<Reservation> previousReservations;
 
     @SequenceGenerator(
             name = "Eco_sequence",
@@ -46,14 +48,14 @@ public class AppUser implements UserDetails {
     private String mobilnummer;
     private String geburtsdatum;
     private String geburtsort;
-    private String fuehrerscheinnumme;
+    private String fuehrerscheinnummer;
     private String erteilungsdatum;
     private String ablaufdatum;
     private String ausstellungsort;
     private String personalausweisnummer;
     private String reisepassnummer;
-
     private String tarif;
+    private String payMethod;
 
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
@@ -72,7 +74,8 @@ public class AppUser implements UserDetails {
                    String ablaufdatum, String ausstellungsort,
                    String personalausweisnummer,
                    String reisepassnummer,
-                   String tarif,AppUserRole appUserRole) {
+                   String tarif,AppUserRole appUserRole,
+                   String payMethod) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -85,13 +88,14 @@ public class AppUser implements UserDetails {
         this.geburtsdatum = geburtsdatum;
         this.geburtsort = geburtsort;
         this.tarif = tarif;
-        this.fuehrerscheinnumme = fuehrerscheinnummer;
+        this.fuehrerscheinnummer = fuehrerscheinnummer;
         this.erteilungsdatum = erteilungsdatum;
         this.ablaufdatum = ablaufdatum;
         this.ausstellungsort = ausstellungsort;
         this.personalausweisnummer = personalausweisnummer;
         this.reisepassnummer = reisepassnummer;
         this.appUserRole = appUserRole;
+        this.payMethod = payMethod;
     }
 
     @Override
@@ -139,8 +143,8 @@ public class AppUser implements UserDetails {
         return geburtsort;
     }
 
-    public String getFuehrerscheinnumme() {
-        return fuehrerscheinnumme;
+    public String getFuehrerscheinnummer() {
+        return fuehrerscheinnummer;
     }
 
     public String getErteilungsdatum() {
@@ -195,6 +199,10 @@ public class AppUser implements UserDetails {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getPayMethod() {
+        return payMethod;
     }
 
     @Override

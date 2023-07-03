@@ -53,7 +53,8 @@ public class RegistrationService {
                         request.getPersonalausweisnummer(),
                         request.getReisepassnummer(),
                         request.getTarif(),
-                        AppUserRole.USER
+                        AppUserRole.USER,
+                        request.getPayMethod()
 
                 )
         );
@@ -79,7 +80,7 @@ public class RegistrationService {
                         request.getPersonalausweisnummer(),
                         request.getReisepassnummer(),
                         request.getTarif()
-                        , link));
+                        , link, request.getPayMethod()));
 
         return token;
     }
@@ -124,7 +125,7 @@ public class RegistrationService {
                             String Ausstellungsort,
                             String Personalausweisnummer,
                             String Reisepassnummer,
-                            String Tarif, String link) {
+                            String Tarif, String link,String payMethod) {
         return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
                 "\n" +
                 "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +

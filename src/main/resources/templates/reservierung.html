@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservierung</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="/img/Logo.png" type="image/png">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .content {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation -->
+<div th:replace="fragments/nav.html::nav"></div>
+
+<div class="container content">
+    <h1>Reservierung</h1>
+
+    <!-- Vorherige Reservierungen -->
+    <h2>Vorherige Reservierungen</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Auto</th>
+            <th>Zeit</th>
+            <th>Datum</th>
+            <th>Abholort</th>
+            <th>Ort</th>
+            <th>Aktion</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iteriere über die vorherigen Reservierungen und zeige sie in der Tabelle an -->
+        <tr th:each="reservation : ${previousReservations}">
+            <td th:text="${reservation.auto}"></td>
+            <td th:text="${reservation.zeit}"></td>
+            <td th:text="${reservation.datum}"></td>
+            <td th:text="${reservation.abholort}"></td>
+            <td th:text="${reservation.ort}"></td>
+            <td>
+                <!-- Stornierungs-Button -->
+                <form th:action="@{/cancelReservation}" method="POST">
+                    <input type="hidden" th:name="reservationId" th:value="${reservation.id}">
+                    <button type="submit" class="btn btn-danger">Stornieren</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Neues Reservierungsformular -->
+    <h2>Neue Reservierung</h2>
+    <form action="/reservierung" method="POST">
+        <div class="form-group">
+            <label for="auto">Auto:</label>
+            <select class="form-control" id="auto" name="auto">
+                <option value="PKW">PKW</option>
+                <option value="LKW">LKW</option>
+                <!-- Weitere Optionen für verschiedene Autotypen -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="zeit">Zeit:</label>
+            <input type="time" class="form-control" id="zeit" name="zeit">
+        </div>
+        <div class="form-group">
+            <label for="datum">Datum:</label>
+            <input type="date" class="form-control" id="datum" name="datum">
+        </div>
+        <div class="form-group">
+            <label for="abholort">Abholort:</label>
+            <input type="text" class="form-control" id="abholort" name="abholort">
+        </div>
+        <div class="form-group">
+            <label for="ort">Ort:</label>
+            <input type="text" class="form-control" id="ort" name="ort">
+        </div>
+        <button type="submit" class="btn btn-primary">Reservieren</button>
+    </form>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <div th:replace="fragments/footer.html::footer"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

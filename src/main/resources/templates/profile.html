@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Persönliche Daten bearbeiten</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<div th:replace="fragments/nav.html::nav"></div>
+
+<!-- Content -->
+<div class="container mt-4">
+  <h2>Persönliche Daten bearbeiten</h2>
+  <form id="personalDataForm">
+    <div class="form-group">
+      <label for="firstName">Vorname:</label>
+      <input type="text" class="form-control" id="firstName" name="firstName" required>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Nachname:</label>
+      <input type="text" class="form-control" id="lastName" name="lastName" required>
+    </div>
+    <div class="form-group">
+      <label for="geburtsdatum">Geburtsdatum:</label>
+      <input type="date" class="form-control" id="geburtsdatum" name="geburtsdatum" required>
+    </div>
+    <div class="form-group">
+      <label for="geburtsort">Geburtsort:</label>
+      <input type="text" class="form-control" id="geburtsort" name="geburtsort" required>
+    </div>
+    <!-- Weitere Felder hinzufügen -->
+
+    <button type="submit" class="btn btn-primary">Daten speichern</button>
+  </form>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // Das Formular submit-Ereignis abfangen
+    $("#personalDataForm").submit(function(e) {
+      e.preventDefault();
+
+      // Daten aus dem Formular sammeln
+      var firstName = $("#firstName").val();
+      var lastName = $("#lastName").val();
+      var geburtsdatum = $("#geburtsdatum").val();
+      var geburtsort = $("#geburtsort").val();
+      // Weitere Felder sammeln
+
+      // AJAX-Anfrage senden
+      $.ajax({
+        url: "/api/v1/user/{email}/personal-data", // Aktualisieren Sie die URL entsprechend Ihrer Anwendung
+        type: "PUT",
+        data: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          geburtsdatum: geburtsdatum,
+          geburtsort: geburtsort
+          // Weitere Felder hinzufügen
+        }),
+        contentType: "application/json",
+        success: function(response) {
+          // Erfolgreiche Antwort verarbeiten
+          console.log("Daten erfolgreich aktualisiert:", response);
+          // Zeigen Sie eine Erfolgsmeldung an oder leiten Sie den Benutzer an eine andere Seite weiter
+        },
+        error: function(xhr, status, error) {
+          // Fehler verarbeiten
+          console.error("Fehler beim Aktualisieren der Daten:", error);
+          // Zeigen Sie eine Fehlermeldung an oder nehmen Sie andere entsprechende Maßnahmen
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

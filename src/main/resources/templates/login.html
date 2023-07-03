@@ -37,7 +37,7 @@
 <body>
 <div class="wrapper">
   <!-- Navigation -->
-  <div th:replace="fragments/nav.html::nav"></div>
+  <div th:replace="fragments/navWithoutLogin::nav"></div>
 
   <div class="content">
     <div class="container mt-5">
@@ -47,7 +47,7 @@
             <img src="/img/Logo.png" alt="Logo" class="logo">
           </div>
           <h2 class="text-center mb-4">Anmelden</h2>
-          <form action="/login" method="post">
+          <form action="http://localhost:8080/login" method="post">
             <div class="form-group">
               <label for="username">E-Mail</label>
               <input type="text" id="username" name="username" class="form-control" required autofocus>
@@ -64,7 +64,10 @@
     </div>
   </div>
 
-  <footer th:replace="fragments/footer.html::footer"></footer>
+  <!-- Footer -->
+  <div class="footer">
+    <div th:replace="fragments/footer.html::footer"></div>
+  </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

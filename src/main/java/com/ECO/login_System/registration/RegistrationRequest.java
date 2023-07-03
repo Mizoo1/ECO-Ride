@@ -27,6 +27,7 @@ public class RegistrationRequest {
     private final String personalausweisnummer;
     private final String reisepassnummer;
     private final String tarif;
+    private final String payMethod;
 
     // Konstruktor, Getter und andere Methoden
 }

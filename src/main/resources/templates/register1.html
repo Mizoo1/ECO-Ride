@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Registerieren</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="/img/Logo.png" type="image/png">
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.min.css">
+    <!-- Main css -->
+
+    <style>
+    </style>
+</head>
+<body>
+<!-- Navigation -->
+<div th:replace="fragments/navWithoutLogin::nav"></div>
+<section class="h-100 h-custom gradient-custom-2 ">
+    <form th:action="@{http://localhost:8080/api/v1/registration}" method="post" enctype="multipart/form-data" >
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-18">
+                    <div class="card card-registration card-registration-2" style="border-radius: 30px;">
+                        <div class="card-body p-0">
+                            <div class="row g-0">
+                                <div class="col-lg-6">
+                                    <div class="p-5">
+                                        <h3 class="fw-normal mb-5" style="color: #4835d4;">Persönliche  Infomationen</h3>
+
+                                        <div class="mb-1 pb-2">
+                                            <select id="form_salutation"  name="titel" class="form-control  " required="required" data-error="Anrede.">
+                                                <option class="text" value="" selected disabled>*</option>
+                                                <option class="text" >Herr</option>
+                                                <option class="text" >Frau</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4 pb-2">
+
+                                                <div class="form-outline">
+                                                    <input type="text" required="required" name="firstName" class="form-control form-control-lg" />
+                                                    <label class="form-label" >First name</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6 mb-4 pb-2">
+
+                                                <div class="form-outline">
+                                                    <input type="text" required="required" name="lastName" class="form-control form-control-lg" />
+                                                    <label class="form-label" >Last name</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+
+                                                <div class="form-outline">
+                                                    <input type="text" required="required" name="geburtsdatum" class="form-control form-control-lg" />
+                                                    <label class="form-label" >Geburtsdatum</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+
+                                                <div class="form-outline">
+                                                    <input type="text" required="required" name="geburtsort" class="form-control form-control-lg" />
+                                                    <label class="form-label" >Geburtsort</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+
+                                                <div class="form-outline">
+                                                    <input type="text" required="required" name="personalausweisnummer" class="form-control form-control-lg" />
+                                                    <label class="form-label" >Personalausweisnummer</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+
+                                                <div class="form-outline">
+                                                    <input type="text" required="required" name="reisepassnummer" class="form-control form-control-lg" />
+                                                    <label class="form-label" >Reisepassnummer</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+
+                                                <div class="form-outline">
+                                                    <input type="text" required="required" name="fuehrerscheinnummer" class="form-control form-control-lg" />
+                                                    <label class="form-label" >Fuehrerscheinnummer</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+
+                                                <div class="form-outline">
+                                                    <input type="text" required="required" name="erteilungsdatum" class="form-control form-control-lg" />
+                                                    <label class="form-label" >Erteilungsdatum</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+
+                                                <div class="form-outline">
+                                                    <input type="text" required="required" name="ablaufdatum" class="form-control form-control-lg" />
+                                                    <label class="form-label" >Ablaufdatum</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+
+                                                <div class="form-outline">
+                                                    <input type="text" required="required" name="ausstellungsort" class="form-control form-control-lg" />
+                                                    <label class="form-label" >Ausstellungsort</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <label class="btn btn-secondary my-cta-button">
+                                                <input type="radio" name="tarif" value="Basic" autocomplete="off" onclick="toggleActive(this)" checked> Basic
+                                            </label>
+                                            <label class="btn btn-secondary my-cta-button">
+                                                <input type="radio" name="tarif" value="Premium" autocomplete="off" onclick="toggleActive(this)"> Premium
+                                            </label>
+                                            <label class="btn btn-secondary my-cta-button">
+                                                <input type="radio" name="tarif" value="Ultra"  autocomplete="off" onclick="toggleActive(this)"> Ultra
+                                            </label>
+                                        </div>
+
+                                        <script>
+                                            function toggleActive(input) {
+                                                var labels = document.querySelectorAll('.my-cta-button');
+                                                labels.forEach(function(label) {
+                                                    label.classList.remove('active');
+                                                });
+                                                input.parentElement.classList.add('active');
+                                            }
+                                        </script>
+
+
+                                    </div>
+                                    <div style="margin-top: 20%"></div>
+
+
+                                </div>
+                                <div class="col-lg-6 bg-indigo text-white">
+                                    <div class="p-5">
+                                        <h3 class="fw-normal mb-5">Kontakt Informationen</h3>
+
+                                        <div class="mb-4 pb-2">
+                                            <div class="form-outline form-white">
+                                                <input type="text" required="required" name="adresse" class="form-control form-control-lg" />
+                                                <label class="form-label" >Straße und Hausnummer</label>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-5 mb-4 pb-2">
+
+                                                <div class="form-outline form-white">
+                                                    <input type="text" name="plz" required="required" class="form-control form-control-lg" />
+                                                    <label class="form-label" >PLZ</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-7 mb-4 pb-2">
+
+                                                <div class="form-outline form-white">
+                                                    <input type="text" name="stadt" required="required" class="form-control form-control-lg" />
+                                                    <label class="form-label" >Ort</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="form-outline form-white">
+                                                <input type="text" name="telefonnummer" required="required" class="form-control form-control-lg" />
+                                                <label class="form-label" >Mobilnummer</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <div class="form-outline form-white">
+                                                <input type="text" required="required" name="email" class="form-control form-control-lg" />
+                                                <label class="form-label" >Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="form-outline form-white">
+                                                <input type="text" required="required" name="password" class="form-control form-control-lg" />
+                                                <label class="form-label" >Password</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-secondary my-cta-button">
+                                                    <input type="radio" name="bezahlMethode" value="Basic" autocomplete="off" onclick="toggleActive2(this)" checked> PAYPAL
+                                                </label>
+                                                <label class="btn btn-secondary my-cta-button">
+                                                    <input type="radio" name="bezahlMethode" value="Premium" autocomplete="off" onclick="toggleActive2(this)"> VISA
+                                                </label>
+                                                <label class="btn btn-secondary my-cta-button">
+                                                    <input type="radio" name="bezahlMethode" value="Ultra"  autocomplete="off" onclick="toggleActive2(this)"> MASTER CARD
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            function toggleActive2(input) {
+                                                var labels = document.querySelectorAll('.my-cta-button');
+                                                labels.forEach(function(label) {
+                                                    label.classList.remove('active');
+                                                });
+                                                input.parentElement.classList.add('active');
+                                            }
+                                        </script>
+
+
+
+                                        <div class="form-check d-flex justify-content-start mb-4 pb-3">
+                                            <input class="form-check-input me-3" type="checkbox" value="" />
+                                            <label class="form-check-label text-white" >
+                                                Ich akzeptiere die <a href="http://localhost:8080/api/v/registration/term_condition" class="text-white"><u>Geschäftsbedingungen </u></a> of your
+                                                site.
+                                            </label>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-light btn-lg"
+                                                data-mdb-ripple-color="dark">Register</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+<!-- Footer -->
+<div class="footer">
+    <div th:replace="fragments/footer.html::footer"></div>
+</div>
+<!-- JS -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/jquery-ui/jquery-ui.min.js"></script>
+<script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
+<script src="/js/register.js"></script>
+</body>
+
+</html>
