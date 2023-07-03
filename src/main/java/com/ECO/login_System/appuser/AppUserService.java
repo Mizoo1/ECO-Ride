@@ -82,21 +82,16 @@ public class AppUserService implements UserDetailsService {
             AppUser existingUser = optionalAppUser.get();
 
             // Die relevanten Felder des Benutzers aktualisieren
+            existingUser.setUserName(appUser.getUserName());
             existingUser.setTitel(appUser.getTitel());
-            //existingUser.setFirstName(appUser.getFirstName());
-            existingUser.setLastName(appUser.getLastName());
             existingUser.setEmail(appUser.getEmail());
             existingUser.setAdresse(appUser.getAdresse());
             existingUser.setPlz(appUser.getPlz());
             existingUser.setStadt(appUser.getStadt());
-            existingUser.setMobilnummer(appUser.getMobilnummer());
-            existingUser.setGeburtsdatum(appUser.getGeburtsdatum());
-            existingUser.setGeburtsort(appUser.getGeburtsort());
+            existingUser.setTelefonnummer(appUser.getTelefonnummer());
             existingUser.setFuehrerscheinnummer(appUser.getFuehrerscheinnummer());
             existingUser.setAblaufdatum(appUser.getAblaufdatum());
-            existingUser.setAusstellungsort(appUser.getAusstellungsort());
-            existingUser.setPersonalausweisnummer(appUser.getPersonalausweisnummer());
-            existingUser.setReisepassnummer(appUser.getReisepassnummer());
+
             existingUser.setTarif(appUser.getTarif());
 
             // Den aktualisierten Benutzer in der Datenbank speichern
@@ -105,11 +100,5 @@ public class AppUserService implements UserDetailsService {
             throw new IllegalArgumentException("Benutzer nicht gefunden");
         }
     }
-
-    public Optional<AppUser> findByEmail(String email) {
-        return appUserRepository.findByEmail(email);
-    }
-    public Optional<AppUser> findById(Long id) {
-        return appUserRepository.findById(id);}
 
 }

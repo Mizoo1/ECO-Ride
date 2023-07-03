@@ -24,6 +24,8 @@
             <td>Titel:</td>
             <td id="titel" th:text="${userDetails.titel}"></td>
         </tr>
+        <td>Benutzername:</td>
+        <td id="userName" th:text="${userDetails.userName}"></td>
         <tr>
             <td>Firstname:</td>
             <td id="firstname" th:text="${userDetails.firstName}"></td>
@@ -54,7 +56,7 @@
         </tr>
         <tr>
             <td>Telefonnummer:</td>
-            <td id="mobilnummer" th:text="${userDetails.mobilnummer}"></td>
+            <td id="telefonnummer" th:text="${userDetails.telefonnummer}"></td>
         </tr>
         <tr>
             <td>Geburtsdatum:</td>
@@ -110,11 +112,11 @@
                             <label for="titelInput">Titel</label>
                             <input type="text" class="form-control" id="titelInput" th:value="${userDetails.titel}">
                         </div>
-
                         <div class="form-group">
-                            <label for="lastNameInput">Lastname</label>
-                            <input type="text" class="form-control" id="lastNameInput" th:value="${userDetails.lastName}">
+                            <label for="userNameInput">Benutzername</label>
+                            <input type="text" class="form-control" id="userNameInput" th:value="${userDetails.userName}">
                         </div>
+
                         <div class="form-group">
                             <label for="emailInput">Email</label>
                             <input type="email" class="form-control" id="emailInput" th:value="${userDetails.email}">
@@ -132,17 +134,10 @@
                             <input type="text" class="form-control" id="stadtInput" th:value="${userDetails.stadt}">
                         </div>
                         <div class="form-group">
-                            <label for="mobilnummerInput">Telefonnummer</label>
-                            <input type="text" class="form-control" id="mobilnummerInput" th:value="${userDetails.mobilnummer}">
+                            <label for="telefonnummerInput">Telefonnummer</label>
+                            <input type="text" class="form-control" id="telefonnummerInput" th:value="${userDetails.telefonnummer}">
                         </div>
-                        <div class="form-group">
-                            <label for="geburtsdatumInput">Geburtsdatum</label>
-                            <input type="text" class="form-control" id="geburtsdatumInput" th:value="${userDetails.geburtsdatum}">
-                        </div>
-                        <div class="form-group">
-                            <label for="geburtsortInput">Geburtsort</label>
-                            <input type="text" class="form-control" id="geburtsortInput" th:value="${userDetails.geburtsort}">
-                        </div>
+
                         <div class="form-group">
                             <label for="fuehrerscheinnummerInput">Fuehrerscheinnummer</label>
                             <input type="text" class="form-control" id="fuehrerscheinnummerInput" th:value="${userDetails.fuehrerscheinnummer }">
@@ -150,18 +145,6 @@
                         <div class="form-group">
                             <label for="ablaufdatumInput">Ablaufdatum</label>
                             <input type="text" class="form-control" id="ablaufdatumInput" th:value="${userDetails.ablaufdatum}">
-                        </div>
-                        <div class="form-group">
-                            <label for="ausstellungsortInput">Ausstellungsort</label>
-                            <input type="text" class="form-control" id="ausstellungsortInput" th:value="${userDetails.ausstellungsort}">
-                        </div>
-                        <div class="form-group">
-                            <label for="personalausweisnummerInput">Personalausweisnummer</label>
-                            <input type="text" class="form-control" id="personalausweisnummerInput" th:value="${userDetails.personalausweisnummer}">
-                        </div>
-                        <div class="form-group">
-                            <label for="reisepassnummerInput">Geburtsort</label>
-                            <input type="text" class="form-control" id="reisepassnummerInput" th:value="${userDetails.personalausweisnummer}">
                         </div>
                         <div class="form-group">
                             <label for="tarifInput">Tarif</label>
@@ -177,6 +160,32 @@
         </div>
     </div>
 </div>
+<!-- "Konto Löschen"-Button -->
+<button type="button" class="btn btn-danger" id="deleteButton" data-toggle="modal" data-target="#deleteModal">
+    Konto Löschen
+</button>
+
+<!-- Modal für die Konto-Löschungs-Bestätigung -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Konto löschen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Sind Sie sicher, dass Sie Ihr Konto löschen möchten?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Löschen</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 <!-- Footer -->
 <div class="footer">
     <div th:replace="fragments/footer.html::footer"></div>
@@ -188,23 +197,16 @@
 
     function saveChanges() {
         var titel = document.getElementById('titelInput').value;
-        //var firstName = document.getElementById('firstNameInput').value;
-        var lastName = document.getElementById('lastNameInput').value;
+        var userName = document.getElementById('userNameInput').value;
         var email = document.getElementById('emailInput').value;
         var adresse = document.getElementById('adresseInput').value;
         var plz = document.getElementById('plzInput').value;
         var stadt = document.getElementById('stadtInput').value;
-        var mobilnummer = document.getElementById('mobilnummerInput').value;
-        var geburtsdatum = document.getElementById('geburtsdatumInput').value;
-        var geburtsort = document.getElementById('geburtsortInput').value;
+        var telefonnummer = document.getElementById('telefonnummerInput').value;
         var fuehrerscheinnummer = document.getElementById('fuehrerscheinnummerInput').value;
         var ablaufdatum = document.getElementById('ablaufdatumInput').value;
-        var ausstellungsort = document.getElementById('ausstellungsortInput').value;
-        var personalausweisnummer = document.getElementById('personalausweisnummerInput').value;
-        var reisepassnummer = document.getElementById('reisepassnummerInput').value;
         var tarif = document.getElementById('tarifInput').value;
         var userId = document.getElementById('id').textContent;
-
         // AJAX-Aufruf oder andere Methoden, um die Daten zu speichern
         // Beispiel:
         $.ajax({
@@ -212,20 +214,14 @@
             type: 'PUT',
             data: JSON.stringify({
                 titel: titel,
+                userName: userName,
                 email: email,
-                //firstName: firstName,
-                lastName: lastName,
                 adresse: adresse,
                 plz: plz,
                 stadt: stadt,
-                mobilnummer: mobilnummer,
-                geburtsdatum: geburtsdatum,
-                geburtsort: geburtsort,
+                telefonnummer: telefonnummer,
                 fuehrerscheinnummer: fuehrerscheinnummer,
                 ablaufdatum: ablaufdatum,
-                ausstellungsort: ausstellungsort,
-                personalausweisnummer: personalausweisnummer,
-                reisepassnummer: reisepassnummer,
                 tarif: tarif
             }),
             contentType: 'application/json',
@@ -233,26 +229,39 @@
                 // Erfolgsbehandlung
                 // Aktualisiere die angezeigten Benutzerdaten
                 document.getElementById('titel').innerText = titel;
-                //document.getElementById('firstname').innerText = firstName;
-                document.getElementById('lastname').innerText = lastName;
+                document.getElementById('userName').innerText = userName;
                 document.getElementById('email').innerText = email;
                 document.getElementById('adresse').innerText = adresse;
                 document.getElementById('plz').innerText = plz;
                 document.getElementById('stadt').innerText = stadt;
-                document.getElementById('mobilnummer').innerText = mobilnummer;
-                document.getElementById('geburtsdatum').innerText = geburtsdatum;
-                document.getElementById('geburtsort').innerText = geburtsort;
+                document.getElementById('telefonnummer').innerText = telefonnummer;
                 document.getElementById('fuehrerscheinnummer').innerText = fuehrerscheinnummer;
                 document.getElementById('ablaufdatum').innerText = ablaufdatum;
-                document.getElementById('ausstellungsort').innerText = ausstellungsort;
-                document.getElementById('personalausweisnummer').innerText = personalausweisnummer;
-                document.getElementById('reisepassnummer').innerText = reisepassnummer;
                 document.getElementById('tarif').innerText = tarif;
 
                 $('#editModal').modal('hide');
             },
             error: function (xhr, status, error) {
                 // Fehlerbehandlung
+                console.error(error);
+            }
+        });
+    }
+    document.getElementById('confirmDeleteButton').addEventListener('click', deleteAccount);
+
+    function deleteAccount() {
+        var userId = document.getElementById('id').textContent;
+        // AJAX request to delete the user account
+        $.ajax({
+            url: '/deleteUser/' + userId,
+            type: 'DELETE',
+            success: function (data) {
+                // Success handling
+                // Redirect to the login page or any other desired action
+                window.location.href = "/login";
+            },
+            error: function (xhr, status, error) {
+                // Error handling
                 console.error(error);
             }
         });

@@ -10,7 +10,7 @@
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.min.css">
-    <link rel="stylesheet" href="css/register.css">
+    <!--link rel="stylesheet" href="css/register.css"-->
 
     <style>
         body {
@@ -106,6 +106,10 @@
                                     <option value="Herr">Herr</option>
                                     <option value="Frau">Frau</option>
                                 </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userName" class="form-label">Benutzername:</label>
+                                <input type="text" id="userName" name="userName" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label for="firstName" class="form-label">Vorname:</label>
@@ -256,7 +260,7 @@
 <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
 <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
-<script src="/js/register.js"></script>
+<script src="js/register.js"></script>
 <script>
     var slider = document.getElementById("slider");
     var carousel = new bootstrap.Carousel(slider);

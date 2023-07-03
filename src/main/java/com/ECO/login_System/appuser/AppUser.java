@@ -35,6 +35,7 @@ public class AppUser implements UserDetails {
             generator = "Eco_sequence"
     )
     private Long id;
+    private String userName;
     private String firstName;
     private String lastName;
     private String email;
@@ -45,7 +46,6 @@ public class AppUser implements UserDetails {
     private String stadt;
 
     private String telefonnummer;
-    private String mobilnummer;
     private String geburtsdatum;
     private String geburtsort;
     private String fuehrerscheinnummer;
@@ -64,7 +64,7 @@ public class AppUser implements UserDetails {
 
 
 
-    public AppUser(String firstName, String lastName,
+    public AppUser(String userName,String firstName, String lastName,
                    String email, String password,
                    String titel, String adresse, String plz,
                    String stadt,  String telefonnummer,
@@ -76,6 +76,7 @@ public class AppUser implements UserDetails {
                    String reisepassnummer,
                    String tarif,AppUserRole appUserRole,
                    String payMethod) {
+        this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -107,6 +108,10 @@ public class AppUser implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public String getEmail() {

@@ -21,5 +21,9 @@ public interface AppUserRepository
     @Query("UPDATE AppUser a " +
             "SET a.enabled = TRUE WHERE a.email = ?1")
     int enableAppUser(String email);
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM ConfirmationToken c WHERE c.appUser.id = ?1")
+    void deleteConfirmationTokenByUserId(Long userId);
 
 }

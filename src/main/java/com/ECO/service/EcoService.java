@@ -18,15 +18,15 @@ public class EcoService {
     public ModelAndView getHome(Authentication authentication) {
         AppUser userDetails = (AppUser) authentication.getPrincipal();
         ModelAndView modelAndView = new ModelAndView("index");
-        String firstname = userDetails.getFirstName();
-        modelAndView.addObject("firstname", firstname);
+        String userName = userDetails.getUserName();
+        modelAndView.addObject("userName", userName);
         return modelAndView;
     }
     public ModelAndView zeigeProfil(Authentication authentication) {
         AppUser userDetails = (AppUser) authentication.getPrincipal();
         ModelAndView modelAndView = new ModelAndView("profile");
-        String firstname = userDetails.getFirstName();
-        modelAndView.addObject("firstname", firstname);
+        String userName = userDetails.getUserName();
+        modelAndView.addObject("userName", userName);
         modelAndView.addObject("userDetails", userDetails);
         return modelAndView;
     }
@@ -45,15 +45,15 @@ public class EcoService {
     public ModelAndView getContact(Authentication authentication) {
         AppUser userDetails = (AppUser) authentication.getPrincipal();
         ModelAndView modelAndView = new ModelAndView("contact");
-        String firstname = userDetails.getFirstName();
-        modelAndView.addObject("firstname", firstname);
+        String userName = userDetails.getUserName();
+        modelAndView.addObject("userName", userName);
         return modelAndView;
     }
     public ModelAndView getReservierung(Authentication authentication) {
         AppUser userDetails = (AppUser) authentication.getPrincipal();
         ModelAndView modelAndView = new ModelAndView("reservierung");
-        String firstname = userDetails.getFirstName();
-        modelAndView.addObject("firstname", firstname);
+        String userName = userDetails.getUserName();
+        modelAndView.addObject("userName", userName);
         return modelAndView;
     }
     public String getContactWithoutLogin() {
@@ -63,8 +63,8 @@ public class EcoService {
     public ModelAndView getAbout(Authentication authentication) {
         AppUser userDetails = (AppUser) authentication.getPrincipal();
         ModelAndView modelAndView = new ModelAndView("about");
-        String firstname = userDetails.getFirstName();
-        modelAndView.addObject("firstname", firstname);
+        String userName = userDetails.getUserName();
+        modelAndView.addObject("userName", userName);
         return modelAndView;
     }
     public String getAboutWithoutLogin() {
@@ -74,8 +74,8 @@ public class EcoService {
     public ModelAndView getServices(Authentication authentication) {
         AppUser userDetails = (AppUser) authentication.getPrincipal();
         ModelAndView modelAndView = new ModelAndView("services");
-        String firstname = userDetails.getFirstName();
-        modelAndView.addObject("firstname", firstname);
+        String userName = userDetails.getUserName();
+        modelAndView.addObject("userName", userName);
         return modelAndView;
     }
     public String getServicesWithoutLogin() {

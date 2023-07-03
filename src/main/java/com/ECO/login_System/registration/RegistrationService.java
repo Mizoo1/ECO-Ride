@@ -34,6 +34,7 @@ public class RegistrationService {
 
         String token = appUserService.signUpUser(
                 new AppUser(
+                        request.getUserName(),
                         request.getFirstName(),
                         request.getLastName(),
                         request.getEmail(),
@@ -62,7 +63,9 @@ public class RegistrationService {
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
         emailSender.send(
                 request.getEmail(),
-                buildEmail(request.getFirstName(),
+                buildEmail(
+                        request.getUserName(),
+                        request.getFirstName(),
                         request.getLastName(),
                         request.getEmail(),
                         request.getPassword(),
@@ -108,8 +111,9 @@ public class RegistrationService {
         return "confirmed";
     }
 
-    private String buildEmail(String name,
-                              String LastName,
+    private String buildEmail(String userName,
+                            String name,
+                            String LastName,
                             String Email,
                             String Password,
                             String Titel,
@@ -199,7 +203,7 @@ public class RegistrationService {
                 "    <h1>Vertragsmuster</h1>\n" +
                 "    \n" +
                 "    <p>\n" +
-                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Sehr geehrte/r "+ Titel +" " +name + " "+LastName+  ",</p>"+
+                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Sehr geehrte/r "+ Titel +" " +name + " "+LastName+ " (" + userName+" )"+  ",</p>"+
                 "    </p>\n" +
                 "    \n" +
                 "    <p>\n" +
@@ -219,6 +223,7 @@ public class RegistrationService {
                 "        Ausstellungsort: "+Ausstellungsort+"<br>\n" +
                 "        Personalausweisnummer: "+Personalausweisnummer+"<br>\n" +
                 "        Reisepassnummer: "+Reisepassnummer+"\n" +
+                "        Bezahlmethode: "+payMethod+"\n"+
                 "    </p>\n" +
                 "    \n" +
                 "    <p>\n" +
