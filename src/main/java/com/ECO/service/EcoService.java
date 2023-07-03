@@ -24,7 +24,7 @@ public class EcoService {
     }
     public ModelAndView zeigeProfil(Authentication authentication) {
         AppUser userDetails = (AppUser) authentication.getPrincipal();
-        ModelAndView modelAndView = new ModelAndView("profile1");
+        ModelAndView modelAndView = new ModelAndView("profile");
         String firstname = userDetails.getFirstName();
         modelAndView.addObject("firstname", firstname);
         modelAndView.addObject("userDetails", userDetails);

@@ -15,6 +15,7 @@ public interface AppUserRepository
 
     Optional<AppUser> findByEmail(String email);
 
+
     @Transactional
     @Modifying
     @Query("UPDATE AppUser a " +

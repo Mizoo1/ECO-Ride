@@ -83,7 +83,7 @@ public class AppUserService implements UserDetailsService {
 
             // Die relevanten Felder des Benutzers aktualisieren
             existingUser.setTitel(appUser.getTitel());
-            existingUser.setFirstName(appUser.getFirstName());
+            //existingUser.setFirstName(appUser.getFirstName());
             existingUser.setLastName(appUser.getLastName());
             existingUser.setEmail(appUser.getEmail());
             existingUser.setAdresse(appUser.getAdresse());
@@ -105,23 +105,11 @@ public class AppUserService implements UserDetailsService {
             throw new IllegalArgumentException("Benutzer nicht gefunden");
         }
     }
-    public AppUser updatePersonalData(String email, PersonalDataUpdateRequest request) {
-        AppUser user = appUserRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(
-                        String.format(USER_NOT_FOUND_MSG, email)));
 
-        // Aktualisieren Sie die relevanten Felder des Benutzers
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setGeburtsdatum(request.getGeburtsdatum());
-        user.setGeburtsort(request.getGeburtsort());
-        // Weitere Felder aktualisieren...
-
-        // Speichern Sie den aktualisierten Benutzer in der Datenbank
-        return appUserRepository.save(user);
-    }
     public Optional<AppUser> findByEmail(String email) {
         return appUserRepository.findByEmail(email);
     }
+    public Optional<AppUser> findById(Long id) {
+        return appUserRepository.findById(id);}
 
 }
