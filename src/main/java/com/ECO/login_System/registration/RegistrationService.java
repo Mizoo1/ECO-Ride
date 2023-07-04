@@ -200,14 +200,14 @@ public class RegistrationService {
                 "    <title>Vertragsmuster</title>\n" +
                 "</head>\n" +
                 "<body>\n" +
-                "    <h2>Vertragsmuster</h2>\n" +
+                "    <h1>Vertragsmuster</h1>\n" +
                 "    \n" +
                 "    <p>\n" +
                 "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Sehr geehrte/r "+ Titel +" " +name + " "+LastName+ " (" + userName+" )"+  ",</p>"+
                 "    </p>\n" +
                 "    \n" +
                 "    <p>\n" +
-                "         Vielen Dank für Ihr Interesse an unserem Vertra. Um den Vertrag abzuschließen, benötigen wir einige Informationen von Ihnen:\n" +
+                "        Vielen Dank für Ihr Interesse an unserem Vertra. Um den Vertrag abzuschließen, benötigen wir einige Informationen von Ihnen:\n" +
                 "    </p>\n" +
                 "    \n" +
                 "    <p>\n" +

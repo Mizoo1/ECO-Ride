@@ -5,16 +5,218 @@
     <title>Über uns</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/13bb240f97.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="icon" href="/img/Logo.png" type="image/png">
-    <style>
+
+    <style>.aboutus {
+        padding-top: 120px;
+        padding-bottom: 120px;
+    }
+    .aboutus-image{
+
+        border-radius: 50%;
+        border: 5px solid rgb(75, 146, 219);
+    }
+    @media (min-width: 768px) {
+        .aboutus-list {
+            background: linear-gradient(
+                    to right,
+                    white 0%,
+                    white calc(50% - 1px),
+                    rgb(75, 146, 219) calc(50% - 1px),
+                    rgb(75, 146, 219) calc(50% + 1px),
+                    white calc(50% + 1px),
+                    white 100%
+            );
+        }
+
+        .aboutus-list .row:last-child {
+            background-color: white;
+        }
+
+    }
+    </style>
+    <style>.team{
+        padding-top: 120px;
+        padding-bottom: 120px;
+        background-color:  #f7f7f7;
+    }
+    .team-image {
+        border-radius: 50%;
+        border: 5px solid white;
+    }
+    .team-social-media {
+        color: black;
+        font-size: 2rem;
+        border: 2px solid black;
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        display: block;
+        text-align: center;
+        margin: 0.4rem 0.2rem 0.2rem 0.2rem;
+    }
     </style>
 </head>
 <body>
 <!-- Navigation -->
-<div th:replace="fragments/nav.html::nav"></div>
+<div th:replace="fragments/nav::nav"></div>
+<!-- Über uns -->
+<section class="aboutus" id="aboutus">
+    <div class="container">
+        <h3 class="text-center">Über uns</h3>
+        <p class="text-center text-muted font-italic mb-5" >Die Geschichte hinter ECO Ride</p>
 
-Hello world from About !
+
+        <div class="aboutus-list">
+            <div class="row">
+                <div class="col-6 offset-3 col-md-2 offset-sm-0 col-sm-3 order-1  order-md-2">
+                    <img class="img-fluid mb-2 aboutus-image" src="/img/my car.jpg">
+                </div>
+                <div class="col-12 col-sm-9 col-md-5 order-2 order-md-1">
+                    <h5  class=" h6 text-center text-sm-left mb-1 text-md-right">2010</h5>
+                    <h6  class="text-center text-sm-left text-md-right">Der Anfang</h6>
+                    <p class="text-center text-sm-left text-muted text-md-right">Im Jahr 2010 haben wir unser Autovermietungsunternehmen mit einer klaren Vision gegründet: Menschen eine bequeme und zuverlässige Möglichkeit bieten, Autos für ihre individuellen Bedürfnisse zu mieten.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 offset-3 col-md-2 offset-sm-0 col-sm-3 order-1 order-sm-2 order-md-1 offset-md-5">
+                    <img class="img-fluid mb-2 aboutus-image mt-3 mt-sm-0" src="/img/my car.jpg">
+                </div>
+                <div class="col-12 col-sm-9 col-md-5 order-2 order-md-1 order-sm-2">
+                    <h5  class=" h6 text-center text-sm-right mb-1 text-md-left">2015</h5>
+                    <h6  class="text-center text-sm-right text-md-left">Expansion und Erfolg</h6>
+                    <p class="text-center text-sm-right text-muted text-md-left">Im Jahr 2015 konnten wir aufgrund unseres kontinuierlichen Erfolgs und der steigenden Nachfrage unseres Unternehmens expandieren. Wir eröffneten mehrere Filialen in verschiedenen Städten und erweiterten unsere Flotte, um unseren Kunden eine noch größere Auswahl an Fahrzeugen bieten zu können.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 offset-3 col-md-2 offset-sm-0 col-sm-3 order-1  order-md-2">
+                    <img class="img-fluid mb-2 aboutus-image" src="/img/my car.jpg">
+                </div>
+                <div class="col-12 col-sm-9 col-md-5 order-2 order-md-1">
+                    <h5  class=" h6 text-center text-sm-left mb-1 text-md-right">2020</h5>
+                    <h6  class="text-center text-sm-left text-md-right">Innovation und Nachhaltigkeit</h6>
+                    <p   class="text-center text-sm-left text-muted text-md-right">Im Jahr 2020 haben wir uns verstärkt auf Innovation und Nachhaltigkeit konzentriert. Wir haben umweltfreundlichere Fahrzeuge in unsere Flotte aufgenommen und digitale Lösungen eingeführt, um die Buchung und Abwicklung für unsere Kunden noch einfacher und bequemer zu gestalten.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 offset-3 col-md-2 offset-sm-0 col-sm-3 order-1 order-sm-2 order-md-1 offset-md-5">
+                    <img class="img-fluid mb-2 aboutus-image mt-3 mt-sm-0" src="/img/my car.jpg">
+                </div>
+                <div class="col-12 col-sm-9 col-md-5 order-2 order-md-1 order-sm-2">
+                    <h5  class=" h6 text-center text-sm-right mb-1 text-md-left">2023</h5>
+                    <h6  class="text-center text-sm-right text-md-left">Zukunftsorientiert und kundenorientiert</h6>
+                    <p   class="text-center text-sm-right text-muted text-md-left">
+                        Im Jahr 2023 richten wir unseren Blick weiterhin auf die Zukunft. Wir investieren verstärkt in innovative Technologien, um unseren Kunden ein noch bequemeres und benutzerfreundlicheres Mietwagenerlebnis zu bieten.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Team -->
+<section class="team" id="team">
+    <div class="container">
+        <h3 class="text-center">Unser Team</h3>
+        <p class="text-center text-muted font-italic">Das hier ist unser cooles Team!</p>
+
+        <div class="row">
+            <div class="col-12 col-sm-4">
+                <div class="row">
+                    <div class="col-6 offset-3 col-md-8 offset-md-2">
+                        <img class="img-fluid team-image mb-2" src="/img/GAri.jpg" alt="Platzhalter" />
+                    </div>
+                </div>
+                <h5 class="h6 text-center">Matrex</h5>
+                <h6 class="text-center text-muted">Geschäftsführer</h6>
+                <div class="d-flex justify-content-center">
+                    <a class="team-social-media d-flex flex-column justify-content-center" href="#">
+                        <i class="fa-regular fa-envelope"></i>
+                    </a>
+                    <a class="team-social-media d-flex flex-column justify-content-center" href="#">
+                        <i class="fa-regular fa-phone"></i>
+                    </a>
+
+                </div>
+            </div>
+            <div class="col-12 col-sm-4">
+                <div class="row">
+                    <div class="col-6 offset-3 col-md-8 offset-md-2">
+
+                        <img class="img-fluid team-image mb-2" src="/img/Mitarbeiter.jpg" alt="Platzhalter" />
+                    </div>
+                </div>
+                <h5 class="h6 text-center">Nouri</h5>
+                <h6 class="text-center text-muted">Marketing</h6>
+                <div class="d-flex justify-content-center">
+                    <a class="team-social-media d-flex flex-column justify-content-center" href="#">
+                        <i class="fa-regular fa-envelope"></i>
+                    </a>
+
+                    <a class="team-social-media d-flex flex-column justify-content-center" href="#">
+                        <i class="fa-regular fa-phone"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-4">
+                <div class="row">
+                    <div class="col-6 offset-3 col-md-8 offset-md-2">
+                        <img class="img-fluid team-image mb-2" src="/img/ich.jpeg" alt="Platzhalter" />
+                    </div>
+                </div>
+                <h5 class="h6 text-center">Hamude</h5>
+                <h6 class="text-center text-muted">Technischer Support</h6>
+                <div class="d-flex justify-content-center">
+                    <a class="team-social-media d-flex flex-column justify-content-center" href="#">
+                        <i class="fa-regular fa-envelope"></i>
+                    </a>
+                    <a class="team-social-media d-flex flex-column justify-content-center" href="#">
+                        <i class="fa-regular fa-phone"></i>
+                    </a>
+
+                </div>
+            </div>
+            <div class="col-12 col-sm-4">
+                <div class="row">
+                    <div class="col-6 offset-3 col-md-8 offset-md-2">
+                        <img class="img-fluid team-image mb-2" src="/img/Mitarbeiter.jpg" alt="Platzhalter" />
+                    </div>
+                </div>
+                <h5 class="h6 text-center">Sakalmbo</h5>
+                <h6 class="text-center text-muted">Kundenservice</h6>
+                <div class="d-flex justify-content-center">
+                    <a class="team-social-media d-flex flex-column justify-content-center" href="#">
+                        <i class="fa-regular fa-phone"></i>
+                    </a>
+
+                    <a class="team-social-media d-flex flex-column justify-content-center" href="#">
+                        <i class="fa-regular fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-4">
+                <div class="row">
+                    <div class="col-6 offset-3 col-md-8 offset-md-2">
+                        <img class="img-fluid team-image mb-2" src="/img/Mitarbeiter.jpg" alt="Platzhalter" />
+                    </div>
+                </div>
+                <h5 class="h6 text-center">Jon</h5>
+                <h6 class="text-center text-muted">Vertrieb</h6>
+                <div class="d-flex justify-content-center">
+                    <a class="team-social-media d-flex flex-column justify-content-center" href="#">
+                        <i class="fa-regular fa-envelope"></i>
+                    </a>
+                    <a class="team-social-media d-flex flex-column justify-content-center" href="#">
+                        <i class="fa-regular fa-phone"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- Footer -->
 <div class="footer">
     <div th:replace="fragments/footer.html::footer"></div>
@@ -22,4 +224,5 @@ Hello world from About !
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
+
 </html>
