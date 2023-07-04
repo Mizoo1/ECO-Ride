@@ -3,45 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Navbar</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add Font Awesome CSS link here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/api/v/registration/index">
-        <img src="/img/Logo.png" alt="Logo" style="width: 50px; height: 50px; margin-right: 10px;">
-        ECO-Ride
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/api/v/registration/index">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/api/v/registration/about">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/api/v/registration/services">Services</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/api/v/registration/contact">Contact</a>
-            </li>
-            <li  class="nav-item">
-                <a class="nav-link" href="/api/v/registration/login">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </a>
-            </li>
-            <li  class="nav-item">
-                <a class="nav-link" href="/api/v/registration/register">
-                    <i class="fas fa-user-plus"></i> Register
-                </a>
-            </li>
-        </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="index">
+            <img src="/img/Logo.png" alt="Logo" style="width: 50px; height: 50px; margin-right: 10px;">
+            ECO-Ride
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/api/v/registration/index">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/api/v/registration/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/api/v/registration/services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/api/v/registration/contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/api/v/registration/reservierung">
+                        Reservierung
+                        <i class="fas fa-plus ml-2"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/api/v/registration/login">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/api/v/registration/register">
+                        <div class="d-flex align-items-center">
+                            <span class="mr-2">Register</span>
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 
+<!-- Add Bootstrap JS scripts here -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Add Font Awesome JS script here -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 </html>

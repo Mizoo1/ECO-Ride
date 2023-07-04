@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bestätigen Sie Ihre E-Mail</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            color: #0b0c0c;
+            background-color: #f6f6f6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1D70B8;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        .quote {
+            margin: 0 0 20px 0;
+            font-size: 18px;
+            line-height: 24px;
+            color: #555555;
+            border-left: 4px solid #1D70B8;
+            padding-left: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1D70B8;
+            color: #ffffff;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 20px;
+            color: #1D70B8;
+            margin-bottom: 10px;
+        }
+
+        .footer-text {
+            font-size: 16px;
+            color: #555555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        th {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="https://i.ibb.co/3r7VRXT/Logo.png" alt="Logo" class="logo">
+    <h1 class="title">Bestätigen Sie Ihre E-Mail</h1>
+
+    <div>
+        <p class="subtitle">Hallo {{name}},</p>
+        <p>Vielen Dank für Ihre Registrierung. Bitte klicken Sie auf den untenstehenden Link, um Ihr Konto zu aktivieren:</p>
+        <blockquote class="quote">
+            <p><a href="{{link}}" class="button">Jetzt aktivieren</a></p>
+        </blockquote>
+        <p>Der Link läuft in 15 Minuten ab.</p>
+        <p>Bis bald,</p>
+    </div>
+
+    <div class="footer">
+        <h2 class="footer-title">Vertragsmuster</h2>
+        <p class="footer-text">Sehr geehrte/r {{Titel}} {{name}} {{LastName}} ({{userName}}),</p>
+        <p class="footer-text">Vielen Dank für Ihr Interesse an unserem Vertra. Um den Vertrag abzuschließen, benötigen wir einige Informationen von Ihnen:</p>
+
+        <table>
+            <tr>
+                <th>Persönliche Informationen:</th>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>{{Email}}</td>
+            </tr>
+            <tr>
+                <td>Adresse:</td>
+                <td>{{Adresse}}, {{Plz}} {{Stadt}}</td>
+            </tr>
+            <tr>
+                <td>Telefonnummer:</td>
+                <td>{{Telefonnummer}}</td>
+            </tr>
+            <tr>
+                <td>Geburtsdatum:</td>
+                <td>{{Geburtsdatum}}</td>
+            </tr>
+            <tr>
+                <td>Geburtsort:</td>
+                <td>{{Geburtsort}}</td>
+            </tr>
+            <tr>
+                <td>Führerscheinnummer:</td>
+                <td>{{Fuehrerscheinnummer}}</td>
+            </tr>
+            <tr>
+                <td>Erteilungsdatum:</td>
+                <td>{{Erteilungsdatum}}</td>
+            </tr>
+            <tr>
+                <td>Ablaufdatum:</td>
+                <td>{{Ablaufdatum}}</td>
+            </tr>
+            <tr>
+                <td>Ausstellungsort:</td>
+                <td>{{Ausstellungsort}}</td>
+            </tr>
+            <tr>
+                <td>Personalausweisnummer:</td>
+                <td>{{Personalausweisnummer}}</td>
+            </tr>
+            <tr>
+                <td>Reisepassnummer:</td>
+                <td>{{Reisepassnummer}}</td>
+            </tr>
+            <tr>
+                <td>Bezahlmethode:</td>
+                <td>{{payMethod}}</td>
+            </tr>
+        </table>
+
+        <p class="footer-text">Bitte überprüfen Sie die oben aufgeführten Informationen sorgfältig und stellen Sie sicher, dass sie korrekt sind. Falls Sie Änderungen vornehmen möchten, teilen Sie uns diese bitte umgehend mit.</p>
+        <p class="footer-text">Der ausgewählte Tarif für den Vertrag ist: {{Tarif}}.</p>
+        <p class="footer-text">Bei Fragen oder Unklarheiten können Sie sich jederzeit an uns wenden.</p>
+        <p class="footer-text">Vielen Dank und freundliche Grüße,</p>
+        <h3 class="footer-title">Ihr Vertragsmuster-Team</h3>
+        <p class="footer-text">ECO-Ride GmbH</p>
+    </div>
+</div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profil von ${userDetails.userName}</title>
+    <title>Profil von </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -50,7 +50,7 @@
 <div class="container">
     <div class="card effect">
         <div class="card-header">
-            <h1 class="card-title">Profil von ${userDetails.userName}</h1>
+            <h1 class="card-title">Profil von <span class="mr-2" th:text="${userDetails.userName}"></span></h1>
         </div>
         <div class="card-body">
             <div class="row">

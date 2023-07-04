@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Users</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="icon" href="/img/Logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    main {
+      flex-grow: 1;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+      overflow: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+      position: sticky;
+      top: 0;
+    }
+    .form-scrollable {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    canvas {
+      max-width: 400px;
+      max-height: 400px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<!-- Navigation -->
+<div th:replace="fragments/nav::nav"></div>
+
+<main>
+  <h1 class="text-center">Admin Users</h1>
+
+  <div class="form-scrollable">
+    <form action="/admin/users/search" method="get">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Benutzer</th>
+          <th>Titel</th>
+          <th>Vorname</th>
+          <th>Nachname</th>
+          <th>Email</th>
+          <th>PersonalID</th>
+          <th>Telefon</th>
+          <th>Geburtsdatum</th>
+          <th>Tarif</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+          <td th:text="${user.id}"></td>
+          <td th:text="${user.userName}"></td>
+          <td th:text="${user.titel}"></td>
+          <td th:text="${user.firstName}"></td>
+          <td th:text="${user.lastName}"></td>
+          <td th:text="${user.email}"></td>
+          <td th:text="${user.personalausweisnummer}"></td>
+          <td th:text="${user.telefonnummer}"></td>
+          <td th:text="${user.geburtsdatum}"></td>
+          <td th:text="${user.tarif}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+
+  <div>
+    <form action="/admin/users/search" method="get">
+      <select name="criteria">
+        <option value="id">ID</option>
+        <option value="firstName">Vorname</option>
+        <option value="lastName">Nachname</option>
+        <option value="email">E-Mail</option>
+        <option value="tarif">Tarif</option>
+      </select>
+      <input type="text" name="keyword" placeholder="Suchen..." />
+      <button type="submit">Suchen</button>
+    </form>
+  </div>
+
+  <canvas id="tarifChart"></canvas>
+</main>
+
+<!-- Footer -->
+<footer class="footer mt-auto py-3">
+  <div th:replace="fragments/footer.html::footer"></div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  // Daten abrufen und Diagramm erstellen
+  fetch('/admin/bookings/statistics')  // Stelle sicher, dass der Endpunkt korrekt ist
+          .then(response => response.json())
+          .then(data => {
+            const labels = data.map(entry => entry[0]);
+            const counts = data.map(entry => entry[1]);
+
+            const ctx = document.getElementById('tarifChart');
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: labels,
+                datasets: [{
+                  label: 'Buchungen pro Tarif',
+                  data: counts,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    stepSize: 1
+                  }
+                }
+              }
+            });
+          })
+          .catch(error => {
+            console.error('Error fetching booking statistics:', error);
+          });
+</script>
+
+</body>
+</html>
