@@ -25,6 +25,7 @@ public class AppUserService implements UserDetailsService {
     private final ConfirmationTokenService confirmationTokenService;
 
 
+
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
@@ -51,7 +52,7 @@ public class AppUserService implements UserDetailsService {
 
         appUser.setPassword(encodedPassword);
 
-        appUserRepository.save(appUser);
+        AppUser savedUser = appUserRepository.save(appUser);
 
         String token = UUID.randomUUID().toString();
 
@@ -59,13 +60,11 @@ public class AppUserService implements UserDetailsService {
                 token,
                 LocalDateTime.now(),
                 LocalDateTime.now().plusMinutes(15),
-                appUser
+                savedUser
         );
 
-        confirmationTokenService.saveConfirmationToken(
-                confirmationToken);
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
 
-//        TODO: SEND EMAIL
 
         return token;
     }
@@ -94,11 +93,14 @@ public class AppUserService implements UserDetailsService {
 
             existingUser.setTarif(appUser.getTarif());
 
-            // Den aktualisierten Benutzer in der Datenbank speichern
+
             return appUserRepository.save(existingUser);
         } else {
             throw new IllegalArgumentException("Benutzer nicht gefunden");
         }
+    }
+    public AppUser saveUser(AppUser appUser) {
+        return appUserRepository.save(appUser);
     }
 
 }

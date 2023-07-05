@@ -3,65 +3,79 @@ package com.ECO.login_System.registration;
 
 
 import com.ECO.login_System.appuser.AppUser;
+import com.ECO.login_System.appuser.AppUserRepository;
 import com.ECO.login_System.appuser.AppUserRole;
 import com.ECO.login_System.appuser.AppUserService;
 import com.ECO.login_System.email.EmailSender;
 import com.ECO.login_System.registration.token.ConfirmationToken;
 import com.ECO.login_System.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import javax.servlet.http.HttpServletRequest;
 
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
 public class RegistrationService {
 
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
+    private final AppUserRepository appUserRepository;
 
-    public String register(RegistrationRequest request) {
-        boolean isValidEmail = emailValidator.
-                test(request.getEmail());
+    @Autowired
+    public RegistrationService(AppUserService appUserService, EmailValidator emailValidator, ConfirmationTokenService confirmationTokenService, EmailSender emailSender, AppUserRepository appUserRepository) {
+        this.appUserService = appUserService;
+        this.emailValidator = emailValidator;
+        this.confirmationTokenService = confirmationTokenService;
+        this.emailSender = emailSender;
+        this.appUserRepository = appUserRepository;
+    }
+
+
+
+    public String register(RegistrationRequest request, HttpServletRequest servletRequest) {
+        boolean isValidEmail = emailValidator.test(request.getEmail());
 
         if (!isValidEmail) {
             throw new IllegalStateException("email not valid");
         }
 
-        String token = appUserService.signUpUser(
-                new AppUser(
-                        request.getUserName(),
-                        request.getFirstName(),
-                        request.getLastName(),
-                        request.getEmail(),
-                        request.getPassword(),
-                        request.getTitel(),
-                        request.getAdresse(),
-                        request.getPlz(),
-                        request.getStadt(),
-
-                        request.getTelefonnummer(),
-                        request.getGeburtsdatum(),
-                        request.getGeburtsort(),
-                        request.getFuehrerscheinnummer(),
-                        request.getErteilungsdatum(),
-                        request.getAblaufdatum(),
-                        request.getAusstellungsort(),
-                        request.getPersonalausweisnummer(),
-                        request.getReisepassnummer(),
-                        request.getTarif(),
-                        AppUserRole.USER,
-                        request.getPayMethod()
-
-                )
+        AppUser appUser = new AppUser(
+                request.getUserName(),
+                request.getFirstName(),
+                request.getLastName(),
+                request.getEmail(),
+                request.getPassword(),
+                request.getTitel(),
+                request.getAdresse(),
+                request.getPlz(),
+                request.getStadt(),
+                request.getTelefonnummer(),
+                request.getGeburtsdatum(),
+                request.getGeburtsort(),
+                request.getFuehrerscheinnummer(),
+                request.getErteilungsdatum(),
+                request.getAblaufdatum(),
+                request.getAusstellungsort(),
+                request.getPersonalausweisnummer(),
+                request.getReisepassnummer(),
+                request.getTarif(),
+                AppUserRole.USER,
+                request.getPayMethod(),
+                getOperatingSystemFromServletRequest(servletRequest)
         );
+
+        String token = appUserService.signUpUser(appUser);
 
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
         emailSender.send(
@@ -85,8 +99,11 @@ public class RegistrationService {
                         request.getAusstellungsort(),
                         request.getPersonalausweisnummer(),
                         request.getReisepassnummer(),
-                        request.getTarif()
-                        , link, request.getPayMethod()));
+                        request.getTarif(),
+                        link,
+                        request.getPayMethod()
+                )
+        );
 
         return token;
     }
@@ -150,5 +167,27 @@ public class RegistrationService {
 
         return htmlTemplate;
     }
+    private String getOperatingSystemFromServletRequest(HttpServletRequest servletRequest) {
+        String userAgent = servletRequest.getHeader("User-Agent");
+        return getOperatingSystemFromUserAgent(userAgent);
+    }
+    public String getOperatingSystemFromUserAgent(String userAgent) {
+        String operatingSystem = "Unknown";
 
+        if (userAgent != null) {
+            if (userAgent.contains("Windows")) {
+                operatingSystem = "Windows";
+            } else if (userAgent.contains("Mac")) {
+                operatingSystem = "Mac";
+            } else if (userAgent.contains("Linux")) {
+                operatingSystem = "Linux";
+            } else if (userAgent.contains("Android")) {
+                operatingSystem = "Android";
+            } else if (userAgent.contains("iOS")) {
+                operatingSystem = "iOS";
+            }
+        }
+
+        return operatingSystem;
+    }
 }

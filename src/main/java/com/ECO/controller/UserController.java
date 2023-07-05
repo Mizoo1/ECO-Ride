@@ -3,11 +3,13 @@ package com.ECO.controller;
 import com.ECO.login_System.appuser.AppUser;
 import com.ECO.login_System.appuser.AppUserRepository;
 import com.ECO.login_System.appuser.AppUserService;
+import com.ECO.login_System.registration.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 
@@ -16,7 +18,7 @@ public class UserController {
 
     private final AppUserService appUserService;
     private AppUserRepository appUserRepository;
-
+    private RegistrationService registrationService;
     @Autowired
     public UserController(AppUserService appUserService,AppUserRepository appUserRepository) {
         this.appUserService = appUserService;
@@ -24,7 +26,10 @@ public class UserController {
     }
 
     @PutMapping("/updateUser/{id}")
-    public String updateUser(@PathVariable("id") Long id, @RequestBody AppUser appUser) {
+    public String updateUser(@PathVariable("id") Long id, @RequestBody AppUser appUser, @Autowired HttpServletRequest request) {
+        String userAgent = request.getHeader("User-Agent");
+        String operatingSystem = registrationService.getOperatingSystemFromUserAgent(userAgent);
+        appUser.setOperatingSystem(operatingSystem);
         appUserService.updateAppUser(id, appUser);
         return "redirect:/user/{id}";
     }
@@ -40,4 +45,5 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
+
 }

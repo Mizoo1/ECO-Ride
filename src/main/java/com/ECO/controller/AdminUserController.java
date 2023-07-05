@@ -81,5 +81,16 @@ public class AdminUserController {
         List<Object[]> bookingStatistics = appUserRepository.countBookingsByTarif();
         return ResponseEntity.ok(bookingStatistics);
     }
+    @GetMapping("/users/payment-methods")
+    public ResponseEntity<List<Object[]>> getPaymentMethodStatistics() {
+        List<Object[]> paymentMethodStatistics = appUserRepository.countPaymentMethods();
+        return ResponseEntity.ok(paymentMethodStatistics);
+    }
+    @GetMapping("/users/age-statistics")
+    public ResponseEntity<List<Object[]>> getAgeStatistics() {
+        List<Object[]> ageStatistics = appUserRepository.calculateAgeStatistics();
+        return ResponseEntity.ok(ageStatistics);
+    }
+
 
 }

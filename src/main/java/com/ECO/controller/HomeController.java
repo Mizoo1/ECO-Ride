@@ -67,10 +67,7 @@ public class HomeController {
 
         return ecoService.getContact(authentication);
     }
-    @GetMapping("/reservierung")
-    public ModelAndView getReservierung(Authentication authentication) {
-        return ecoService.getReservierung(authentication);
-    }
+
     @GetMapping("/api/v/registration/services")
     public String getServices() {
         return ecoService.getServicesWithoutLogin();
@@ -88,8 +85,8 @@ public class HomeController {
         return ecoService.getAbout(authentication);
     }
     @PostMapping(path = "api/v1/registration")
-    public ResponseEntity<String> register(@ModelAttribute RegistrationRequest request) {
-        String confirmationResult = registrationService.register(request);
+    public ResponseEntity<String> register(@ModelAttribute @RequestBody RegistrationRequest registrationRequest,HttpServletRequest request) {
+        String confirmationResult = registrationService.register(registrationRequest,request);
         Context context = new Context();
         context.setVariable("confirmationResult", confirmationResult);
         String renderedHtml = templateEngine.process("/registerSucsses", context);
@@ -119,8 +116,5 @@ public class HomeController {
     public String getTerm_condition() {
         return "term_condition";
     }
-
-
-
 
 }

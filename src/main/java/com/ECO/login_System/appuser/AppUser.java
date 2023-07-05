@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -20,6 +21,7 @@ import java.util.Collections;
 @NoArgsConstructor
 @Entity
 public class AppUser implements UserDetails {
+
 
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
     private List<Reservation> previousReservations;
@@ -34,6 +36,7 @@ public class AppUser implements UserDetails {
             strategy = GenerationType.SEQUENCE,
             generator = "Eco_sequence"
     )
+
     private Long id;
     private String userName;
     private String firstName;
@@ -44,7 +47,6 @@ public class AppUser implements UserDetails {
     private String adresse;
     private String plz;
     private String stadt;
-
     private String telefonnummer;
     private String geburtsdatum;
     private String geburtsort;
@@ -57,6 +59,8 @@ public class AppUser implements UserDetails {
     private String tarif;
     private String payMethod;
 
+    private String operatingSystem;
+
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
     private Boolean locked = false;
@@ -64,24 +68,18 @@ public class AppUser implements UserDetails {
 
 
 
-    public AppUser(String userName,String firstName, String lastName,
-                   String email, String password,
-                   String titel, String adresse, String plz,
-                   String stadt,  String telefonnummer,
-                   String geburtsdatum,
-                   String geburtsort,
-                   String fuehrerscheinnummer, String erteilungsdatum,
-                   String ablaufdatum, String ausstellungsort,
-                   String personalausweisnummer,
-                   String reisepassnummer,
-                   String tarif,AppUserRole appUserRole,
-                   String payMethod) {
+    public AppUser(String userName, String firstName, String lastName, String email, String password,
+                   String titel, String adresse, String plz, String stadt, String telefonnummer,
+                   String geburtsdatum, String geburtsort, String fuehrerscheinnummer, String erteilungsdatum,
+                   String ablaufdatum, String ausstellungsort, String personalausweisnummer,
+                   String reisepassnummer, String tarif, AppUserRole appUserRole, String payMethod,
+                   String operatingSystem) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.titel = titel;
         this.password = password;
+        this.titel = titel;
         this.adresse = adresse;
         this.plz = plz;
         this.stadt = stadt;
@@ -97,6 +95,7 @@ public class AppUser implements UserDetails {
         this.reisepassnummer = reisepassnummer;
         this.appUserRole = appUserRole;
         this.payMethod = payMethod;
+        this.operatingSystem = operatingSystem;
     }
 
     @Override
@@ -228,5 +227,13 @@ public class AppUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+    public String getOperatingSystem() {
+        return operatingSystem;
+    }
+
+    public void setOperatingSystem(String operatingSystem) {
+
+        this.operatingSystem = operatingSystem;
     }
 }
