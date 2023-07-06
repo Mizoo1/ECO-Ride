@@ -3,91 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <title>Reservierung</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="icon" href="/img/Logo.png" type="image/png">
+
     <style>
         body {
+
+        }
+        .content {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
             min-height: 100vh;
         }
 
-        .content {
-            flex: 1;
+        .table-container {
+            margin: 20px auto;
+            animation: fadeIn 2s ease-in-out;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: #f0f0f0;
+            width: 1200px;
+            height: auto;
+            overflow: auto;
+            position: relative;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+
+        .scrollable-table {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        h1 {
+            font-family: 'Roboto Condensed', Arial, sans-serif;
+            font-weight: 700;
+            font-size: 36px;
+            text-align: center;
+            animation: fadeIn_h 2s ease-in-out;
+        }
+
+        h2 {
+            font-family: 'Roboto Condensed', Arial, sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            text-align: center;
+            animation: fadeIn_h 2s ease-in-out;
+        }
+
+        th, td {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .form-group label {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+        }
+
+        .btn-primary {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+        }
+        .footer {
+            margin-top: 10px;
+            text-align: center;
+        }
+        @keyframes fadeIn_h {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
 <!-- Navigation -->
 <div th:replace="fragments/nav.html::nav"></div>
+<div class="content ">
 
-<div class="container content">
+    <div class="heading">
     <h1>Reservierung</h1>
+    </div>
 
-    <!-- Vorherige Reservierungen -->
+    <div class="subheading">
     <h2>Vorherige Reservierungen</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Auto</th>
-            <th>Zeit</th>
-            <th>Datum</th>
-            <th>Abholort</th>
-            <th>Ort</th>
-            <th>Aktion</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="reservation : ${reservations}">
-            <td th:text="${reservation.auto}"></td>
-            <td th:text="${reservation.zeit}"></td>
-            <td th:text="${reservation.datum}"></td>
-            <td th:text="${reservation.abholort}"></td>
-            <td th:text="${reservation.ort}"></td>
-            <td>
-                <form action="/reservierung/cancelReservation" method="POST">
-                    <input type="hidden" name="reservationId" th:value="${reservation.id}">
-                    <button type="submit" class="btn btn-danger">Stornieren</button>
-                </form>
+    </div>
+    <div class="row justify-content-center scrollable-table">
+        <div class="col-md-8 table-container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Fahrzeug</th>
+                    <th>Zeit</th>
+                    <th>Datum</th>
+                    <th>Abholort</th>
+                    <th>Ort</th>
+                    <th>Status</th>
+                    <th>Aktion</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reservation : ${reservations}" th:unless="${reservation.status == reservation.status.CANCELLED }">
+                    <td th:text="${reservation.getFahrzeug}"></td>
+                    <td th:text="${reservation.zeit}"></td>
+                    <td th:text="${reservation.datum}"></td>
+                    <td th:text="${reservation.abholort}"></td>
+                    <td th:text="${reservation.ort}"></td>
+                    <td th:text="${reservation.status}"></td>
+                    <td>
+                        <form action="/reservierung/cancelReservation" method="POST">
+                            <input type="hidden"name="reservationId" th:value="${reservation.id}">
+                            <button type="submit" class="btn btn-danger">Stornieren</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-            </td>
-        </tr>
-        </tbody>
-    </table>
 
-    <!-- Neues Reservierungsformular -->
+
+    <div class="subheading">
     <h2>Neue Reservierung</h2>
-    <form id="myForm" th:action="@{/reservierung }" method="POST" th:object="${newReservation}">
-        <a class="nav-link" th:href="@{/reservierung/{userId}(userId=${userId})}"></a>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8 table-container">
+            <form id="myForm" th:action="@{/reservierung}" method="POST" th:object="${reservierung}">
+                <a class="nav-link" th:href="@{/reservierung/{userId}(userId=${userId})}"></a>
 
-        <div class="form-group">
-            <label for="auto">Auto:</label>
-            <select class="form-control" id="auto" name="auto">
-                <option value="PKW">PKW</option>
-                <option value="LKW">LKW</option>
-                <!-- Weitere Optionen für verschiedene Autotypen -->
-            </select>
+                <div class="form-group">
+                    <label for="fahrzeug">Fahrzeug:</label>
+                    <select class="form-control" id="fahrzeug" name="fahrzeug">
+                        <option value="PKW">PKW</option>
+                        <option value="LKW">LKW</option>
+                        <option value="MOTORAD">MOTORAD</option>
+                        <option value="ANHÄNGER">ANHÄNGER</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="zeit">Zeit:</label>
+                    <input type="time" class="form-control" id="zeit" name="zeit">
+                </div>
+                <div class="form-group">
+                    <label for="datum">Datum:</label>
+                    <input type="date" class="form-control" id="datum" name="datum">
+                </div>
+                <div class="form-group">
+                    <label for="abholort">Abholort:</label>
+                    <input type="text" class="form-control" id="abholort" name="abholort">
+                </div>
+                <div class="form-group">
+                    <label for="ort">Ort:</label>
+                    <input type="text" class="form-control" id="ort" name="ort">
+                </div>
+                <div class="form-group">
+                    <label for="panne">Panne:</label>
+                    <div>
+                        <input type="checkbox" id="panne" name="panne">
+                        <label for="panne">Ja</label>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Reservieren</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="zeit">Zeit:</label>
-            <input type="time" class="form-control" id="zeit" name="zeit">
+    </div>
+
+
+    <div class="subheading">
+        <h2>Stornierte Reservierungen</h2>
+    </div>
+    <div class="row justify-content-center scrollable-table">
+        <div class="col-md-8 table-container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Fahrzeug</th>
+                    <th>Zeit</th>
+                    <th>Datum</th>
+                    <th>Abholort</th>
+                    <th>Ort</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reservation : ${cancelledReservations}">
+                    <td th:text="${reservation.getFahrzeug}"></td>
+                    <td th:text="${reservation.zeit}"></td>
+                    <td th:text="${reservation.datum}"></td>
+                    <td th:text="${reservation.abholort}"></td>
+                    <td th:text="${reservation.ort}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="form-group">
-            <label for="datum">Datum:</label>
-            <input type="date" class="form-control" id="datum" name="datum">
-        </div>
-        <div class="form-group">
-            <label for="abholort">Abholort:</label>
-            <input type="text" class="form-control" id="abholort"name="abholort">
-        </div>
-        <div class="form-group">
-            <label for="ort">Ort:</label>
-            <input type="text" class="form-control" id="ort" name="ort">
-        </div>
-        <button type="button" class="btn btn-primary" onclick="submitForm()">Reservieren</button>
-    </form>
+    </div>
+
+
 </div>
 
 <!-- Footer -->
@@ -100,20 +232,21 @@
 
 <script>
     function submitForm() {
-        var formData = $("#myForm").serialize();
+        var formData = $("#myForm").serializeArray();
         $.ajax({
-            url: "/reservierung",
             type: "POST",
+            url: "/reservierung",
             data: formData,
-            success: function(response) {
-                // Verarbeiten Sie die AJAX-Antwort hier, wenn nötig
+            success: function(data){
+                alert('Reservierung erfolgreich!');
+                location.reload();
             },
-            error: function(xhr, status, error) {
-                // Verarbeiten Sie den AJAX-Fehler hier, wenn nötig
+            error: function(){
+                alert('Fehler bei der Reservierung. Bitte versuchen Sie es erneut.');
             }
         });
     }
-</script>
 
+</script>
 </body>
 </html>

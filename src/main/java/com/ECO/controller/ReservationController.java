@@ -2,6 +2,7 @@ package com.ECO.controller;
 
 import com.ECO.login_System.appuser.AppUser;
 import com.ECO.login_System.appuser.Reservation;
+import com.ECO.login_System.appuser.ReservationStatus;
 import com.ECO.repository.ReservationRepository;
 import com.ECO.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,14 @@ public class ReservationController {
     }
 
     @PostMapping
-    public String submitReservationForm(@ModelAttribute("reservation") Reservation reservation) {
+    public String submitReservationForm(@ModelAttribute("reservation") Reservation reservation,
+                                        @RequestParam(name = "panne", required = false) boolean panne) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         AppUser currentUser = (AppUser) authentication.getPrincipal();
         reservation.setAppUser(currentUser);
+
+        reservation.setPanne(panne);
+        reservation.setStatus(ReservationStatus.RESERVED);
 
         reservationService.processReservation(reservation);
 
@@ -58,6 +63,13 @@ public class ReservationController {
         reservationService.cancelReservation(reservationId);
         return "redirect:/reservierung";
     }
+    @ModelAttribute("cancelledReservations")
+    public List<Reservation> getCancelledReservations() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser currentUser = (AppUser) authentication.getPrincipal();
+        return reservationRepository.findAllByAppUserAndStatus(currentUser, ReservationStatus.CANCELLED);
+    }
+
 
 
 }

@@ -18,13 +18,16 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String auto;
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status;
+
+    private boolean panne;
+
+    private String fahrzeug;
     private String zeit;
     private String datum;
     private String abholort;
     private String ort;
 
-
-    // Constructors, getters, and setters
 
 }

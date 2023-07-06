@@ -1,10 +1,11 @@
 package com.ECO.service;
 
 import com.ECO.login_System.appuser.Reservation;
+import com.ECO.login_System.appuser.ReservationStatus;
 import com.ECO.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.NoSuchElementException;
 @Service
 public class ReservationService {
 
@@ -21,9 +22,23 @@ public class ReservationService {
     }
 
     public void cancelReservation(Long reservationId) {
-        // Fügen Sie hier die Logik zur Stornierung der Reservierung hinzu
-        reservationRepository.deleteById(reservationId);
+        Reservation reservation = reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new NoSuchElementException("Could not find reservation " + reservationId));
+        reservation.setStatus(ReservationStatus.CANCELLED);
+        reservationRepository.save(reservation);
+    }
+    public void completeReservation(Long reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new NoSuchElementException("Could not find reservation " + reservationId));
+        reservation.setStatus(ReservationStatus.COMPLETED);
+        reservationRepository.save(reservation);
     }
 
-    // Weitere Methoden für die Geschäftslogik der Reservierung können hier hinzugefügt werden
+    public void missReservation(Long reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new NoSuchElementException("Could not find reservation " + reservationId));
+        reservation.setStatus(ReservationStatus.MISSED);
+        reservationRepository.save(reservation);
+    }
+
 }
