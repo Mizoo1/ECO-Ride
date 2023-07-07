@@ -36,7 +36,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="reservation : ${reservations}" th:unless="${reservation.status == reservation.status.CANCELLED }">
+                <tr th:each="reservation : ${reservations}" th:unless="${reservation.status == reservation.status.CANCELLED || reservation.status == reservation.status.MISSED}">
                     <td th:text="${reservation.getFahrzeug}"></td>
                     <td th:text="${reservation.zeit}"></td>
                     <td th:text="${reservation.datum}"></td>
@@ -222,6 +222,7 @@
                     <th>Datum</th>
                     <th>Abholort</th>
                     <th>Ort</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -231,6 +232,36 @@
                     <td th:text="${reservation.datum}"></td>
                     <td th:text="${reservation.abholort}"></td>
                     <td th:text="${reservation.ort}"></td>
+                    <td th:text="${reservation.status}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="subheading">
+        <h2>Verpasste Reservierungen</h2>
+    </div>
+    <div class="row justify-content-center scrollable-table">
+        <div class="col-md-8 table-container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Fahrzeug</th>
+                    <th>Zeit</th>
+                    <th>Datum</th>
+                    <th>Abholort</th>
+                    <th>Ort</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reservation : ${missedReservations}">
+                    <td th:text="${reservation.getFahrzeug}"></td>
+                    <td th:text="${reservation.zeit}"></td>
+                    <td th:text="${reservation.datum}"></td>
+                    <td th:text="${reservation.abholort}"></td>
+                    <td th:text="${reservation.ort}"></td>
+                    <td th:text="${reservation.status}"></td>
                 </tr>
                 </tbody>
             </table>

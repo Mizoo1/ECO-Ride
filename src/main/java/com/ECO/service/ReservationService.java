@@ -1,6 +1,5 @@
 package com.ECO.service;
 
-import com.ECO.login_System.appuser.AppUser;
 import com.ECO.login_System.appuser.Reservation;
 import com.ECO.login_System.appuser.ReservationStatus;
 import com.ECO.login_System.registration.ReservationConfirmationEmailService;

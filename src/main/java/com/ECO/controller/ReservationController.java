@@ -70,5 +70,11 @@ public class ReservationController {
         AppUser currentUser = (AppUser) authentication.getPrincipal();
         return reservationRepository.findAllByAppUserAndStatus(currentUser, ReservationStatus.CANCELLED);
     }
+    @ModelAttribute("missedReservations")
+    public List<Reservation> getMissedReservations() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        AppUser currentUser = (AppUser) authentication.getPrincipal();
+        return reservationRepository.findAllByAppUserAndStatus(currentUser, ReservationStatus.MISSED);
+    }
 
 }
