@@ -13,5 +13,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findAllByAppUser(AppUser appUser);
     List<Reservation> findAllByAppUserAndStatus(AppUser appUser, ReservationStatus status);
     List<Reservation> findAllByAppUserAndStatusNot(AppUser appUser, ReservationStatus status);
+    List<Reservation> findAllByStatus(ReservationStatus status);
 }
 

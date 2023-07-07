@@ -20,9 +20,10 @@ public class UserController {
     private AppUserRepository appUserRepository;
     private RegistrationService registrationService;
     @Autowired
-    public UserController(AppUserService appUserService,AppUserRepository appUserRepository) {
+    public UserController(AppUserService appUserService,AppUserRepository appUserRepository,RegistrationService registrationService) {
         this.appUserService = appUserService;
         this.appUserRepository = appUserRepository;
+        this.registrationService = registrationService;
     }
 
     @PutMapping("/updateUser/{id}")

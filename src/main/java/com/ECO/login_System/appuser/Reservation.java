@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Entity
 public class Reservation {
 
+
     @ManyToOne
     @JoinColumn(name = "app_user_id")
     private AppUser appUser;
@@ -21,13 +22,25 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
-    private boolean panne;
+    private boolean barrierefrei;
 
     private String fahrzeug;
+    private String marke;
+    private String motoradMarke;
+    private String modelPkw;
+    private String modelLkw;
+    private String modelMotorad;
+    private String anzahlDerTuren;
+    private String sprit;
+    private String lkwSize;
+    private String motoradSize;
+    private String anhaengerSize;
     private String zeit;
     private String datum;
     private String abholort;
     private String ort;
 
-
+    public boolean isBarrierefrei() {
+        return barrierefrei;
+    }
 }

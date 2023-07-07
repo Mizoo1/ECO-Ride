@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Profil von </title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -37,11 +38,29 @@
         }
 
         .attribute-title {
-            color: black; /* Rote Farbe für Attribut-Titel */
+            color: black;
         }
 
         .attribute-value {
-            color: green; /* Blaue Farbe für Attribut-Antworten */
+            color: green;
+            animation: fadeIn_h 2s ease-in-out;
+        }
+        h1 {
+            font-family: 'Roboto Condensed', Arial, sans-serif;
+            font-weight: 700;
+            font-size: 36px;
+            text-align: center;
+            animation: fadeIn_h 2s ease-in-out;
+        }
+        @keyframes fadeIn_h {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     </style>
 </head>

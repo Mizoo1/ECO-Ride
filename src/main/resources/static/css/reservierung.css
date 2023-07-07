@@ -1,0 +1,85 @@
+body {
+
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.table-container {
+    margin: 20px auto;
+    animation: fadeIn 2s ease-in-out;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+    width: 1200px;
+    height: auto;
+    overflow: auto;
+    position: relative;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.scrollable-table {
+    max-height: 400px;
+    overflow-y: auto;
+}
+h1 {
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    text-align: center;
+    animation: fadeIn_h 2s ease-in-out;
+}
+
+h2 {
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    text-align: center;
+    animation: fadeIn_h 2s ease-in-out;
+}
+
+th, td {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    text-align: center;
+}
+
+.form-group label {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+}
+
+.btn-primary {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+}
+.footer {
+    margin-top: 10px;
+    text-align: center;
+}
+@keyframes fadeIn_h {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

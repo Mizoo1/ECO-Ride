@@ -6,6 +6,7 @@ import com.ECO.login_System.appuser.ReservationStatus;
 import com.ECO.repository.ReservationRepository;
 import com.ECO.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,7 @@ public class ReservationController {
         AppUser currentUser = (AppUser) authentication.getPrincipal();
         reservation.setAppUser(currentUser);
 
-        reservation.setPanne(panne);
+        reservation.setBarrierefrei(panne);
         reservation.setStatus(ReservationStatus.RESERVED);
 
         reservationService.processReservation(reservation);
@@ -69,7 +70,5 @@ public class ReservationController {
         AppUser currentUser = (AppUser) authentication.getPrincipal();
         return reservationRepository.findAllByAppUserAndStatus(currentUser, ReservationStatus.CANCELLED);
     }
-
-
 
 }
