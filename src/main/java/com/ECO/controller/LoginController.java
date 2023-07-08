@@ -11,5 +11,10 @@ public class LoginController {
     {
         return "login";
     }
+    @GetMapping("/api/v/registration/login")
+    public String showLogin_()
+    {
+        return "login";
+    }
 
 }

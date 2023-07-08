@@ -28,18 +28,6 @@
             flex: 1;
         }
 
-        .content {
-            flex: 1;
-        }
-
-        .slider-card {
-            display: none;
-        }
-
-        .slider-card.active {
-            display: block;
-        }
-
         .card {
             border: none;
             border-radius: 10px;
@@ -86,6 +74,31 @@
             width: 100%;
             text-align: center;
         }
+        h1 {
+            font-family: 'Roboto Condensed', Arial, sans-serif;
+            font-weight: 700;
+            font-size: 36px;
+            text-align: center;
+            animation: fadeIn_h 2s ease-in-out;
+        }
+
+        h2 {
+            font-family: 'Roboto Condensed', Arial, sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            text-align: center;
+            animation: fadeIn_h 2s ease-in-out;
+        }
+        @keyframes fadeIn_h {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 <body>
@@ -100,12 +113,17 @@
                         <h2 class="card-header">Personendaten</h2>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label for="titel" class="form-label">Titel:</label>
-                                <select id="titel" name="titel" class="form-select" required>
-                                    <option value="">Bitte wähle einen Titel aus</option>
-                                    <option value="Herr">Herr</option>
-                                    <option value="Frau">Frau</option>
-                                </select>
+                                <label class="form-label">Titel:</label>
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-outline-secondary">
+                                        <input type="radio" class="btn-check" name="titel" id="herr" value="Herr" autocomplete="off">
+                                        <i class="bi bi-gender-male"></i> Herr
+                                    </label>
+                                    <label class="btn btn-outline-secondary">
+                                        <input type="radio" class="btn-check" name="titel" id="frau" value="Frau" autocomplete="off">
+                                        <i class="bi bi-gender-female"></i> Frau
+                                    </label>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="userName" class="form-label">Benutzername:</label>
@@ -260,6 +278,7 @@
 <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
 <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"></script>
 <script src="js/register.js"></script>
 <script>
     var slider = document.getElementById("slider");
@@ -272,6 +291,7 @@
     function previousSlide() {
         carousel.prev();
     }
+
 </script>
 </body>
 </html>

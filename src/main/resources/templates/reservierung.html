@@ -65,7 +65,7 @@
             <form id="myForm" th:action="@{/reservierung}" method="POST" th:object="${reservierung}">
                 <a class="nav-link" th:href="@{/reservierung/{userId}(userId=${userId})}"></a>
 
-                <!-- Common Fields -->
+
                 <div class="form-group">
                     <label for="zeit">Zeit:</label>
                     <input type="time" class="form-control" id="zeit" name="zeit">

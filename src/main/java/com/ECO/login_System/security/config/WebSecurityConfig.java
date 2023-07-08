@@ -29,13 +29,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v*/registration/**")
+                .antMatchers("/api/v*/registration/**","contact","login","reservierung","index")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .loginPage("/api/v/registration/login")
                 .successHandler(authenticationSuccessHandler) // Set the custom authentication success handler
                 .permitAll()
                 .and()
@@ -45,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/api/v*/registration/**");
+        web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/api/v*/registration/**","contact","reservierung","index");
     }
 
     @Override

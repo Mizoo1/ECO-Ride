@@ -3,6 +3,8 @@ package com.ECO.service;
 import com.ECO.login_System.appuser.AppUser;
 import com.ECO.repository.EcoRepository;
 
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,9 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Service
 public class EcoService {
     private final EcoRepository ecoRepository;
-
-    public EcoService(EcoRepository ecoRepository) {
+    private final JavaMailSender mailSender;
+    public EcoService(EcoRepository ecoRepository, JavaMailSender mailSender) {
         this.ecoRepository = ecoRepository;
+        this.mailSender = mailSender;
     }
 
     public ModelAndView getHome(Authentication authentication) {
@@ -46,7 +49,7 @@ public class EcoService {
         AppUser userDetails = (AppUser) authentication.getPrincipal();
         ModelAndView modelAndView = new ModelAndView("contact");
         String userName = userDetails.getUserName();
-        modelAndView.addObject("userName", userName);
+        modelAndView.addObject("userDetails", userDetails);
         return modelAndView;
     }
     public ModelAndView getReservierung(Authentication authentication) {

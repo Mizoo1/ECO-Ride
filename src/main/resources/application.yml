@@ -1,66 +1,67 @@
-server:
-  error:
-    include-message: always
-    include-binding-errors: always
 
-spring:
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-    cache: false
+  server:
+    error:
+      include-message: always
+      include-binding-errors: always
 
-  datasource:
-    url: jdbc:postgresql://containers-us-west-41.railway.app:6549/railway
-    username: postgres
-    password: jAYP6GhmCxtAFRCK13BG
+  spring:
+    thymeleaf:
+      prefix: classpath:/templates/
+      suffix: .html
+      cache: false
 
-  jpa:
-    open-in-view: false
-    hibernate:
-      ddl-auto: update
-    properties:
+    datasource:
+      url: jdbc:mariadb://localhost:3306/registration
+      username: root
+      password:
+
+    jpa:
+      open-in-view: false
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-    show-sql: true
-  servlet:
-    multipart:
-      enabled: true
-      max-file-size: 20MB
-      max-request-size: 20MB
-pin:
-# E-Mail-Einstellungen
-email:
-  reservation:
-    confirmation:
-      subject: "Betreff für die Reservierungsbestätigung"
-      template: "classpath:/templates/reservation_confirmation.html"
-    cancellation:
-      subject: "Betreff für die Stornierung der Reservierung"
-      template: "classpath:/templates/reservation_cancellation.html"
-    missed:
-      subject: "Betreff für die verpasste Reservierung"
-      template: "classpath:/templates/reservation_missed.html"
-    completed:
-      subject: "Betreff für die erfolgreiche Reservierung"
-      template: "classpath:/templates/reservation_completed.html"
+        ddl-auto: update
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MariaDBDialect
+          format_sql: true
+      show-sql: true
+    servlet:
+      multipart:
+        enabled: true
+        max-file-size: 10MB
+        max-request-size: 10MB
+  pin:
+  # E-Mail-Einstellungen
+  email:
+    reservation:
+      confirmation:
+        subject: "Betreff für die Reservierungsbestätigung"
+        template: "classpath:/templates/reservation_confirmation.html"
+      cancellation:
+        subject: "Betreff für die Stornierung der Reservierung"
+        template: "classpath:/templates/reservation_cancellation.html"
+      missed:
+        subject: "Betreff für die verpasste Reservierung"
+        template: "classpath:/templates/reservation_missed.html"
+      completed:
+        subject: "Betreff für die erfolgreiche Reservierung"
+        template: "classpath:/templates/reservation_completed.html"
 
 
 
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: eco.ride.germany@gmail.com
-    password: srpyyfidibekflju
-    properties:
-      mail:
-        smtp:
-          ssl:
-            trust: "*"
-          auth: true
-          starttls:
-            enable: true
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: eco.ride.germany@gmail.com
+      password: srpyyfidibekflju
+      properties:
+        mail:
+          smtp:
+            ssl:
+              trust: "*"
             auth: true
-          connectiontimeout: 5000
-          timeout: 3000
-          writetimeout: 5000
+            starttls:
+              enable: true
+              auth: true
+            connectiontimeout: 5000
+            timeout: 3000
+            writetimeout: 5000
