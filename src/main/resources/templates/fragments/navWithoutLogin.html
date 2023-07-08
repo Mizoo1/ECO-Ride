@@ -4,17 +4,39 @@
     <meta charset="UTF-8">
     <title>Navbar</title>
     <!-- Add Bootstrap CSS link here -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Add Font Awesome CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .nav-item {
+            transition: transform .3s;
+            cursor: pointer;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .nav-item:hover {
+                transform: scale(1.1);
+            }
+
+            .nav-link:hover {
+                color: #007bff !important;
+            }
+        }
+
+        .nav-link {
+            color: #000 !important;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+    </style>
 </head>
 <body>
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="index">
             <img src="/img/Logo.png" alt="Logo" style="width: 50px; height: 50px; margin-right: 10px;">
-            ECO-Ride
+            <span style="font-weight: bold; color: #000;">ECO-Ride</span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,26 +44,26 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item" data-aos="fade-down" data-aos-delay="100">
                     <a class="nav-link" href="/api/v/registration/index">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" data-aos="fade-down" data-aos-delay="200">
                     <a class="nav-link" href="/api/v/registration/about">About</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" data-aos="fade-down" data-aos-delay="300">
                     <a class="nav-link" href="/api/v/registration/services">Services</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" data-aos="fade-down" data-aos-delay="400">
                     <a class="nav-link" href="/api/v/registration/contact">Contact</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" data-aos="fade-down" data-aos-delay="500">
                     <a class="nav-link" href="/api/v/registration/login">
                         <div class="d-flex align-items-center">
                             <i class="fas fa-sign-in-alt"></i> Login
                         </div>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" data-aos="fade-down" data-aos-delay="600">
                     <a class="nav-link" href="/api/v/registration/register">
                         <div class="d-flex align-items-center">
                             <span class="mr-2">Register</span>
@@ -53,10 +75,15 @@
         </div>
     </div>
 </nav>
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
 <!-- Add Bootstrap JS scripts here -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- Add Font Awesome JS script here -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<script>
+    AOS.init();
+</script>
 </body>
 </html>

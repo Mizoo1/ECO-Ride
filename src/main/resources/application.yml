@@ -11,9 +11,9 @@
       cache: false
 
     datasource:
-      url: jdbc:mariadb://localhost:3306/registration
-      username: root
-      password:
+      url: jdbc:postgresql://containers-us-west-92.railway.app:7453/railway
+      username: postgres
+      password: 3WkMiU9A7HEMtxbyMGBT
 
     jpa:
       open-in-view: false
@@ -21,14 +21,14 @@
         ddl-auto: update
       properties:
         hibernate:
-          dialect: org.hibernate.dialect.MariaDBDialect
+          dialect: org.hibernate.dialect.PostgreSQLDialect
           format_sql: true
       show-sql: true
     servlet:
       multipart:
         enabled: true
-        max-file-size: 10MB
-        max-request-size: 10MB
+        max-file-size: 20MB
+        max-request-size: 20MB
   pin:
   # E-Mail-Einstellungen
   email:

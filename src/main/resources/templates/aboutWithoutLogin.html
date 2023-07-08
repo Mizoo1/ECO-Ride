@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Über uns</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/style.css">
   <script src="https://kit.fontawesome.com/13bb240f97.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="icon" href="/img/Logo.png" type="image/png">
@@ -58,6 +57,7 @@
     margin: 0.4rem 0.2rem 0.2rem 0.2rem;
   }
   </style>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
 </head>
 <body>
 <!-- Navigation -->
@@ -221,8 +221,11 @@
 <div class="footer">
   <div th:replace="fragments/footer.html::footer"></div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+<script>AOS.init();</script>
 </body>
 
 </html>

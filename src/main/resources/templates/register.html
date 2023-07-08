@@ -10,15 +10,15 @@
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.min.css">
-    <!--link rel="stylesheet" href="css/register.css"-->
 
     <style>
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-color: #f2f2f2;
             font-family: Arial, sans-serif;
+
+
         }
 
         .container {
@@ -33,17 +33,23 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 20px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .card-header {
-            background-color: #0046be;
-            color: #ffffff;
             border-radius: 10px 10px 0 0;
             padding: 10px 20px;
+            font-weight: bold;
+            background-color: #f8f9fa;
         }
 
         .form-label {
-            font-weight: bold;
+            color: #333;
         }
 
         .button-container {
@@ -52,13 +58,11 @@
             margin-top: 20px;
         }
 
-        .footer {
-            margin-top: auto;
+
+        /* Bezahlmethode */
+        .form-check-input[type="radio"]:checked + .form-check-label .input-group-text {
+            transform: scale(1.2);
         }
-        <!-- bezahlmethode -->
-             .form-check-input[type="radio"]:checked + .form-check-label .input-group-text {
-                 transform: scale(1.2);
-             }
 
         .input-group-text {
             width: 180px;
@@ -74,6 +78,7 @@
             width: 100%;
             text-align: center;
         }
+
         h1 {
             font-family: 'Roboto Condensed', Arial, sans-serif;
             font-weight: 700;
@@ -89,32 +94,82 @@
             text-align: center;
             animation: fadeIn_h 2s ease-in-out;
         }
-        @keyframes fadeIn_h {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+
+        /* Ruhigere Styles */
+        .card-header {
+            background-color: #f8f9fa;
         }
+
+        .form-label {
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #f8f9fa;
+            border-color: #f8f9fa;
+            color: #333;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #e9ecef;
+            border-color: #e9ecef;
+            color: #333;
+        }
+
+        .btn-light {
+            background-color: #ffffff;
+            color: #333;
+            border-color: #f8f9fa;
+        }
+
+        .btn-light:hover {
+            background-color: #e9ecef;
+            color: #333;
+            border-color: #e9ecef;
+        }
+        .footer {
+            margin-top: auto;
+            color: #333;
+            padding: 20px;
+        }
+        .footer a {
+            color: #333;
+        }
+
+        .footer a:hover {
+            color: #007bff;
+        }
+        .parallax {
+            background-image: url("/img/1.png");
+            min-height: 500px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
     </style>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
 </head>
 <body>
 <!-- Navigation -->
 <div th:replace="fragments/navWithoutLogin::nav"></div>
+<!-- Parallax Section -->
+<div class="parallax">
+    <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
+</div>
 <div class="container">
     <div id="slider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-        <form th:action="@{http://localhost:8080/api/v1/registration}" method="post" enctype="multipart/form-data" >
+        <form th:action="@{http://localhost:8080/api/v1/registration}" method="post" enctype="multipart/form-data">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <div class="card personal-data">
+                    <div class="card personal-data" data-aos="fade-right">
                         <h2 class="card-header">Personendaten</h2>
                         <div class="card-body">
                             <div class="mb-3">
                                 <label class="form-label">Titel:</label>
-                                <div class="btn-group" data-toggle="buttons">
+                                <div class="btn-group-toggle" data-toggle="buttons">
                                     <label class="btn btn-outline-secondary">
                                         <input type="radio" class="btn-check" name="titel" id="herr" value="Herr" autocomplete="off">
                                         <i class="bi bi-gender-male"></i> Herr
@@ -145,6 +200,51 @@
                                 <label for="geburtsort" class="form-label">Geburtsort:</label>
                                 <input type="text" id="geburtsort" name="geburtsort" class="form-control" required>
                             </div>
+                        </div>
+                        <div class="button-container">
+                            <button class="btn btn-primary" type="button" onclick="nextSlide()">Weiter</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card subscription" data-aos="fade-left">
+                        <h2 class="card-header">Abonnement und Kontakt</h2>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="adresse" class="form-label">Straße und Hausnummer:</label>
+                                <input type="text" id="adresse" name="adresse" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="plz" class="form-label">PLZ:</label>
+                                <input type="text" id="plz" name="plz" class="form-control" pattern="[0-9]+" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="stadt" class="form-label">Ort:</label>
+                                <input type="text" id="stadt" name="stadt" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefonnummer" class="form-label">Mobilnummer:</label>
+                                <input type="text" id="telefonnummer" name="telefonnummer" class="form-control" pattern="[0-9]+" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">E-Mail:</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Passwort:</label>
+                                <input type="password" id="password" name="password" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button class="btn btn-primary" type="button" onclick="previousSlide()">Zurück</button>
+                            <button class="btn btn-primary" type="button" onclick="nextSlide()">Weiter</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card additional-data" data-aos="fade-right">
+                        <h2 class="card-header">Führerschein</h2>
+                        <div class="card-body">
                             <div class="mb-3">
                                 <label for="reisepassnummer" class="form-label">Reisepassnummer:</label>
                                 <input type="text" id="reisepassnummer" name="reisepassnummer" class="form-control" required>
@@ -169,43 +269,19 @@
                                 <label for="ausstellungsort" class="form-label">Ausstellungsort:</label>
                                 <input type="text" id="ausstellungsort" name="ausstellungsort" class="form-control" required>
                             </div>
-                            <div class="button-container">
-                                <button class="btn btn-primary" type="button" onclick="nextSlide()">Weiter</button>
-                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button class="btn btn-primary" type="button" onclick="previousSlide()">Zurück</button>
+                            <button class="btn btn-primary" type="button" onclick="nextSlide()">Weiter</button>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="card subscription">
-                        <h2 class="card-header">Abonnement und Kontakt</h2>
+                    <div class="card payment-method" data-aos="fade-left">
+                        <h2 class="card-header">Bezahlmethode</h2>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label for="adresse" class="form-label">Straße und Hausnummer:</label>
-                                <input type="text" id="adresse" name="adresse" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="plz" class="form-label">PLZ:</label>
-                                <input type="text" id="plz" name="plz" class="form-control" pattern="[0-9]+" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="stadt" class="form-label">Ort:</label>
-                                <input type="text" id="stadt" name="stadt" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="telefonnummer" class="form-label">Mobilnummer:</label>
-                                <input type="text" id="telefonnummer" name="telefonnummer" class="form-control"  pattern="[0-9]+"  required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">E-Mail:</label>
-                                <input type="email" id="email" name="email" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Passwort:</label>
-                                <input type="password" id="password" name="password" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Bezahlmethode:</label><br>
+                                <label class="form-label">Bezahlmethode:</label>
                                 <div class="input-group mb-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" id="paypal" name="payMethod" value="paypal" required>
@@ -213,7 +289,7 @@
                                             <div class="input-group-text">
                                                 <div class="icon-container">
                                                     <i class="fab fa-paypal fa-fw" style="color: blue;"></i>
-                                                    <span class="icon-text "> PayPal</span>
+                                                    <span class="icon-text"> PayPal</span>
                                                 </div>
                                             </div>
                                         </label>
@@ -226,7 +302,7 @@
                                             <div class="input-group-text">
                                                 <div class="icon-container">
                                                     <i class="fab fa-cc-visa fa-fw" style="color: green;"></i>
-                                                    <span class="icon-text "> Visa</span>
+                                                    <span class="icon-text"> Visa</span>
                                                 </div>
                                             </div>
                                         </label>
@@ -239,35 +315,42 @@
                                             <div class="input-group-text">
                                                 <div class="icon-container">
                                                     <i class="fab fa-cc-mastercard fa-fw" style="color: red;"></i>
-                                                    <span class="icon-text "> MasterCard</span>
+                                                    <span class="icon-text"> MasterCard</span>
                                                 </div>
                                             </div>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="tarif" class="form-label">Tarief:</label>
-                                    <select id="tarif" name="tarif" class="form-select" required>
-                                        <option value="basic">Basic</option>
-                                        <option value="premium">Premium</option>
-                                        <option value="ultra">Ultra</option>
-                                    </select>
-                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tarif" class="form-label">Tarif:</label>
+                                <select id="tarif" name="tarif" class="form-select" required>
+                                    <option value="basic">Basic</option>
+                                    <option value="premium">Premium</option>
+                                    <option value="ultra">Ultra</option>
+                                </select>
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" id="terms" name="terms" class="form-check-input" required>
-                                <label for="terms" class="form-check-label">Ich akzeptiere die <a href="http://localhost:8080/api/v/registration/term_condition"><u>Geschäftsbedingungen </u> </a> der Seite</label>
+                                <label for="terms" class="form-check-label">Ich akzeptiere die <a href="http://localhost:8080/api/v/registration/term_condition"><u>Geschäftsbedingungen</u></a> derSeite</label>
                             </div>
                             <div class="button-container">
-                                <button class="btn btn-primary" type="button" onclick="previousSlide()">Zurück</button>
-                                <button type="submit" class="btn btn-light btn-lg" style="background-color: forestgreen;" data-mdb-ripple-color="dark">Regestrieren</button>
+                                <button type="submit" class="btn btn-light btn-lg" style="background-color: forestgreen;" data-mdb-ripple-color="dark">Registrieren</button>
                             </div>
+                        </div>
+                        <div class="button-container">
+                            <button class="btn btn-primary" type="button" onclick="previousSlide()">Zurück</button>
+                            <button class="btn btn-primary" type="button" onclick="nextSlide()">Weiter</button>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
     </div>
+</div>
+<!-- Parallax Section -->
+<div class="parallax">
+    <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
 </div>
 <!-- Footer -->
 <div class="footer">
@@ -278,9 +361,13 @@
 <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
 <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta1/js/bootstrap.bundle.min.js"></script>
-<script src="js/register.js"></script>
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="vendor/jquery-ui/jquery-ui.min.js"></script>
 <script>
+    AOS.init();
+
     var slider = document.getElementById("slider");
     var carousel = new bootstrap.Carousel(slider);
 
@@ -291,7 +378,6 @@
     function previousSlide() {
         carousel.prev();
     }
-
 </script>
 </body>
 </html>
