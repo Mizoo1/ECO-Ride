@@ -166,7 +166,8 @@ public class RegistrationService {
         // HTML-Datei einlesen
         String htmlTemplate = ""; // HTML-Code als String
         try {
-            File file = new File("src/main/resources/templates/email_template.html");
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(classLoader.getResource("templates/email_template.html").getFile());
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 htmlTemplate += scanner.nextLine();
@@ -202,7 +203,8 @@ public class RegistrationService {
         // HTML-Datei einlesen
         String htmlTemplate = ""; // HTML-Code als String
         try {
-            File file = new File("D:\\ECO-Ride\\src\\main\\resources\\templates\\email_template.html");
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(classLoader.getResource("templates/email_template.html").getFile());
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 htmlTemplate += scanner.nextLine();
