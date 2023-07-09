@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Scanner;
 
 @Service
@@ -167,7 +168,7 @@ public class RegistrationService {
         String htmlTemplate = ""; // HTML-Code als String
         try {
             ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource("email_template.html").getFile());
+            File file = new File(Objects.requireNonNull(classLoader.getResource("email_template.html")).getFile());
             ;
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
