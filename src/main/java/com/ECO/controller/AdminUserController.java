@@ -55,10 +55,6 @@ public class AdminUserController {
         return "admin_users";
     }
 
-
-
-
-
     @GetMapping("/users/{id}")
     public String showUserDetails(@PathVariable("id") Long id, Model model) {
         Optional<AppUser> optionalUser = appUserRepository.findById(id);
@@ -76,21 +72,22 @@ public class AdminUserController {
         appUserRepository.deleteById(id);
         return "redirect:/admin/users";
     }
+
     @GetMapping("/bookings/statistics")
     public ResponseEntity<List<Object[]>> getBookingStatistics() {
         List<Object[]> bookingStatistics = appUserRepository.countBookingsByTarif();
         return ResponseEntity.ok(bookingStatistics);
     }
+
     @GetMapping("/users/payment-methods")
     public ResponseEntity<List<Object[]>> getPaymentMethodStatistics() {
         List<Object[]> paymentMethodStatistics = appUserRepository.countPaymentMethods();
         return ResponseEntity.ok(paymentMethodStatistics);
     }
+
     @GetMapping("/users/age-statistics")
     public ResponseEntity<List<Object[]>> getAgeStatistics() {
         List<Object[]> ageStatistics = appUserRepository.calculateAgeStatistics();
         return ResponseEntity.ok(ageStatistics);
     }
-
-
 }
