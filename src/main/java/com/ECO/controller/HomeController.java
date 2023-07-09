@@ -92,16 +92,16 @@ public class HomeController {
         String confirmationResult = registrationService.registerUser(registrationRequest,request);
         Context context = new Context();
         context.setVariable("confirmationResult", confirmationResult);
-        String renderedHtml = templateEngine.process("/registerSucsses", context);
+        String renderedHtml = templateEngine.process("registerSuccess", context); // Assuming the template file is named "registerSuccess.html"
         // Return the rendered HTML as a response with appropriate headers and status
         return ResponseEntity.ok().body(renderedHtml);
     }
     @PostMapping(path = "api/v1/registration")
-    public ResponseEntity<String> registerAdmin(@ModelAttribute @RequestBody RegistrationRequest registrationRequest,HttpServletRequest request) {
-        String confirmationResult = registrationService.registerAdmin(registrationRequest,request);
+    public ResponseEntity<String> registerAdmin(@ModelAttribute @RequestBody RegistrationRequest registrationRequest, HttpServletRequest request) {
+        String confirmationResult = registrationService.registerAdmin(registrationRequest, request);
         Context context = new Context();
         context.setVariable("confirmationResult", confirmationResult);
-        String renderedHtml = templateEngine.process("/registerSucsses", context);
+        String renderedHtml = templateEngine.process("registerSuccess", context); // Assuming the template file is named "registerSuccess.html"
         // Return the rendered HTML as a response with appropriate headers and status
         return ResponseEntity.ok().body(renderedHtml);
     }
