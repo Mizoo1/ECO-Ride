@@ -6,12 +6,15 @@ import com.ECO.login_System.appuser.ReservationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StreamUtils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -106,8 +109,9 @@ public class ReservationConfirmationEmailService {
         try {
             // Read the HTML template file based on the status
             String templateFileName = getTemplateFileNameByStatus(status);
-            Path htmlPath = new ClassPathResource("templates/" + templateFileName).getFile().toPath();
-            byte[] htmlBytes = Files.readAllBytes(htmlPath);
+            Resource resource = new ClassPathResource("templates/" + templateFileName);
+            InputStream inputStream = resource.getInputStream();
+            byte[] htmlBytes = StreamUtils.copyToByteArray(inputStream);
 
             // Convert the bytes to a string using UTF-8 encoding
             return new String(htmlBytes, StandardCharsets.UTF_8);
@@ -117,6 +121,7 @@ public class ReservationConfirmationEmailService {
             return ""; // Return an empty string if the template cannot be read
         }
     }
+
     private String replaceNullWithEmptyString(String value) {
         return value != null ? value : "";
     }
