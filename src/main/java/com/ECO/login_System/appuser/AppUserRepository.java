@@ -38,6 +38,10 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
             "GROUP BY EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM u.geburtsdatum)")
     List<Object[]> calculateAgeStatistics();
 
+    @Query("SELECT u.operatingSystem, COUNT(u.operatingSystem) FROM AppUser u GROUP BY u.operatingSystem")
+    List<Object[]> countOperatingSystems();
+
+
     @Transactional
     @Modifying
     @Query("UPDATE AppUser a SET a.enabled = TRUE WHERE a.email = ?1")

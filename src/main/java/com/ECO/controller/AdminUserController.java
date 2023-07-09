@@ -90,4 +90,10 @@ public class AdminUserController {
         List<Object[]> ageStatistics = appUserRepository.calculateAgeStatistics();
         return ResponseEntity.ok(ageStatistics);
     }
+    @GetMapping("/users/operating-systems")
+    public ResponseEntity<List<Object[]>> getOperatingSystemStatistics() {
+        List<Object[]> operatingSystemStatistics = appUserRepository.countOperatingSystems();
+        return ResponseEntity.ok(operatingSystemStatistics);
+    }
+
 }
