@@ -1,30 +1,34 @@
 package com.ECO.controller;
 
-import javax.servlet.http.HttpSession;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.spring5.SpringTemplateEngine;
-
 import com.ECO.login_System.registration.RegistrationRequest;
 import com.ECO.login_System.registration.RegistrationService;
 import com.ECO.service.EcoService;
+import org.springframework.security.core.Authentication;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
 
 @Controller
 public class HomeController {
 
     private final EcoService ecoService;
+
     private final RegistrationService registrationService;
     private final SpringTemplateEngine templateEngine;
 
-    public HomeController(EcoService ecoService, RegistrationService registrationService,
-            SpringTemplateEngine templateEngine) {
+    public HomeController(EcoService ecoService,RegistrationService registrationService,SpringTemplateEngine templateEngine) {
         this.ecoService = ecoService;
         this.registrationService = registrationService;
         this.templateEngine = templateEngine;
@@ -32,78 +36,65 @@ public class HomeController {
 
     @GetMapping("/api/v/registration/index")
     public String getHomeWithoutLogin(Model model, HttpSession session) {
-        // model.addAttribute("loggedIn", session.getAttribute("loggedIn"));
+        //model.addAttribute("loggedIn", session.getAttribute("loggedIn"));
         return ecoService.getHomeWithoutLogin();
     }
-
-    @GetMapping("index")
-    public String getHome(Model model, HttpSession session) {
-        // model.addAttribute("logout", session.getAttribute("logout"));
-        return ecoService.getHome();
+    @GetMapping("/index")
+    public ModelAndView getHome(Authentication authentication) {
+        return ecoService.getHome(authentication);
     }
-
     @GetMapping("/api/v/registration/register")
     public String getRegister() {
         return ecoService.getRegister();
-    }
-
-    @GetMapping("/register")
-    public String getPersonlicheSeite() {
-        return "/name";
-    }
-
-    @GetMapping("/api/v/registration/login")
-    public String getLogin() {
-        return ecoService.getLogin();
     }
 
     @GetMapping("/api/v/registration/logout")
     public String getLogout() {
         return ecoService.getLogout();
     }
-
-    @GetMapping("/api/v/registration/contact")
-    public String getContact() {
-        return ecoService.getContact();
+    @RequestMapping("/profile")
+    public ModelAndView zeigeProfil(Authentication authentication) {
+        return ecoService.zeigeProfil(authentication);
     }
 
-    @GetMapping("/contact")
+
+    @GetMapping("/api/v/registration/contact")
     public String getContactWithoutLogin() {
-        return ecoService.getContact();
+        return ecoService.getContactWithoutLogin();
+    }
+    @GetMapping("/contact")
+    public ModelAndView getContact(Authentication authentication) {
+
+        return ecoService.getContact(authentication);
     }
 
     @GetMapping("/api/v/registration/services")
     public String getServices() {
-        return ecoService.getServices();
+        return ecoService.getServicesWithoutLogin();
     }
-
     @GetMapping("/services")
-    public String getServicesWithoutLogin() {
-        return ecoService.getServices();
+    public ModelAndView getServicesWithoutLogin(Authentication authentication) {
+        return ecoService.getServices(authentication);
     }
-
     @GetMapping("/api/v/registration/about")
     public String getAbout() {
-        return ecoService.getAbout();
+        return ecoService.getAboutWithoutLogin();
     }
-
     @GetMapping("/about")
-    public String getAboutWithoutLogin() {
-        return ecoService.getAbout();
+    public ModelAndView getAboutWithoutLogin(Authentication authentication) {
+        return ecoService.getAbout(authentication);
     }
-
     @PostMapping(path = "api/v1/registration")
-    public ResponseEntity<String> register(@ModelAttribute RegistrationRequest request) {
-        String confirmationResult = registrationService.register(request);
+    public ResponseEntity<String> register(@ModelAttribute @RequestBody RegistrationRequest registrationRequest,HttpServletRequest request) {
+        String confirmationResult = registrationService.register(registrationRequest,request);
         Context context = new Context();
         context.setVariable("confirmationResult", confirmationResult);
         String renderedHtml = templateEngine.process("/registerSucsses", context);
         // Return the rendered HTML as a response with appropriate headers and status
         return ResponseEntity.ok().body(renderedHtml);
     }
-
     @GetMapping(path = "confirm")
-    public ResponseEntity<String> confirm(@RequestParam String token, Model model) {
+    public ResponseEntity<String> confirm(@RequestParam("token") String token, Model model) {
         String confirmationResult = registrationService.confirmToken(token);
         // Create a Thymeleaf context and add necessary data
         Context context = new Context();
@@ -115,10 +106,10 @@ public class HomeController {
         // Return the rendered HTML as a response with appropriate headers and status
         return ResponseEntity.ok().body(renderedHtml);
     }
-
     @GetMapping()
     public String registerDone() {
         return "sucess";
+
     }
 
     @GetMapping(path = "/api/v/registration/term_condition")

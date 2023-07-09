@@ -1,22 +1,492 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>ECO-Ride</title>
+    <title>Autovermietung</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="icon" href="/img/Logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
     <style>
+        .parallax {
+            background-image: url("/img/1.png");
+            min-height: 1500px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .transition {
+            width: 100px;
+            height: 100px;
+            transition: width 2s;
+            background-color: blue;
+        }
+
+        .transition:hover {
+            width: 200px;
+        }
+        .btn-animate {
+            transition: transform .3s;
+        }
+        .btn-animate:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
 <!-- Navigation -->
-<div th:replace="fragments/nav.html::nav"></div>
-<h1 class="Omar">Hello world from Home !</h1>
-<img src="/img/signup-bg.jpg" alt="Description of the image">
-<footer th:replace="fragments/footer.html::footer"></footer>
+<div th:replace="fragments/navWithoutLogin::nav"></div>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Autovermietung</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#services-section">Dienstleistungen</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#booking-section">Reservierung</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#reviews-section">Bewertungen</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Parallax Section -->
+<div class="parallax">
+    <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
+</div>
+
+<!-- Carousel -->
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/img/3.png" class="d-block w-100" alt="Car 1">
+        </div>
+        <div class="carousel-item">
+            <img src="/img/2.png" class="d-block w-100" alt="Car 2">
+        </div>
+    </div>
+</div>
+
+<!-- Services Section -->
+<div id="services-section" class="container p-5">
+    <h2 class="text-center" data-aos="fade-down">Unsere Dienstleistungen</h2>
+    <div class="row">
+        <div class="col-4" data-aos="fade-up">
+            <h4>Günstige Preise</h4>
+            <p>Wir bieten die besten Preise auf dem Markt.</p>
+        </div>
+        <div class="col-4" data-aos="fade-up">
+            <h4>Große Auswahl</h4>
+            <p>Wählen Sie aus einer Vielzahl von Fahrzeugen.</p>
+        </div>
+        <div class="col-4" data-aos="fade-up">
+            <h4>Kundenservice</h4>
+            <p>Unser Kundenservice ist immer für Sie da.</p>
+        </div>
+    </div>
+</div>
+<div class="parallax">
+    <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
+    <!-- Booking Section -->
+    <div id="booking-section" class="container p-5">
+        <h2 class="text-center" data-aos="fade-down">Buchen Sie Ihr Fahrzeug</h2>
+        <form data-aos="fade-up">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Ihr Name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Ihre Email">
+            </div>
+            <div class="form-group">
+                <label for="car">Auto</label>
+                <select class="form-control" id="car">
+                    <option>BMW</option>
+                    <option>Mercedes</option>
+                    <option>Audi</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Reservieren</button>
+        </form>
+    </div>
+</div>
+
+<div class="parallax">
+    <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
+</div>
+<!-- Reviews Section -->
+<div id="reviews-section" class="container p-5">
+    <h2 class="text-center" data-aos="fade-down">Was unsere Kunden sagen</h2>
+    <div class="row">
+        <div class="col-6" data-aos="fade-right">
+            <p>"Toller Service und tolle Autos!" - Kunde 1</p>
+        </div>
+        <div class="col-6" data-aos="fade-left">
+            <p>"Sehr zufrieden mit dem Preis und dem Service!" - Kunde 2</p>
+        </div>
+    </div>
+</div>
+<!-- About Us Section -->
+<div id="about-section" class="container p-5">
+    <h2 class="text-center" data-aos="fade-down">Über Uns</h2>
+    <p data-aos="fade-up">
+        Wir sind ein engagiertes Team von Autoenthusiasten, das sich zum Ziel gesetzt hat,
+        Ihnen den besten Autovermietungsservice zu bieten. Seit unserer Gründung im Jahr 2023
+        haben wir unermüdlich daran gearbeitet, eine große Auswahl an Fahrzeugen zu
+        erschwinglichen Preisen anzubieten und einen herausragenden Kundenservice zu bieten.
+    </p>
+</div>
+<div class="parallax">
+    <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
+</div>
+<!-- Gallery Section -->
+<div id="gallery-section" class="container p-5">
+    <h2 class="text-center" data-aos="fade-down">Unsere Fahrzeuggalerie</h2>
+    <div class="row">
+        <!-- Car 1 -->
+        <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
+            <div class="card h-100">
+                <img src="/img/2.png" class="card-img-top" alt="Car 1">
+                <div class="card-body">
+                    <h4 class="card-title">BMW 5er</h4>
+                    <p class="card-text">Premium-Komfort und luxuriöses Fahrerlebnis.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Car 2 -->
+        <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
+            <div class="card h-100">
+                <img src="/img/1.png" class="card-img-top" alt="Car 2">
+                <div class="card-body">
+                    <h4 class="card-title">Audi A6</h4>
+                    <p class="card-text">Sportlichkeit und Eleganz vereint.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Car 3 -->
+        <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
+            <div class="card h-100">
+                <img src="/img/4.png" class="card-img-top" alt="Car 3">
+                <div class="card-body">
+                    <h4 class="card-title">Mercedes E-Klasse</h4>
+                    <p class="card-text">Innovation und Luxus in Perfektion.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Car 4 -->
+        <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
+            <div class="card h-100">
+                <img src="/img/3.png" class="card-img-top" alt="Car 4">
+                <div class="card-body">
+                    <h4 class="card-title">Porsche Taycan</h4>
+                    <p class="card-text">Elektrisierendes Fahrvergnügen und atemberaubende Leistung.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Car 4 -->
+        <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up">
+            <div class="card h-100">
+                <img src="img/5.png" class="card-img-top" alt="Car 4">
+                <div class="card-body">
+                    <h4 class="card-title">Porsche Taycan</h4>
+                    <p class="card-text">Elektrisierendes Fahrvergnügen und atemberaubende Leistung.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="parallax">
+    <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
+    <!-- Pricing Section -->
+    <div id="pricing-section" class="container p-5">
+        <h2 class="text-center" data-aos="fade-down">Unsere Preispläne</h2>
+        <div class="row">
+            <!-- Basic Plan -->
+            <div class="col-4" data-aos="fade-up">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="my-0 font-weight-normal">Basic</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">€20 <small class="text-muted">/ Tag</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Freikilometer: 100 km</li>
+                            <li>Versicherung: Basis</li>
+                            <li>Zusätzlicher Fahrer: Nein</li>
+                            <li>Kostenlose Stornierung bis 24h vor Fahrtantritt</li>
+                            <li>Rund um die Uhr Pannenhilfe</li>
+                        </ul>
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Jetzt buchen</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Premium Plan -->
+            <div class="col-4" data-aos="fade-up">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="my-0 font-weight-normal">Premium</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">€30 <small class="text-muted">/ Tag</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Freikilometer: 200 km</li>
+                            <li>Versicherung: Komfort</li>
+                            <li>Zusätzlicher Fahrer: Ja</li>
+                            <li>Kostenlose Stornierung bis 12h vor Fahrtantritt</li>
+                            <li>Rund um die Uhr Pannenhilfe</li>
+                            <li>Gratis Navigationssystem</li>
+                        </ul>
+                        <button type="button" class="btn btn-lg btn-block btn-outline-success">Jetzt buchen</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Ultra Plan -->
+            <div class="col-4" data-aos="fade-up">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h4 class="my-0 font-weight-normal">Ultra</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">€40 <small class="text-muted">/ Tag</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Freikilometer: Unbegrenzt</li>
+                            <li>Versicherung: Premium</li>
+                            <li>Zusätzlicher Fahrer: Ja</li>
+                            <li>Kostenlose Stornierung bis 1h vor Fahrtantritt</li>
+                            <li>Rund um die Uhr Pannenhilfe</li>
+                            <li>Gratis Navigationssystem</li>
+                            <li>Priorität bei Fahrzeugauswahl</li>
+                        </ul>
+                        <button type="button" class="btn btn-lg btn-block btn-outline-danger">Jetzt buchen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="parallax">
+    <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
+    <!-- Contact Section -->
+    <div id="contact-section" class="container p-5">
+        <h2 class="text-center" data-aos="fade-down">Kontakt</h2>
+        <form data-aos="fade-up">
+            <div class="form-group">
+                <label for="contactName">Name</label>
+                <input type="text" class="form-control" id="contactName" placeholder="Ihr Name">
+            </div>
+            <div class="form-group">
+                <label for="contactEmail">Email</label>
+                <input type="email" class="form-control" id="contactEmail" placeholder="Ihre Email">
+            </div>
+            <div class="form-group">
+                <label for="contactMessage">Nachricht</label>
+                <textarea class="form-control" id="contactMessage" rows="3" placeholder="Ihre Nachricht"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Senden</button>
+        </form>
+    </div>
+    <div class="parallax">
+        <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
+    </div>
+    <!-- Team Section -->
+    <div id="team-section" class="container p-5">
+        <h2 class="text-center" data-aos="fade-down">Unser Team</h2>
+        <div class="row">
+            <div class="col-4" data-aos="fade-up">
+                <img src="/img/team1.png" class="img-fluid rounded-circle" alt="Team member 1">
+                <h4>Max Mustermann</h4>
+                <p>CEO & Gründer</p>
+            </div>
+            <div class="col-4" data-aos="fade-up">
+                <img src="/img/team2.png" class="img-fluid rounded-circle" alt="Team member 2">
+                <h4>Anna Musterfrau</h4>
+                <p>COO & Mitgründer</p>
+            </div>
+            <div class="col-4" data-aos="fade-up">
+                <img src="/img/team3.png" class="img-fluid rounded-circle" alt="Team member 3">
+                <h4>John Doe</h4>
+                <p>Leiter Kundenservice</p>
+            </div>
+        </div>
+    </div>
+    <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
+    <!-- FAQ Section -->
+    <div id="faq-section" class="container p-5">
+        <h2 class="text-center" data-aos="fade-down">Häufig gestellte Fragen</h2>
+        <div class="accordion" id="faqAccordion" data-aos="fade-up">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Wie kann ich ein Auto buchen?
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Sie können ein Auto buchen, indem Sie das Formular in unserem Buchungsabschnitt ausfüllen und absenden.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingFive">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Bieten Sie einen Langzeitmietrabatt an?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Ja, wir bieten Rabatte für Langzeitmieten an. Kontaktieren Sie uns für weitere Informationen.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingEleven">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                            Was ist Ihre Stornierungsrichtlinie?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Unsere Stornierungsrichtlinie variiert je nach Buchung. Bitte lesen Sie unsere AGB für detaillierte Informationen zur Stornierung und Rückerstattung.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingTen">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                            Bieten Sie Kindersitze für die Autos an?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Ja, wir bieten Kindersitze als Zusatzoption an. Bitte geben Sie bei der Buchung an, ob Sie einen Kindersitz benötigen.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingNine">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                            Was passiert, wenn ich meine Buchung ändern muss?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Bitte kontaktieren Sie uns so früh wie möglich, wenn Sie Änderungen an Ihrer Buchung vornehmen müssen. Wir werden unser Bestes tun, um Ihnen zu helfen.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingEight">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                            Sind die Autos versichert?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Ja, alle unsere Autos sind voll versichert. Es gelten jedoch bestimmte Bedingungen und Selbstbeteiligungen. Weitere Informationen finden Sie in unseren Versicherungsrichtlinien.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingSeven">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            Kann ich das gemietete Auto an einem anderen Standort abgeben?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Ja, wir bieten die Möglichkeit, das Auto an einem anderen Standort abzugeben. Es können jedoch zusätzliche Gebühren anfallen. Bitte kontaktieren Sie uns für weitere Informationen.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingSix">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            Kann ich das gemietete Auto in einem anderen Land abgeben?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Ja, wir bieten grenzüberschreitende Rückgabeoptionen an. Es können jedoch zusätzliche Gebühren anfallen. Bitte kontaktieren Sie uns für weitere Informationen.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Was sind Ihre Öffnungszeiten?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Unser Service steht Ihnen rund um die Uhr zur Verfügung.
+                    </div>
+                </div>
+            </div>
+            <!-- Weitere Fragen hier einfügen -->
+        </div>
+    </div>
+    <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
+    <!-- Newsletter-Anmeldung Section -->
+    <div id="newsletter-section" class="container p-5 bg-light">
+        <h2 class="text-center" data-aos="fade-down" style="font-size: 2.5em;">Newsletter Anmeldung</h2>
+        <div class="row justify-content-center" data-aos="fade-up">
+            <div class="col-md-6">
+                <p style="font-size: 1.2em;">Melden Sie sich für unseren Newsletter an, um über unsere neuesten Angebote informiert zu bleiben.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="newsletter-email" placeholder="Ihre Email" style="font-size: 1.2em;">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-animate">Anmelden</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container text-center">
+        <span>&copy; 2023 Autovermietung</span>
+    </div>
+</footer>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 </body>
 </html>

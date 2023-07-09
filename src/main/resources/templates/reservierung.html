@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservierung</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/reservierung.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="/img/Logo.png" type="image/png">
+</head>
+<body>
+<!-- Navigation -->
+<div th:replace="fragments/nav.html::nav"></div>
+<div class="content ">
+
+    <div class="heading">
+    <h1>Reservierung</h1>
+    </div>
+
+    <div class="subheading">
+    <h2>Aktuelle Reservierungen</h2>
+    </div>
+    <div class="row justify-content-center scrollable-table">
+        <div class="col-md-8 table-container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Fahrzeug</th>
+                    <th>Zeit</th>
+                    <th>Datum</th>
+                    <th>Abholort</th>
+                    <th>Ort</th>
+                    <th>Status</th>
+                    <th>Aktion</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reservation : ${reservations}" th:unless="${reservation.status == reservation.status.CANCELLED || reservation.status == reservation.status.MISSED}">
+                    <td th:text="${reservation.getFahrzeug}"></td>
+                    <td th:text="${reservation.zeit}"></td>
+                    <td th:text="${reservation.datum}"></td>
+                    <td th:text="${reservation.abholort}"></td>
+                    <td th:text="${reservation.ort}"></td>
+                    <td th:text="${reservation.status}"></td>
+                    <td>
+                        <form action="/reservierung/cancelReservation" method="POST">
+                            <input type="hidden"name="reservationId" th:value="${reservation.id}">
+                            <button type="submit" class="btn btn-danger">Stornieren</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <div class="subheading">
+    <h2>Neue Reservierung</h2>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8 table-container">
+            <form id="myForm" th:action="@{/reservierung}" method="POST" th:object="${reservierung}">
+                <a class="nav-link" th:href="@{/reservierung/{userId}(userId=${userId})}"></a>
+
+
+                <div class="form-group">
+                    <label for="zeit">Zeit:</label>
+                    <input type="time" class="form-control" id="zeit" name="zeit">
+                </div>
+                <div class="form-group">
+                    <label for="datum">Datum:</label>
+                    <input type="date" class="form-control" id="datum" name="datum">
+                </div>
+                <div class="form-group">
+                    <label for="abholort">Abholort:</label>
+                    <input type="text" class="form-control" id="abholort" name="abholort">
+                </div>
+                <div class="form-group">
+                    <label for="ort">Ort:</label>
+                    <input type="text" class="form-control" id="ort" name="ort">
+                </div>
+
+                <div class="form-group">
+                    <label for="fahrzeug">Fahrzeug:</label>
+                    <select class="form-control" id="fahrzeug" name="fahrzeug" onchange="showFieldsByVehicleType()">
+                        <option value="" disabled selected>Bitte wählen</option>
+                        <option value="PKW">PKW</option>
+                        <option value="LKW">LKW</option>
+                        <option value="MOTORAD">MOTORAD</option>
+                        <option value="ANHÄNGER">ANHÄNGER</option>
+                    </select>
+                </div>
+
+                <!-- Fields for LKW -->
+                <div id="lkwFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="lkwSize">LKW Größe:</label>
+                        <select class="form-control" id="lkwSize" name="lkwSize" onchange="populateLKWModels()">
+                            <option value="">Bitte wählen</option>
+                            <option value="Klein">Klein</option>
+                            <option value="Mittel">Mittel</option>
+                            <option value="Groß">Groß</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modelLkw">Modell:</label>
+                        <select class="form-control" id="modelLkw" name="modelLkw">
+                            <option value="" disabled selected>Bitte wählen</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <!-- Fields for PKW -->
+                <div id="pkwFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="marke">Marke:</label>
+                        <select class="form-control" id="marke" name="marke" onchange="populateModels()">
+                            <option value="">Bitte wählen</option>
+                            <option value="Audi">Audi</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="anzahlDerTuren">Anzahl der Türen:</label>
+                        <select class="form-control" id="anzahlDerTuren" name="anzahlDerTuren" onchange="populateModels()">
+                            <option value="">Bitte wählen</option>
+                            <option value="2">2 Türen</option>
+                            <option value="4">4 Türen</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sprit">Sprit:</label>
+                        <select class="form-control" id="sprit" name="sprit" onchange="populateModels()">
+                            <option value="">Bitte wählen</option>
+                            <option value="Diesel">Diesel</option>
+                            <option value="Benzin">Benzin</option>
+                            <option value="Gas">Gas</option>
+                            <option value="Elektro">Elektro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modelPkw">Modell:</label>
+                        <select class="form-control" id="modelPkw" name="modelPkw">
+                            <option value="" disabled selected>Bitte wählen</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <!-- Fields for MOTORAD -->
+                <div id="motoradFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="motoradSize">Größe:</label>
+                        <select class="form-control" id="motoradSize" name="motoradSize" onchange="populateMotoradModels()">
+                            <option value="" disabled selected>Bitte wählen</option>
+                            <option value="Small">Small</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Large">Large</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="motoradMarke">Marke:</label>
+                        <select class="form-control" id="motoradMarke" name="motoradMarke" onchange="populateMotoradModels()">
+                            <option value="" disabled selected>Bitte wählen</option>
+                            <option value="Harley-Davidson">Harley-Davidson</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Yamaha">Yamaha</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modelMotorad">Modell:</label>
+                        <select class="form-control" id="modelMotorad" name="modelMotorad">
+                            <option value="" disabled selected>Bitte wählen</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Fields for ANHÄNGER -->
+                <div id="anhaengerFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="anhaengerSize">Anhänger Größe:</label>
+                        <select class="form-control" id="anhaengerSize" name="anhaengerSize">
+                            <option value="">Bitte wählen</option>
+                            <option value="Klein">Klein</option>
+                            <option value="Mittel">Mittel</option>
+                            <option value="Groß">Groß</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="barrierefrei">Barrierefrei:</label>
+                    <div>
+                        <input type="checkbox" id="barrierefrei" name="barrierefrei">
+                        <label for="barrierefrei">Ja</label>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Reservieren</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="subheading">
+        <h2>Stornierte Reservierungen</h2>
+    </div>
+    <div class="row justify-content-center scrollable-table">
+        <div class="col-md-8 table-container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Fahrzeug</th>
+                    <th>Zeit</th>
+                    <th>Datum</th>
+                    <th>Abholort</th>
+                    <th>Ort</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reservation : ${cancelledReservations}">
+                    <td th:text="${reservation.getFahrzeug}"></td>
+                    <td th:text="${reservation.zeit}"></td>
+                    <td th:text="${reservation.datum}"></td>
+                    <td th:text="${reservation.abholort}"></td>
+                    <td th:text="${reservation.ort}"></td>
+                    <td th:text="${reservation.status}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="subheading">
+        <h2>Verpasste Reservierungen</h2>
+    </div>
+    <div class="row justify-content-center scrollable-table">
+        <div class="col-md-8 table-container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Fahrzeug</th>
+                    <th>Zeit</th>
+                    <th>Datum</th>
+                    <th>Abholort</th>
+                    <th>Ort</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reservation : ${missedReservations}">
+                    <td th:text="${reservation.getFahrzeug}"></td>
+                    <td th:text="${reservation.zeit}"></td>
+                    <td th:text="${reservation.datum}"></td>
+                    <td th:text="${reservation.abholort}"></td>
+                    <td th:text="${reservation.ort}"></td>
+                    <td th:text="${reservation.status}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <div th:replace="fragments/footer.html::footer"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<script>
+    function submitForm() {
+        var formData = $("#myForm").serializeArray();
+        $.ajax({
+            type: "POST",
+            url: "/reservierung",
+            data: formData,
+            success: function(data){
+                alert('Reservierung erfolgreich!');
+                location.reload();
+            },
+            error: function(){
+                alert('Fehler bei der Reservierung. Bitte versuchen Sie es erneut.');
+            }
+        });
+    }
+    function showFieldsByVehicleType() {
+        var selectedVehicle = document.getElementById("fahrzeug").value;
+
+
+        document.getElementById("lkwFields").style.display = "none";
+        document.getElementById("pkwFields").style.display = "none";
+        document.getElementById("motoradFields").style.display = "none";
+        document.getElementById("anhaengerFields").style.display = "none";
+
+        if (selectedVehicle === "LKW") {
+            document.getElementById("lkwFields").style.display = "block";
+        } else if (selectedVehicle === "PKW") {
+            document.getElementById("pkwFields").style.display = "block";
+        } else if (selectedVehicle === "MOTORAD") {
+            document.getElementById("motoradFields").style.display = "block";
+        } else if (selectedVehicle === "ANHÄNGER") {
+            document.getElementById("anhaengerFields").style.display = "block";
+        }
+    }
+    function populateModels() {
+        var brandSelect = document.getElementById("marke");
+        var doorsSelect = document.getElementById("anzahlDerTuren");
+        var modelSelect = document.getElementById("modelPkw");
+        var fuelSelect = document.getElementById("sprit");
+
+        // Clear existing options
+        modelSelect.innerHTML = "<option value='' disabled selected>Bitte wählen</option>";
+
+        var models = {
+            "Audi": {
+                "2": {
+                    "Diesel": ["Audi A1", "Audi A3"],
+                    "Benzin": ["Audi A2", "Audi A4"],
+                    "Gas": ["Audi A3 g-tron", "Audi A5 g-tron"],
+                    "Elektro": ["Audi e-tron", "Audi Q4 e-tron"]
+                },
+                "4": {
+                    "Diesel": ["Audi A5", "Audi A6"],
+                    "Benzin": ["Audi A4", "Audi A7"],
+                    "Gas": ["Audi A6 g-tron", "Audi A8 g-tron"],
+                    "Elektro": ["Audi e-tron GT", "Audi Q7 e-tron"]
+                }
+            },
+            "BMW": {
+                "2": {
+                    "Diesel": ["BMW 1 Series", "BMW 2 Series"],
+                    "Benzin": ["BMW 2 Series", "BMW 3 Series"],
+                    "Gas": ["BMW 2 Series g-tron", "BMW 5 Series g-tron"],
+                    "Elektro": ["BMW i3", "BMW i4"]
+                },
+                "4": {
+                    "Diesel": ["BMW 3 Series", "BMW 4 Series"],
+                    "Benzin": ["BMW 5 Series", "BMW 7 Series"],
+                    "Gas": ["BMW 5 Series g-tron", "BMW X5 g-tron"],
+                    "Elektro": ["BMW i4", "BMW iX3"]
+                }
+            },
+            "Mercedes-Benz": {
+                "2": {
+                    "Diesel": ["Mercedes-Benz A-Class", "Mercedes-Benz C-Class"],
+                    "Benzin": ["Mercedes-Benz CLA", "Mercedes-Benz E-Class"],
+                    "Gas": ["Mercedes-Benz GLC g-tron", "Mercedes-Benz GLA g-tron"],
+                    "Elektro": ["Mercedes-Benz EQA", "Mercedes-Benz EQC"]
+                },
+                "4": {
+                    "Diesel": ["Mercedes-Benz C-Class", "Mercedes-Benz E-Class"],
+                    "Benzin": ["Mercedes-Benz E-Class", "Mercedes-Benz S-Class"],
+                    "Gas": ["Mercedes-Benz GLC g-tron", "Mercedes-Benz GLE g-tron"],
+                    "Elektro": ["Mercedes-Benz EQC", "Mercedes-Benz EQS"]
+                }
+            }
+        };
+
+        var selectedBrand = brandSelect.value;
+        var selectedDoors = doorsSelect.value;
+        var selectedFuel = fuelSelect.value;
+        var brandModels = models[selectedBrand];
+
+        if (brandModels && brandModels[selectedDoors] && brandModels[selectedDoors][selectedFuel]) {
+            brandModels[selectedDoors][selectedFuel].forEach(function (model) {
+                var option = document.createElement("option");
+                option.value = model;
+                option.text = model;
+                modelSelect.appendChild(option);
+            });
+        }
+    }
+    function populateLKWModels() {
+        var lkwSizeSelect = document.getElementById("lkwSize");
+        var modelLkwSelect = document.getElementById("modelLkw");
+
+        // Clear existing options
+        modelLkwSelect.innerHTML = "<option value='' disabled selected>Bitte wählen</option>";
+
+        var lkwModels = {
+            "Klein": ["LKW Modell 1", "LKW Modell 2", "LKW Modell 3"],
+            "Mittel": ["LKW Modell 4", "LKW Modell 5", "LKW Modell 6"],
+            "Groß": ["LKW Modell 7", "LKW Modell 8", "LKW Modell 9"]
+        };
+
+        var selectedSize = lkwSizeSelect.value;
+        var sizeModels = lkwModels[selectedSize];
+
+        if (sizeModels) {
+            sizeModels.forEach(function (model) {
+                var option = document.createElement("option");
+                option.value = model;
+                option.text = model;
+                modelLkwSelect.appendChild(option);
+            });
+        }
+    }
+    function populateMotoradModels() {
+        var motoradSizeSelect = document.getElementById("motoradSize");
+        var motoradMarkeSelect = document.getElementById("motoradMarke");
+        var modelMotoradSelect = document.getElementById("modelMotorad");
+
+        // Clear existing options
+        modelMotoradSelect.innerHTML = "<option value='' disabled selected>Bitte wählen</option>";
+
+        var motoradModels = {
+            "Small": {
+                "Harley-Davidson": ["Modell 1", "Modell 2", "Modell 3"],
+                "Honda": ["Modell 4", "Modell 5", "Modell 6"],
+                "Yamaha": ["Modell 7", "Modell 8", "Modell 9"]
+            },
+            "Medium": {
+                "Harley-Davidson": ["Modell 10", "Modell 11", "Modell 12"],
+                "Honda": ["Modell 13", "Modell 14", "Modell 15"],
+                "Yamaha": ["Modell 16", "Modell 17", "Modell 18"]
+            },
+            "Large": {
+                "Harley-Davidson": ["Modell 19", "Modell 20", "Modell 21"],
+                "Honda": ["Modell 22", "Modell 23", "Modell 24"],
+                "Yamaha": ["Modell 25", "Modell 26", "Modell 27"]
+            }
+        };
+
+        var selectedSize = motoradSizeSelect.value;
+        var selectedMarke = motoradMarkeSelect.value;
+        var sizeModels = motoradModels[selectedSize];
+        var brandModels = sizeModels ? sizeModels[selectedMarke] : null;
+
+        if (brandModels) {
+            brandModels.forEach(function (model) {
+                var option = document.createElement("option");
+                option.value = model;
+                option.text = model;
+                modelMotoradSelect.appendChild(option);
+            });
+        }
+    }
+
+</script>
+</body>
+</html>

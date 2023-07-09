@@ -1,14 +1,14 @@
 package com.ECO.login_System.registration;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
+
 @Getter
+
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
 public class RegistrationRequest {
+    private final String userName;
     private final String firstName;
     private final String lastName;
     private final String email;
@@ -27,6 +27,8 @@ public class RegistrationRequest {
     private final String personalausweisnummer;
     private final String reisepassnummer;
     private final String tarif;
+    private final String payMethod;
+    private final String operatingSystem;
 
-    // Konstruktor, Getter und andere Methoden
+
 }

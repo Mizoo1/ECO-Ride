@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dinstleistungen</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://kit.fontawesome.com/13bb240f97.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="icon" href="/img/Logo.png" type="image/png">
+
+  <style>.services{
+    padding-top: 120px;
+    padding-bottom: 120px;
+
+  }
+  .services-icon {
+
+    border: 2px solid rgb(75, 146, 219);
+    font-size: 2rem;
+    line-height: 3.75rem;
+    color: rgb(75, 146, 219);
+    text-align: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin: 0px auto 0.75rem auto;
+
+  }
+  </style>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
+</head>
+<body>
+<!-- Navigation -->
+<div th:replace="fragments/navWithoutLogin::nav"></div>
+<div class="container">
+  <!-- Hauptinhalt der Seite -->
+</div>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div class="container">
+    <h3 class="text-center">Serviceleistungen</h3>
+    <p class="text-center text-muted font-italic mb-5">Wir sind die Besten</p>
+
+    <div class="row">
+      <div class="col-sm">
+        <div class="services-icon">
+          <i class="fa-solid fa-car"></i>
+        </div>
+        <h4 class="text-center">Vielfältige Fahrzeugauswahl</h4>
+        <p class="text-center text-muted font-italic">Wählen Sie aus einer großen Auswahl an hochwertigen Fahrzeugen das passende Modell für Ihre Bedürfnisse.</p>
+      </div>
+
+
+      <div class="col-sm">
+        <div class="services-icon">
+          <i class="fa-solid fa-wrench"></i>
+        </div>
+        <h4 class="text-center">Wartung und Instandhaltung</h4>
+        <p class="text-center text-muted font-italic">Unsere Fahrzeuge werden regelmäßig gewartet und instand gehalten, um Ihnen eine zuverlässige und reibungslose Fahrt zu garantieren.</p>
+      </div>
+
+      <div class="col-sm">
+        <div class="services-icon">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+        <h4 class="text-center">Flexible Mietdauer</h4>
+        <p class="text-center text-muted font-italic">Wir bieten Ihnen flexible Mietdaueroptionen, damit Sie das Fahrzeug für die benötigte Zeit nutzen können.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+  <div th:replace="fragments/footer.html::footer"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+<script>AOS.init();</script>
+</body>
+</html>

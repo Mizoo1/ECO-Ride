@@ -8,9 +8,10 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import java.util.List;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -22,6 +23,9 @@ import java.util.Collections;
 public class AppUser implements UserDetails {
 
 
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
+    private List<Reservation> previousReservations;
+
     @SequenceGenerator(
             name = "Eco_sequence",
             sequenceName = "Eco_sequence",
@@ -32,7 +36,9 @@ public class AppUser implements UserDetails {
             strategy = GenerationType.SEQUENCE,
             generator = "Eco_sequence"
     )
+
     private Long id;
+    private String userName;
     private String firstName;
     private String lastName;
     private String email;
@@ -41,19 +47,19 @@ public class AppUser implements UserDetails {
     private String adresse;
     private String plz;
     private String stadt;
-
     private String telefonnummer;
-    private String mobilnummer;
     private String geburtsdatum;
     private String geburtsort;
-    private String fuehrerscheinnumme;
+    private String fuehrerscheinnummer;
     private String erteilungsdatum;
     private String ablaufdatum;
     private String ausstellungsort;
     private String personalausweisnummer;
     private String reisepassnummer;
-
     private String tarif;
+    private String payMethod;
+
+    private String operatingSystem;
 
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
@@ -62,22 +68,18 @@ public class AppUser implements UserDetails {
 
 
 
-    public AppUser(String firstName, String lastName,
-                   String email, String password,
-                   String titel, String adresse, String plz,
-                   String stadt,  String telefonnummer,
-                   String geburtsdatum,
-                   String geburtsort,
-                   String fuehrerscheinnummer, String erteilungsdatum,
-                   String ablaufdatum, String ausstellungsort,
-                   String personalausweisnummer,
-                   String reisepassnummer,
-                   String tarif,AppUserRole appUserRole) {
+    public AppUser(String userName, String firstName, String lastName, String email, String password,
+                   String titel, String adresse, String plz, String stadt, String telefonnummer,
+                   String geburtsdatum, String geburtsort, String fuehrerscheinnummer, String erteilungsdatum,
+                   String ablaufdatum, String ausstellungsort, String personalausweisnummer,
+                   String reisepassnummer, String tarif, AppUserRole appUserRole, String payMethod,
+                   String operatingSystem) {
+        this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.titel = titel;
         this.password = password;
+        this.titel = titel;
         this.adresse = adresse;
         this.plz = plz;
         this.stadt = stadt;
@@ -85,13 +87,15 @@ public class AppUser implements UserDetails {
         this.geburtsdatum = geburtsdatum;
         this.geburtsort = geburtsort;
         this.tarif = tarif;
-        this.fuehrerscheinnumme = fuehrerscheinnummer;
+        this.fuehrerscheinnummer = fuehrerscheinnummer;
         this.erteilungsdatum = erteilungsdatum;
         this.ablaufdatum = ablaufdatum;
         this.ausstellungsort = ausstellungsort;
         this.personalausweisnummer = personalausweisnummer;
         this.reisepassnummer = reisepassnummer;
         this.appUserRole = appUserRole;
+        this.payMethod = payMethod;
+        this.operatingSystem = operatingSystem;
     }
 
     @Override
@@ -103,6 +107,10 @@ public class AppUser implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     public String getEmail() {
@@ -139,8 +147,8 @@ public class AppUser implements UserDetails {
         return geburtsort;
     }
 
-    public String getFuehrerscheinnumme() {
-        return fuehrerscheinnumme;
+    public String getFuehrerscheinnummer() {
+        return fuehrerscheinnummer;
     }
 
     public String getErteilungsdatum() {
@@ -186,7 +194,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return userName;
     }
 
     public String getFirstName() {
@@ -195,6 +203,10 @@ public class AppUser implements UserDetails {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getPayMethod() {
+        return payMethod;
     }
 
     @Override
@@ -215,5 +227,13 @@ public class AppUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+    public String getOperatingSystem() {
+        return operatingSystem;
+    }
+
+    public void setOperatingSystem(String operatingSystem) {
+
+        this.operatingSystem = operatingSystem;
     }
 }

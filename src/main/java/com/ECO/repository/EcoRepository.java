@@ -5,9 +5,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class EcoRepository {
 
-    public String getHome() {
-        return "index";
-    }
+
     public String getHomeWithoutLogin() {
         return "indexWithoutLogin";
     }
@@ -16,22 +14,22 @@ public class EcoRepository {
         return "register";
     }
 
-    public String getLogin() {
-        return "login";
-    }
+
     public String getLogout() {
         return "logout";
     }
 
-    public String getContact() {
-        return "contact";
+
+    public String getContactWithoutLogin() {
+        return "contactWithoutLogin";
     }
 
-    public String getAbout() {
-        return "about";
+    public String getAboutWithoutLogin() {
+        return "aboutWithoutLogin";
     }
 
-    public String getServices() {
-        return "services";
+
+    public String getServicesWithoutLogin() {
+        return "serviceWithoutLogin";
     }
 }

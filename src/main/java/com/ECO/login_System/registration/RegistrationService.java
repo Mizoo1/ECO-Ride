@@ -3,37 +3,85 @@ package com.ECO.login_System.registration;
 
 
 import com.ECO.login_System.appuser.AppUser;
+import com.ECO.login_System.appuser.AppUserRepository;
 import com.ECO.login_System.appuser.AppUserRole;
 import com.ECO.login_System.appuser.AppUserService;
 import com.ECO.login_System.email.EmailSender;
 import com.ECO.login_System.registration.token.ConfirmationToken;
 import com.ECO.login_System.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import javax.servlet.http.HttpServletRequest;
 
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
 public class RegistrationService {
 
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
+    private final AppUserRepository appUserRepository;
 
-    public String register(RegistrationRequest request) {
-        boolean isValidEmail = emailValidator.
-                test(request.getEmail());
+    @Autowired
+    public RegistrationService(AppUserService appUserService, EmailValidator emailValidator, ConfirmationTokenService confirmationTokenService, EmailSender emailSender, AppUserRepository appUserRepository) {
+        this.appUserService = appUserService;
+        this.emailValidator = emailValidator;
+        this.confirmationTokenService = confirmationTokenService;
+        this.emailSender = emailSender;
+        this.appUserRepository = appUserRepository;
+    }
+
+
+
+    public String register(RegistrationRequest request, HttpServletRequest servletRequest) {
+        boolean isValidEmail = emailValidator.test(request.getEmail());
 
         if (!isValidEmail) {
             throw new IllegalStateException("email not valid");
         }
 
-        String token = appUserService.signUpUser(
-                new AppUser(
+        AppUser appUser = new AppUser(
+                request.getUserName(),
+                request.getFirstName(),
+                request.getLastName(),
+                request.getEmail(),
+                request.getPassword(),
+                request.getTitel(),
+                request.getAdresse(),
+                request.getPlz(),
+                request.getStadt(),
+                request.getTelefonnummer(),
+                request.getGeburtsdatum(),
+                request.getGeburtsort(),
+                request.getFuehrerscheinnummer(),
+                request.getErteilungsdatum(),
+                request.getAblaufdatum(),
+                request.getAusstellungsort(),
+                request.getPersonalausweisnummer(),
+                request.getReisepassnummer(),
+                request.getTarif(),
+                AppUserRole.USER,
+                request.getPayMethod(),
+                getOperatingSystemFromServletRequest(servletRequest)
+        );
+
+        String token = appUserService.signUpUser(appUser);
+
+        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+        emailSender.send(
+                request.getEmail(),
+                buildEmail(
+                        request.getUserName(),
                         request.getFirstName(),
                         request.getLastName(),
                         request.getEmail(),
@@ -42,7 +90,6 @@ public class RegistrationService {
                         request.getAdresse(),
                         request.getPlz(),
                         request.getStadt(),
-
                         request.getTelefonnummer(),
                         request.getGeburtsdatum(),
                         request.getGeburtsort(),
@@ -53,33 +100,10 @@ public class RegistrationService {
                         request.getPersonalausweisnummer(),
                         request.getReisepassnummer(),
                         request.getTarif(),
-                        AppUserRole.USER
-
+                        link,
+                        request.getPayMethod()
                 )
         );
-
-        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
-        emailSender.send(
-                request.getEmail(),
-                buildEmail(request.getFirstName(),
-                        request.getLastName(),
-                        request.getEmail(),
-                        request.getPassword(),
-                        request.getTitel(),
-                        request.getAdresse(),
-                        request.getPlz(),
-                        request.getStadt(),
-                        request.getTelefonnummer(),
-                        request.getGeburtsdatum(),
-                        request.getGeburtsort(),
-                        request.getFuehrerscheinnummer(),
-                        request.getErteilungsdatum(),
-                        request.getAblaufdatum(),
-                        request.getAusstellungsort(),
-                        request.getPersonalausweisnummer(),
-                        request.getReisepassnummer(),
-                        request.getTarif()
-                        , link));
 
         return token;
     }
@@ -107,136 +131,63 @@ public class RegistrationService {
         return "confirmed";
     }
 
-    private String buildEmail(String name,
-                              String LastName,
-                            String Email,
-                            String Password,
-                            String Titel,
-                            String Adresse,
-                            String Plz,
-                            String Stadt,
-                            String  Telefonnummer,
-                            String Geburtsdatum,
-                            String Geburtsort,
-                            String Fuehrerscheinnummer,
-                            String Erteilungsdatum,
-                            String Ablaufdatum,
-                            String Ausstellungsort,
-                            String Personalausweisnummer,
-                            String Reisepassnummer,
-                            String Tarif, String link) {
-        return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
-                "\n" +
-                "<span style=\"display:none;font-size:1px;color:#fff;max-height:0\"></span>\n" +
-                "\n" +
-                "  <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;min-width:100%;width:100%!important\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n" +
-                "    <tbody><tr>\n" +
-                "      <td width=\"100%\" height=\"53\" bgcolor=\"#0b0c0c\">\n" +
-                "        \n" +
-                "        <table role=\"presentation\" width=\"100%\" style=\"border-collapse:collapse;max-width:580px\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\">\n" +
-                "          <tbody><tr>\n" +
-                "            <td width=\"70\" bgcolor=\"#0b0c0c\" valign=\"middle\">\n" +
-                "                <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n" +
-                "                  <tbody><tr>\n" +
-                "                    <td style=\"padding-left:10px\">\n" +
-                "                    <img src=\"/img/Logo.png\" alt=\"Logo\" class=\"logo\" width=\"50\" height=\"50\">\n" +
-                "                  \n" +
-                "                    </td>\n" +
-                "                    <td style=\"font-size:28px;line-height:1.315789474;Margin-top:4px;padding-left:10px\">\n" +
-                "                      <span style=\"font-family:Helvetica,Arial,sans-serif;font-weight:700;color:#ffffff;text-decoration:none;vertical-align:top;display:inline-block\">Bestätigen Sie Ihre E-Mail</span>\n" +
-                "                    </td>\n" +
-                "                  </tr>\n" +
-                "                </tbody></table>\n" +
-                "              </a>\n" +
-                "            </td>\n" +
-                "          </tr>\n" +
-                "        </tbody></table>\n" +
-                "        \n" +
-                "      </td>\n" +
-                "    </tr>\n" +
-                "  </tbody></table>\n" +
-                "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n" +
-                "    <tbody><tr>\n" +
-                "      <td width=\"10\" height=\"10\" valign=\"middle\"></td>\n" +
-                "      <td>\n" +
-                "        \n" +
-                "                <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse\">\n" +
-                "                  <tbody><tr>\n" +
-                "                    <td bgcolor=\"#1D70B8\" width=\"100%\" height=\"10\"></td>\n" +
-                "                  </tr>\n" +
-                "                </tbody></table>\n" +
-                "        \n" +
-                "      </td>\n" +
-                "      <td width=\"10\" valign=\"middle\" height=\"10\"></td>\n" +
-                "    </tr>\n" +
-                "  </tbody></table>\n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "  <table role=\"presentation\" class=\"m_-6186904992287805515content\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;max-width:580px;width:100%!important\" width=\"100%\">\n" +
-                "    <tbody><tr>\n" +
-                "      <td height=\"30\"><br></td>\n" +
-                "    </tr>\n" +
-                "    <tr>\n" +
-                "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
-                "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
-                "        \n" +
-                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hallo " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Vielen Dank für Ihre Registrierung. Bitte klicken Sie auf den untenstehenden Link, um Ihr Konto zu aktivieren:</p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Jetzt aktivieren</a> </p></blockquote>\n Der Link läuft in 15 Minuten ab. <p>Bis bald</p>" +
-                "        \n" +
-                "      </td>\n" +
-                "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
-                "    </tr>\n" +
-                "    <tr>\n" +
-                "      <td height=\"30\"><br></td>\n" +
-                "    </tr>\n" +
-                "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
-                "\n" +
-                "</div></div>"+
-                "    <title>Vertragsmuster</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "    <h1>Vertragsmuster</h1>\n" +
-                "    \n" +
-                "    <p>\n" +
-                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Sehr geehrte/r "+ Titel +" " +name + " "+LastName+  ",</p>"+
-                "    </p>\n" +
-                "    \n" +
-                "    <p>\n" +
-                "        Vielen Dank für Ihr Interesse an unserem Vertra. Um den Vertrag abzuschließen, benötigen wir einige Informationen von Ihnen:\n" +
-                "    </p>\n" +
-                "    \n" +
-                "    <p>\n" +
-                "        <strong>Persönliche Informationen:</strong><br>\n" +
-                "        Email: \n"+Email+"<br>\n" +
-                "        Adresse: "+Adresse+", "+Plz +" "+Stadt+"<br>\n" +
-                "        Telefonnummer: "+Telefonnummer+"<br>\n" +
-                "        Geburtsdatum: "+Geburtsdatum+"<br>\n" +
-                "        Geburtsort: "+Geburtsort+"<br>\n" +
-                "        Führerscheinnummer: "+Fuehrerscheinnummer+"<br>\n" +
-                "        Erteilungsdatum: "+Erteilungsdatum+"<br>\n" +
-                "        Ablaufdatum: "+Ablaufdatum+"<br>\n" +
-                "        Ausstellungsort: "+Ausstellungsort+"<br>\n" +
-                "        Personalausweisnummer: "+Personalausweisnummer+"<br>\n" +
-                "        Reisepassnummer: "+Reisepassnummer+"\n" +
-                "    </p>\n" +
-                "    \n" +
-                "    <p>\n" +
-                "        Bitte überprüfen Sie die oben aufgeführten Informationen sorgfältig und stellen Sie sicher, dass sie korrekt sind. Falls Sie Änderungen vornehmen möchten, teilen Sie uns diese bitte umgehend mit.\n" +
-                "    </p>\n" +
-                "    \n" +
-                "    <p>\n" +
-                "        Der ausgewählte Tarif für den Vertrag ist: "+Tarif+".\n" +
-                "    </p>\n" +
-                "    \n" +
-                "    </p>\n" +
-                "    \n" +
-                "    <p>\n" +
-                "        Bei Fragen oder Unklarheiten können Sie sich jederzeit an uns wenden.\n" +
-                "    </p>\n" +
-                "    \n" +
-                "    <p>\n" +
-                "        Vielen Dank und freundliche Grüße,"+"\n" +
-                "        Ihr Vertragsmuster-Team\n" + "ECO-Ride GmbH" +
-                "    </p>\n";
+    private String buildEmail(String userName, String name, String LastName, String Email, String Password, String Titel, String Adresse, String Plz, String Stadt, String Telefonnummer, String Geburtsdatum, String Geburtsort, String Fuehrerscheinnummer, String Erteilungsdatum, String Ablaufdatum, String Ausstellungsort, String Personalausweisnummer, String Reisepassnummer, String Tarif, String link, String payMethod) {
+        // HTML-Datei einlesen
+        String htmlTemplate = ""; // HTML-Code als String
+        try {
+            File file = new File("D:\\ECO-Ride\\src\\main\\resources\\templates\\email_template.html");
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                htmlTemplate += scanner.nextLine();
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        htmlTemplate = htmlTemplate.replace("{{name}}", name);
+        htmlTemplate = htmlTemplate.replace("{{link}}", link);
+        htmlTemplate = htmlTemplate.replace("{{Email}}", Email);
+        htmlTemplate = htmlTemplate.replace("{{Adresse}}", Adresse);
+        htmlTemplate = htmlTemplate.replace("{{Plz}}", Plz);
+        htmlTemplate = htmlTemplate.replace("{{Stadt}}", Stadt);
+        htmlTemplate = htmlTemplate.replace("{{Telefonnummer}}", Telefonnummer);
+        htmlTemplate = htmlTemplate.replace("{{Geburtsdatum}}", Geburtsdatum);
+        htmlTemplate = htmlTemplate.replace("{{Geburtsort}}", Geburtsort);
+        htmlTemplate = htmlTemplate.replace("{{Fuehrerscheinnummer}}", Fuehrerscheinnummer);
+        htmlTemplate = htmlTemplate.replace("{{Erteilungsdatum}}", Erteilungsdatum);
+        htmlTemplate = htmlTemplate.replace("{{Ablaufdatum}}", Ablaufdatum);
+        htmlTemplate = htmlTemplate.replace("{{Ausstellungsort}}", Ausstellungsort);
+        htmlTemplate = htmlTemplate.replace("{{Personalausweisnummer}}", Personalausweisnummer);
+        htmlTemplate = htmlTemplate.replace("{{Reisepassnummer}}", Reisepassnummer);
+        htmlTemplate = htmlTemplate.replace("{{payMethod}}", payMethod);
+        htmlTemplate = htmlTemplate.replace("{{Tarif}}", Tarif);
+        htmlTemplate = htmlTemplate.replace("{{Titel}}", Titel);
+        htmlTemplate = htmlTemplate.replace("{{LastName}}", LastName);
+        htmlTemplate = htmlTemplate.replace("{{userName}}", userName);
+
+        return htmlTemplate;
+    }
+    private String getOperatingSystemFromServletRequest(HttpServletRequest servletRequest) {
+        String userAgent = servletRequest.getHeader("User-Agent");
+        return getOperatingSystemFromUserAgent(userAgent);
+    }
+    public String getOperatingSystemFromUserAgent(String userAgent) {
+        String operatingSystem = "Unknown";
+
+        if (userAgent != null) {
+            if (userAgent.contains("Windows")) {
+                operatingSystem = "Windows";
+            } else if (userAgent.contains("Mac")) {
+                operatingSystem = "Mac";
+            } else if (userAgent.contains("Linux")) {
+                operatingSystem = "Linux";
+            } else if (userAgent.contains("Android")) {
+                operatingSystem = "Android";
+            } else if (userAgent.contains("iOS")) {
+                operatingSystem = "iOS";
+            }
+        }
+
+        return operatingSystem;
     }
 }

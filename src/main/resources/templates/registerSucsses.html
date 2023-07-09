@@ -10,7 +10,8 @@
 </head>
 
 <body>
-<div th:replace="fragments/nav.html::nav"></div>
+<!-- Navigation -->
+<div th:replace="fragments/navWithoutLogin::nav"></div>
 
 <div class="vh-100 d-flex justify-content-center align-items-center">
     <div class="card col-md-4 bg-white shadow-md p-5">
@@ -23,6 +24,9 @@
         </div>
     </div>
 </div>
+<!-- Footer -->
+<div class="footer">
+    <div th:replace="fragments/footer.html::footer"></div>
+</div>
 </body>
-<div th:replace="fragments/footer.html::footer"></div>
 </html>

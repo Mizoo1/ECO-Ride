@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @AllArgsConstructor
@@ -19,34 +20,37 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AppUserService appUserService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeHttpRequests()
-                .antMatchers("/api/v*/registration/**").permitAll()
-                .anyRequest().authenticated()
+                .cors()
                 .and()
-                .formLogin(login -> login
-                        .defaultSuccessUrl("/index", false)
-                        .loginPage("/login"))
-                .logout(logout -> logout
-                        .logoutSuccessUrl("http://localhost:8080/api/v/registration/logout"));
+                .authorizeRequests()
+                .antMatchers("/api/v*/registration/**","contact","login","reservierung","index")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginPage("/api/v/registration/login")
+                .successHandler(authenticationSuccessHandler) // Set the custom authentication success handler
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
     }
 
     @Override
-    public void configure(WebSecurity web) {
-        web
-                .ignoring()
-                .antMatchers("/css/**")
-                .antMatchers("/img/**")
-                .antMatchers("/js/**")
-                .antMatchers("/api/v*/registration/**");
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/api/v*/registration/**","contact","reservierung","index");
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
 

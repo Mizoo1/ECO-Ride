@@ -1,24 +1,106 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Titel</title>
+    <title>Footer</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add Font Awesome CSS link here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .footer {
+            padding: 20px 0;
+            background-color: #f8f9fa;
+            color: #fff;
+            background-image: linear-gradient(to right, #007bff, #0056b3);
+        }
+
+        .footer .container {
+            text-align: center;
+        }
+
+        .footer ul {
+            margin-bottom: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .footer ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .footer ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer ul li a:hover {
+            color: #dfe2e5;
+        }
+
+        .footer h5 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer .social-icons .fab {
+            font-size: 24px;
+            margin: 0 5px;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        .footer .social-icons .fab:hover {
+            color: #dfe2e5;
+        }
+
+        .footer .links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            margin-right: 10px;
+        }
+
+        .footer .links a:hover {
+            color: #dfe2e5;
+        }
+
+        .footer .legal-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer .legal-links a:hover {
+            color: #dfe2e5;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
 </head>
 <body>
 
-</body>
-<footer class="footer bg-dark text-white">
+<!-- Content here -->
+
+<footer class="footer" data-aos="fade-up">
     <div class="container">
+        <hr>
         <div class="row">
             <div class="col-md-4">
-                <h5 class="text-center">ECO-Ride</h5>
-                <p class="text-center">Address: 123 Street, City, Country</p>
-                <p class="text-center">Phone: +1234567890</p>
-                <p class="text-center">Email: info@eco-ride.com</p>
+                <h5>ECO-Ride</h5>
+                <p>Address: 123 Street, City, Country</p>
+                <p>Phone: +1234567890</p>
+                <p>Email: info@eco-ride.com</p>
             </div>
             <div class="col-md-4">
-                <h5 class="text-center">Quick Links</h5>
-                <ul class="list-unstyled text-center">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled links">
                     <li><a href="index">Home</a></li>
                     <li><a href="about">About</a></li>
                     <li><a href="services">Services</a></li>
@@ -26,8 +108,8 @@
                 </ul>
             </div>
             <div class="col-md-4">
-                <h5 class="text-center">Follow Us</h5>
-                <ul class="list-inline text-center">
+                <h5>Follow Us</h5>
+                <ul class="list-inline social-icons">
                     <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                     <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
                     <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
@@ -37,8 +119,8 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col text-center">
-                <p>
+            <div class="col">
+                <p class="legal-links">
                     <a href="#">Cookie-Einstellungen</a> |
                     <a href="#">AGB</a> |
                     <a href="#">Datenschutz</a> |
@@ -50,6 +132,13 @@
     </div>
 </footer>
 
-
-
+<!-- Add Bootstrap JS scripts here -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Add Font Awesome JS script here -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+</body>
 </html>
