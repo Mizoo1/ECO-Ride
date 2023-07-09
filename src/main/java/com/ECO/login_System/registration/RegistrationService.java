@@ -1,7 +1,6 @@
 package com.ECO.login_System.registration;
 
 
-
 import com.ECO.login_System.appuser.AppUser;
 import com.ECO.login_System.appuser.AppUserRepository;
 import com.ECO.login_System.appuser.AppUserRole;
@@ -75,7 +74,10 @@ public class RegistrationService {
 
         String token = appUserService.signUpUser(appUser);
 
-        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+        String serverName = servletRequest.getServerName();
+        int serverPort = servletRequest.getServerPort();
+        String link = "http://" + serverName + ":" + serverPort + "/api/v1/registration/confirm?token=" + token;
+
         emailSender.send(
                 request.getEmail(),
                 buildEmail(
@@ -123,7 +125,9 @@ public class RegistrationService {
 
         String token = appUserService.signUpUser(appUser);
 
-        String link = "/api/v1/registration/confirm?token=" + token;
+        String serverUrl = servletRequest.getRequestURL().toString();
+        String link = serverUrl + "/confirm?token=" + token;
+
         emailSender.send(
                 request.getEmail(),
                 buildEmail(
@@ -198,7 +202,7 @@ public class RegistrationService {
         // HTML-Datei einlesen
         String htmlTemplate = ""; // HTML-Code als String
         try {
-            File file = new File("templates/email_template.html");
+            File file = new File("D:\\ECO-Ride\\src\\main\\resources\\templates\\email_template.html");
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 htmlTemplate += scanner.nextLine();

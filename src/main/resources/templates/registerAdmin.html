@@ -3,152 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Registrierung</title>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="icon" href="/img/Logo.png" type="image/png">
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.min.css">
-
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
-
-
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            flex: 1;
-        }
-
-        .card {
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .card-header {
-            border-radius: 10px 10px 0 0;
-            padding: 10px 20px;
-            font-weight: bold;
-            background-color: #f8f9fa;
-        }
-
-        .form-label {
-            color: #333;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-
-        /* Bezahlmethode */
-        .form-check-input[type="radio"]:checked + .form-check-label .input-group-text {
-            transform: scale(1.2);
-        }
-
-        .input-group-text {
-            width: 180px;
-        }
-
-        .icon-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .icon-container .fa-fw {
-            width: 100%;
-            text-align: center;
-        }
-
-        h1 {
-            font-family: 'Roboto Condensed', Arial, sans-serif;
-            font-weight: 700;
-            font-size: 36px;
-            text-align: center;
-            animation: fadeIn_h 2s ease-in-out;
-        }
-
-        h2 {
-            font-family: 'Roboto Condensed', Arial, sans-serif;
-            font-weight: 700;
-            font-size: 28px;
-            text-align: center;
-            animation: fadeIn_h 2s ease-in-out;
-        }
-
-        /* Ruhigere Styles */
-        .card-header {
-            background-color: #f8f9fa;
-        }
-
-        .form-label {
-            color: #333;
-        }
-
-        .btn-primary {
-            background-color: #f8f9fa;
-            border-color: #f8f9fa;
-            color: #333;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .btn-primary:hover {
-            background-color: #e9ecef;
-            border-color: #e9ecef;
-            color: #333;
-        }
-
-        .btn-light {
-            background-color: #ffffff;
-            color: #333;
-            border-color: #f8f9fa;
-        }
-
-        .btn-light:hover {
-            background-color: #e9ecef;
-            color: #333;
-            border-color: #e9ecef;
-        }
-        .footer {
-            margin-top: auto;
-            color: #333;
-            padding: 20px;
-        }
-        .footer a {
-            color: #333;
-        }
-
-        .footer a:hover {
-            color: #007bff;
-        }
-        .parallax {
-            background-image: url("/img/1.png");
-            min-height: 500px;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
+        /* Styles hier einfügen */
     </style>
     <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
 </head>
@@ -160,7 +22,8 @@
     <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
 </div>
 <div class="container">
-    <div id="slider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+    <div id="slider" class="carousel slide">
+
         <form th:action="@{/api/v1/registration}" method="post" enctype="multipart/form-data">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -182,23 +45,23 @@
                             </div>
                             <div class="mb-3">
                                 <label for="userName" class="form-label">Benutzername:</label>
-                                <input type="text" id="userName" name="userName" class="form-control" >
+                                <input type="text" id="userName" name="userName" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label for="firstName" class="form-label">Vorname:</label>
-                                <input type="text" id="firstName" name="firstName" class="form-control" >
+                                <input type="text" id="firstName" name="firstName" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Nachname:</label>
-                                <input type="text" id="lastName" name="lastName" class="form-control" >
+                                <input type="text" id="lastName" name="lastName" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label for="geburtsdatum" class="form-label">Geburtsdatum:</label>
-                                <input type="date" id="geburtsdatum" name="geburtsdatum" class="form-control" >
+                                <input type="date" id="geburtsdatum" name="geburtsdatum" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label for="geburtsort" class="form-label">Geburtsort:</label>
-                                <input type="text" id="geburtsort" name="geburtsort" class="form-control" >
+                                <input type="text" id="geburtsort" name="geburtsort" class="form-control">
                             </div>
                         </div>
                         <div class="button-container">
@@ -212,19 +75,19 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <label for="adresse" class="form-label">Straße und Hausnummer:</label>
-                                <input type="text" id="adresse" name="adresse" class="form-control" >
+                                <input type="text" id="adresse" name="adresse" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label for="plz" class="form-label">PLZ:</label>
-                                <input type="text" id="plz" name="plz" class="form-control" pattern="[0-9]+" >
+                                <input type="text" id="plz" name="plz" class="form-control" pattern="[0-9]+">
                             </div>
                             <div class="mb-3">
                                 <label for="stadt" class="form-label">Ort:</label>
-                                <input type="text" id="stadt" name="stadt" class="form-control" >
+                                <input type="text" id="stadt" name="stadt" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label for="telefonnummer" class="form-label">Mobilnummer:</label>
-                                <input type="text" id="telefonnummer" name="telefonnummer" class="form-control" pattern="[0-9]+" >
+                                <input type="text" id="telefonnummer" name="telefonnummer" class="form-control" pattern="[0-9]+">
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">E-Mail:</label>
@@ -234,113 +97,9 @@
                                 <label for="password" class="form-label">Passwort:</label>
                                 <input type="password" id="password" name="password" class="form-control" required>
                             </div>
-                        </div>
-                        <div class="button-container">
-                            <button class="btn btn-primary" type="button" onclick="previousSlide()">Zurück</button>
-                            <button class="btn btn-primary" type="button" onclick="nextSlide()">Weiter</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card additional-data" data-aos="fade-right">
-                        <h2 class="card-header">Führerschein</h2>
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label for="reisepassnummer" class="form-label">Reisepassnummer:</label>
-                                <input type="text" id="reisepassnummer" name="reisepassnummer" class="form-control" >
-                            </div>
-                            <div class="mb-3">
-                                <label for="personalausweisnummer" class="form-label">Personalausweisnummer:</label>
-                                <input type="text" id="personalausweisnummer" name="personalausweisnummer" class="form-control" >
-                            </div>
-                            <div class="mb-3">
-                                <label for="erteilungsdatum" class="form-label">Erteilungsdatum:</label>
-                                <input type="date" id="erteilungsdatum" name="erteilungsdatum" class="form-control" >
-                            </div>
-                            <div class="mb-3">
-                                <label for="fuehrerscheinnummer" class="form-label">Führerscheinnummer:</label>
-                                <input type="text" id="fuehrerscheinnummer" name="fuehrerscheinnummer" class="form-control" >
-                            </div>
-                            <div class="mb-3">
-                                <label for="ablaufdatum" class="form-label">Ablaufdatum:</label>
-                                <input type="date" id="ablaufdatum" name="ablaufdatum" class="form-control" >
-                            </div>
-                            <div class="mb-3">
-                                <label for="ausstellungsort" class="form-label">Ausstellungsort:</label>
-                                <input type="text" id="ausstellungsort" name="ausstellungsort" class="form-control" >
-                            </div>
-                        </div>
-                        <div class="button-container">
-                            <button class="btn btn-primary" type="button" onclick="previousSlide()">Zurück</button>
-                            <button class="btn btn-primary" type="button" onclick="nextSlide()">Weiter</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card payment-method" data-aos="fade-left">
-                        <h2 class="card-header">Bezahlmethode</h2>
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label class="form-label">Bezahlmethode:</label>
-                                <div class="input-group mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="paypal" name="payMethod" value="paypal" >
-                                        <label class="form-check-label" for="paypal">
-                                            <div class="input-group-text">
-                                                <div class="icon-container">
-                                                    <i class="fab fa-paypal fa-fw" style="color: blue;"></i>
-                                                    <span class="icon-text"> PayPal</span>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="visa" name="payMethod" value="visa" >
-                                        <label class="form-check-label" for="visa">
-                                            <div class="input-group-text">
-                                                <div class="icon-container">
-                                                    <i class="fab fa-cc-visa fa-fw" style="color: green;"></i>
-                                                    <span class="icon-text"> Visa</span>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="mastercard" name="payMethod" value="mastercard" >
-                                        <label class="form-check-label" for="mastercard">
-                                            <div class="input-group-text">
-                                                <div class="icon-container">
-                                                    <i class="fab fa-cc-mastercard fa-fw" style="color: red;"></i>
-                                                    <span class="icon-text"> MasterCard</span>
-                                                </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="tarif" class="form-label">Tarif:</label>
-                                <select id="tarif" name="tarif" class="form-select" >
-                                    <option value="basic">Basic</option>
-                                    <option value="premium">Premium</option>
-                                    <option value="ultra">Ultra</option>
-                                </select>
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" id="terms" name="terms" class="form-check-input" >
-                                <label for="terms" class="form-check-label">Ich akzeptiere die <a href="http://localhost:8080/api/v/registration/term_condition"><u>Geschäftsbedingungen</u></a> derSeite</label>
-                            </div>
                             <div class="button-container">
-                                <button type="submit" class="btn btn-light btn-lg" style="background-color: forestgreen;" data-mdb-ripple-color="dark">Registrieren</button>
+                                <button class="btn btn-primary" type="submit">Registrieren</button>
                             </div>
-                        </div>
-                        <div class="button-container">
-                            <button class="btn btn-primary" type="button" onclick="previousSlide()">Zurück</button>
-                            <button class="btn btn-primary" type="button" onclick="nextSlide()">Weiter</button>
                         </div>
                     </div>
                 </div>
