@@ -47,7 +47,10 @@ public class HomeController {
     public String getRegister() {
         return ecoService.getRegister();
     }
-
+    @GetMapping("/api/v/registration/registerAdmin")
+    public String getRegisterAdmin() {
+        return ecoService.getRegisterAdmin();
+    }
     @GetMapping("/api/v/registration/logout")
     public String getLogout() {
         return ecoService.getLogout();
@@ -84,9 +87,18 @@ public class HomeController {
     public ModelAndView getAboutWithoutLogin(Authentication authentication) {
         return ecoService.getAbout(authentication);
     }
+    @PostMapping(path = "api/v2/registration")
+    public ResponseEntity<String> registerUser(@ModelAttribute @RequestBody RegistrationRequest registrationRequest,HttpServletRequest request) {
+        String confirmationResult = registrationService.registerUser(registrationRequest,request);
+        Context context = new Context();
+        context.setVariable("confirmationResult", confirmationResult);
+        String renderedHtml = templateEngine.process("/registerSucsses", context);
+        // Return the rendered HTML as a response with appropriate headers and status
+        return ResponseEntity.ok().body(renderedHtml);
+    }
     @PostMapping(path = "api/v1/registration")
-    public ResponseEntity<String> register(@ModelAttribute @RequestBody RegistrationRequest registrationRequest,HttpServletRequest request) {
-        String confirmationResult = registrationService.register(registrationRequest,request);
+    public ResponseEntity<String> registerAdmin(@ModelAttribute @RequestBody RegistrationRequest registrationRequest,HttpServletRequest request) {
+        String confirmationResult = registrationService.registerAdmin(registrationRequest,request);
         Context context = new Context();
         context.setVariable("confirmationResult", confirmationResult);
         String renderedHtml = templateEngine.process("/registerSucsses", context);

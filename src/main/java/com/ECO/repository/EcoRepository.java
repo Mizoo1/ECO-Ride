@@ -13,7 +13,9 @@ public class EcoRepository {
     public String getRegister() {
         return "register";
     }
-
+    public String getRegisterAdmin() {
+        return "registerAdmin";
+    }
 
     public String getLogout() {
         return "logout";

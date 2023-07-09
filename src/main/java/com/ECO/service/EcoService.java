@@ -40,6 +40,9 @@ public class EcoService {
     public String getRegister() {
         return ecoRepository.getRegister();
     }
+    public String getRegisterAdmin() {
+        return ecoRepository.getRegisterAdmin();
+    }
 
     public String getLogout() {
         return ecoRepository.getLogout();

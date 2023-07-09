@@ -9,14 +9,12 @@ import com.ECO.login_System.appuser.AppUserService;
 import com.ECO.login_System.email.EmailSender;
 import com.ECO.login_System.registration.token.ConfirmationToken;
 import com.ECO.login_System.registration.token.ConfirmationTokenService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
@@ -43,7 +41,7 @@ public class RegistrationService {
 
 
 
-    public String register(RegistrationRequest request, HttpServletRequest servletRequest) {
+    public String registerUser(RegistrationRequest request, HttpServletRequest servletRequest) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
 
         if (!isValidEmail) {
@@ -108,6 +106,36 @@ public class RegistrationService {
         return token;
     }
 
+    public String registerAdmin(RegistrationRequest request, HttpServletRequest servletRequest) {
+        boolean isValidEmail = emailValidator.test(request.getEmail());
+
+        if (!isValidEmail) {
+            throw new IllegalStateException("email not valid");
+        }
+
+        AppUser appUser = new AppUser(
+
+                request.getEmail(),
+                request.getPassword(),
+                AppUserRole.ADMIN
+
+        );
+
+        String token = appUserService.signUpUser(appUser);
+
+        String link = "/api/v1/registration/confirm?token=" + token;
+        emailSender.send(
+                request.getEmail(),
+                buildEmail(
+
+                        request.getEmail(),
+                        request.getPassword(),
+                        link
+                )
+        );
+        return token;
+    }
+
     @Transactional
     public String confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenService
@@ -130,7 +158,6 @@ public class RegistrationService {
                 confirmationToken.getAppUser().getEmail());
         return "confirmed";
     }
-
     private String buildEmail(String userName, String name, String LastName, String Email, String Password, String Titel, String Adresse, String Plz, String Stadt, String Telefonnummer, String Geburtsdatum, String Geburtsort, String Fuehrerscheinnummer, String Erteilungsdatum, String Ablaufdatum, String Ausstellungsort, String Personalausweisnummer, String Reisepassnummer, String Tarif, String link, String payMethod) {
         // HTML-Datei einlesen
         String htmlTemplate = ""; // HTML-Code als String
@@ -164,6 +191,25 @@ public class RegistrationService {
         htmlTemplate = htmlTemplate.replace("{{Titel}}", Titel);
         htmlTemplate = htmlTemplate.replace("{{LastName}}", LastName);
         htmlTemplate = htmlTemplate.replace("{{userName}}", userName);
+
+        return htmlTemplate;
+    }
+    private String buildEmail( String Email, String Password,  String link) {
+        // HTML-Datei einlesen
+        String htmlTemplate = ""; // HTML-Code als String
+        try {
+            File file = new File("templates/email_template.html");
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                htmlTemplate += scanner.nextLine();
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        htmlTemplate = htmlTemplate.replace("{{link}}", link);
+        htmlTemplate = htmlTemplate.replace("{{Email}}", Email);
+
 
         return htmlTemplate;
     }

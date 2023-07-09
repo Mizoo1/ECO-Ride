@@ -98,6 +98,12 @@ public class AppUser implements UserDetails {
         this.operatingSystem = operatingSystem;
     }
 
+    public AppUser(String email, String password, AppUserRole appUserRole) {
+        this.email = email;
+        this.password = password;
+        this.appUserRole = appUserRole;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
