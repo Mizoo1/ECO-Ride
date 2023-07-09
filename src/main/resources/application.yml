@@ -10,9 +10,9 @@ server:
       cache: false
 
     datasource:
-      url: jdbc:postgresql://containers-us-west-41.railway.app:6549/railway
+      url: jdbc:postgresql://containers-us-west-92.railway.app:7453/railway
       username: postgres
-      password: jAYP6GhmCxtAFRCK13BG
+      password: 3WkMiU9A7HEMtxbyMGBT
 
     jpa:
       open-in-view: false
