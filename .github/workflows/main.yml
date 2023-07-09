@@ -7,10 +7,14 @@ on:
     branches: [ "Master" ]
 
 jobs:
-  build:
+  build-and-run:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag matrex-image:$(date +%s)
+      - uses: actions/checkout@v3
+
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag matrex-image:$(date +%s)
+
+      - name: Run the Docker container
+        run: docker run matrex-image
