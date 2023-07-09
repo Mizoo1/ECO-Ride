@@ -14,10 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import java.util.Scanner;
 
 @Service
@@ -163,57 +161,61 @@ public class RegistrationService {
                 confirmationToken.getAppUser().getEmail());
         return "confirmed";
     }
-    private String buildEmail(String userName, String name, String LastName, String Email, String Password, String Titel, String Adresse, String Plz, String Stadt, String Telefonnummer, String Geburtsdatum, String Geburtsort, String Fuehrerscheinnummer, String Erteilungsdatum, String Ablaufdatum, String Ausstellungsort, String Personalausweisnummer, String Reisepassnummer, String Tarif, String link, String payMethod) {
-        // HTML-Datei einlesen
-        String htmlTemplate = ""; // HTML-Code als String
+    private String buildEmail(String userName, String name, String lastName, String email, String password, String titel, String adresse, String plz, String stadt, String telefonnummer, String geburtsdatum, String geburtsort, String fuehrerscheinnummer, String erteilungsdatum, String ablaufdatum, String ausstellungsort, String personalausweisnummer, String reisepassnummer, String tarif, String link, String payMethod) {
+        String htmlTemplate = "";
         try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(Objects.requireNonNull(classLoader.getResource("email_template.html")).getFile());
-            ;
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                htmlTemplate += scanner.nextLine();
+            InputStream inputStream = getClass().getResourceAsStream("/templates/email_template.html");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line); // Ausgabe der gelesenen Zeile
+                htmlTemplate += line;
             }
-            scanner.close();
-        } catch (FileNotFoundException e) {
+
+            reader.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
         htmlTemplate = htmlTemplate.replace("{{name}}", name);
         htmlTemplate = htmlTemplate.replace("{{link}}", link);
-        htmlTemplate = htmlTemplate.replace("{{Email}}", Email);
-        htmlTemplate = htmlTemplate.replace("{{Adresse}}", Adresse);
-        htmlTemplate = htmlTemplate.replace("{{Plz}}", Plz);
-        htmlTemplate = htmlTemplate.replace("{{Stadt}}", Stadt);
-        htmlTemplate = htmlTemplate.replace("{{Telefonnummer}}", Telefonnummer);
-        htmlTemplate = htmlTemplate.replace("{{Geburtsdatum}}", Geburtsdatum);
-        htmlTemplate = htmlTemplate.replace("{{Geburtsort}}", Geburtsort);
-        htmlTemplate = htmlTemplate.replace("{{Fuehrerscheinnummer}}", Fuehrerscheinnummer);
-        htmlTemplate = htmlTemplate.replace("{{Erteilungsdatum}}", Erteilungsdatum);
-        htmlTemplate = htmlTemplate.replace("{{Ablaufdatum}}", Ablaufdatum);
-        htmlTemplate = htmlTemplate.replace("{{Ausstellungsort}}", Ausstellungsort);
-        htmlTemplate = htmlTemplate.replace("{{Personalausweisnummer}}", Personalausweisnummer);
-        htmlTemplate = htmlTemplate.replace("{{Reisepassnummer}}", Reisepassnummer);
+        htmlTemplate = htmlTemplate.replace("{{Email}}", email);
+        htmlTemplate = htmlTemplate.replace("{{Adresse}}", adresse);
+        htmlTemplate = htmlTemplate.replace("{{Plz}}", plz);
+        htmlTemplate = htmlTemplate.replace("{{Stadt}}", stadt);
+        htmlTemplate = htmlTemplate.replace("{{Telefonnummer}}", telefonnummer);
+        htmlTemplate = htmlTemplate.replace("{{Geburtsdatum}}", geburtsdatum);
+        htmlTemplate = htmlTemplate.replace("{{Geburtsort}}", geburtsort);
+        htmlTemplate = htmlTemplate.replace("{{Fuehrerscheinnummer}}", fuehrerscheinnummer);
+        htmlTemplate = htmlTemplate.replace("{{Erteilungsdatum}}", erteilungsdatum);
+        htmlTemplate = htmlTemplate.replace("{{Ablaufdatum}}", ablaufdatum);
+        htmlTemplate = htmlTemplate.replace("{{Ausstellungsort}}", ausstellungsort);
+        htmlTemplate = htmlTemplate.replace("{{Personalausweisnummer}}", personalausweisnummer);
+        htmlTemplate = htmlTemplate.replace("{{Reisepassnummer}}", reisepassnummer);
         htmlTemplate = htmlTemplate.replace("{{payMethod}}", payMethod);
-        htmlTemplate = htmlTemplate.replace("{{Tarif}}", Tarif);
-        htmlTemplate = htmlTemplate.replace("{{Titel}}", Titel);
-        htmlTemplate = htmlTemplate.replace("{{LastName}}", LastName);
+        htmlTemplate = htmlTemplate.replace("{{Tarif}}", tarif);
+        htmlTemplate = htmlTemplate.replace("{{Titel}}", titel);
+        htmlTemplate = htmlTemplate.replace("{{LastName}}", lastName);
         htmlTemplate = htmlTemplate.replace("{{userName}}", userName);
 
         return htmlTemplate;
     }
     private String buildEmail( String Email, String Password,  String link) {
         // HTML-Datei einlesen
-        String htmlTemplate = ""; // HTML-Code als String
+        String htmlTemplate = "";
         try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource("email_template.html").getFile());
+            InputStream inputStream = getClass().getResourceAsStream("/templates/email_template.html");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                htmlTemplate += scanner.nextLine();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line); // Ausgabe der gelesenen Zeile
+                htmlTemplate += line;
             }
-            scanner.close();
-        } catch (FileNotFoundException e) {
+
+            reader.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         htmlTemplate = htmlTemplate.replace("{{link}}", link);
