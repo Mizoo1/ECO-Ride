@@ -167,7 +167,8 @@ public class RegistrationService {
         String htmlTemplate = ""; // HTML-Code als String
         try {
             ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource("templates/email_template.html").getFile());
+            File file = new File(classLoader.getResource("email_template.html").getFile());
+            ;
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 htmlTemplate += scanner.nextLine();
@@ -204,7 +205,8 @@ public class RegistrationService {
         String htmlTemplate = ""; // HTML-Code als String
         try {
             ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource("templates/email_template.html").getFile());
+            File file = new File(classLoader.getResource("email_template.html").getFile());
+
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 htmlTemplate += scanner.nextLine();
