@@ -3,10 +3,10 @@ name: Run Docker Container
 on:
   push:
     branches:
-      - main
+      - Master
   pull_request:
     branches:
-      - main
+      - Master
 
 jobs:
   run_docker:
