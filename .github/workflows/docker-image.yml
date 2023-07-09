@@ -33,10 +33,10 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ghcr.io/mizoo1/muaazecoride:latest
+          tags: ghcr.io/mizoo1/eco-ride:latest
         env:
           SETUP_BUILDX: ${{ steps.setup_buildx.outputs.name }}
 
       - name: Run Docker container
         run: |
-          docker run ghcr.io/mizoo1/muaazecoride:latest
+          docker run ghcr.io/mizoo1/eco-ride:latest
