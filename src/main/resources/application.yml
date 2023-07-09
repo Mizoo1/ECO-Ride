@@ -64,3 +64,4 @@ server:
             connectiontimeout: 5000
             timeout: 3000
             writetimeout: 5000
+  port: 8080
