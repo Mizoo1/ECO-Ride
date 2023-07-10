@@ -112,6 +112,7 @@
     <canvas id="paymentMethodChart"></canvas>
     <canvas id="operatingSystemChart"></canvas>
     <canvas id="bookedVehiclesChart"></canvas>
+    <canvas id="vehicleTypesChart"></canvas>
   </div>
 
 </main>
@@ -295,6 +296,39 @@
           .catch(error => {
             console.error('Fehler beim Abrufen der am meisten gebuchten Fahrzeuge:', error);
           });
+  fetch('/admin/users/vehicle-types')
+          .then(response => response.json())
+          .then(data => {
+            const labels = data.map(entry => entry[0]);
+            const counts = data.map(entry => entry[1]);
+
+            const ctx = document.getElementById('vehicleTypesChart');
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: labels,
+                datasets: [{
+                  label: 'Fahrzeugtypen',
+                  data: counts,
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    stepSize: 1
+                  }
+                }
+              }
+            });
+          })
+          .catch(error => {
+            console.error('Fehler beim Abrufen der Fahrzeugtypen:', error);
+          });
+
 </script>
 
 </body>

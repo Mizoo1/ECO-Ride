@@ -96,11 +96,12 @@ public class AdminUserController {
         return ResponseEntity.ok(operatingSystemStatistics);
     }
 
-    @GetMapping("/users/booked-vehicles")
-    public ResponseEntity<List<Object[]>> getBookedVehiclesStatistics() {
-        List<Object[]> bookedVehiclesStatistics = appUserRepository.countMostBookedVehicles();
-        return ResponseEntity.ok(bookedVehiclesStatistics);
+    @GetMapping("/users/vehicle-types")
+    public ResponseEntity<List<Object[]>> getVehicleTypeStatistics() {
+        List<Object[]> vehicleTypeStatistics = appUserRepository.countVehicleTypes();
+        return ResponseEntity.ok(vehicleTypeStatistics);
     }
+
 
 
 }

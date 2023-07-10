@@ -33,17 +33,17 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     @Query("SELECT u.payMethod, COUNT(u.payMethod) FROM AppUser u GROUP BY u.payMethod")
     List<Object[]> countPaymentMethods();
 
-    @Query("SELECT CAST(date_part('year', CURRENT_DATE) - date_part('year', u.geburtsdatum) AS INTEGER), COUNT(u) " +
+    @Query("SELECT EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM TO_DATE(u.geburtsdatum, 'YYYY-MM-DD')), COUNT(u) " +
             "FROM AppUser u " +
-            "GROUP BY CAST(date_part('year', CURRENT_DATE) - date_part('year', u.geburtsdatum) AS INTEGER)")
+            "GROUP BY EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM TO_DATE(u.geburtsdatum, 'YYYY-MM-DD'))")
     List<Object[]> calculateAgeStatistics();
-
 
     @Query("SELECT u.operatingSystem, COUNT(u.operatingSystem) FROM AppUser u GROUP BY u.operatingSystem")
     List<Object[]> countOperatingSystems();
     @Query("SELECT r.fahrzeug, COUNT(r.fahrzeug) FROM Reservation r GROUP BY r.fahrzeug")
     List<Object[]> countMostBookedVehicles();
-
+    @Query("SELECT r.fahrzeug, COUNT(r.fahrzeug) FROM Reservation r GROUP BY r.fahrzeug")
+    List<Object[]> countVehicleTypes();
 
     @Transactional
     @Modifying
