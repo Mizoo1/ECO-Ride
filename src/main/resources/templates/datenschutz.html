@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Datenschutz</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="icon" href="/img/Logo.png" type="image/png">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    h1, h2 {
+      color: #333;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 10px;
+    }
+    @keyframes fadeIn_h {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    h1 {
+      font-family: 'Roboto Condensed', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      text-align: center;
+      animation: fadeIn_h 2s ease-in-out;
+    }
+
+    h2 {
+      font-family: 'Roboto Condensed', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      text-align: center;
+      animation: fadeIn_h 2s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+<!-- Navigation -->
+<div th:replace="fragments/navWithoutLogin::nav"></div>
+<div class="container py-5">
+  <h1 class="text-center mb-4">Datenschutz</h1>
+
+  <<h2>Datenschutz</h2>
+  <p>Der Schutz Ihrer persönlichen Daten ist uns wichtig. Nachfolgend informieren wir Sie über die Erhebung, Verarbeitung und Nutzung Ihrer Daten im Rahmen der Nutzung unserer Webseite.</p>
+
+  <h3>Datenerhebung</h3>
+  <p>Bei Ihrem Besuch auf unserer Webseite werden automatisch Informationen über Ihre IP-Adresse, den von Ihnen verwendeten Browser, das Betriebssystem Ihres Computers, den Domainnamen der Webseite, von der aus Sie auf unsere Seite gelangt sind, sowie Datum und Uhrzeit Ihres Besuchs erfasst. Diese Daten werden für statistische Zwecke ausgewertet und dienen der Verbesserung unserer Webseite. Eine personenbezogene Auswertung oder Weitergabe an Dritte findet nicht statt.</p>
+
+  <h3>Cookies</h3>
+  <p>Unsere Webseite verwendet Cookies, um die Benutzerfreundlichkeit zu verbessern und bestimmte Funktionen bereitzustellen. Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden und Informationen wie Ihre bevorzugte Sprache oder andere Seiteneinstellungen speichern. Sie können das Speichern von Cookies in den Einstellungen Ihres Browsers jederzeit deaktivieren.</p>
+
+  <h3>Kontaktformular</h3>
+  <p>Wenn Sie uns über das Kontaktformular auf unserer Webseite kontaktieren, werden die von Ihnen angegebenen Daten (z.B. Name, E-Mail-Adresse) zum Zweck der Bearbeitung Ihrer Anfrage gespeichert. Diese Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.</p>
+
+  <h3>Links zu anderen Webseiten</h3>
+  <p>Unsere Webseite kann Links zu anderen Webseiten enthalten, auf die sich diese Datenschutzerklärung nicht erstreckt. Wir haben keinen Einfluss auf die Einhaltung der Datenschutzbestimmungen durch diese verlinkten Webseiten und empfehlen Ihnen, die Datenschutzerklärungen dieser Webseiten zu lesen.</p>
+
+  <h3>Datensicherheit</h3>
+  <p>Wir setzen technische und organisatorische Sicherheitsmaßnahmen ein, um Ihre Daten gegen Manipulationen, Verlust, Zerstörung oder den Zugriff unberechtigter Personen zu schützen. Unsere Sicherheitsmaßnahmen werden entsprechend der technologischen Entwicklung fortlaufend verbessert.</p>
+
+  <h3>Auskunftsrecht</h3>
+  <p>Sie haben das Recht, Auskunft über die von uns gespeicherten personenbezogenen Daten zu erhalten. Bei Bedarf können Sie auch eine Berichtigung, Sperrung oder Löschung dieser Daten verlangen. Bitte kontaktieren Sie uns dazu über die im Impressum angegebenen Kontaktdaten.</p>
+
+  <h3>Änderungen dieser Datenschutzerklärung</h3>
+  <p>Wir behalten uns das Recht vor, diese Datenschutzerklärung bei Bedarf zu ändern, um sie an aktuelle rechtliche Anforderungen anzupassen oder um Änderungen unserer Dienstleistungen umzusetzen. Für Ihren erneuten Besuch gilt dann die aktualisierte Datenschutzerklärung.</p>
+</div>
+<!-- Footer -->
+<div class="footer">
+  <div th:replace="fragments/footer.html::footer"></div>
+</div>
+</body>
+
+</html>

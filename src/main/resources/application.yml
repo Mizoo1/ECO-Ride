@@ -31,7 +31,6 @@ servlet:
     max-request-size: 20MB
 
 pin:
-
 email:
   reservation:
     confirmation:

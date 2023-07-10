@@ -129,4 +129,20 @@ public class HomeController {
         return "term_condition";
     }
 
+    @GetMapping("api/v/registration/impressum")
+    public String getImpressum() {
+        return "impressum";
+
+    }
+    @GetMapping("api/v/registration/datenschutz")
+    public String getDatenschutz() {
+        return "datenschutz";
+
+    }
+    @GetMapping("api/v/registration/Cookie-Einstellungen")
+    public String getCookiesEinstellungen() {
+        return "Cookie-Einstellungen";
+
+    }
+
 }
