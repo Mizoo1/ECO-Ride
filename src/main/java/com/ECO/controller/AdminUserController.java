@@ -2,12 +2,15 @@ package com.ECO.controller;
 
 import com.ECO.login_System.appuser.AppUser;
 import com.ECO.login_System.appuser.AppUserRepository;
+import com.ECO.login_System.appuser.Reservation;
+import com.ECO.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,10 +21,11 @@ import java.util.Optional;
 public class AdminUserController {
 
     private final AppUserRepository appUserRepository;
-
+    private final ReservationRepository reservationRepository;
     @Autowired
-    public AdminUserController(AppUserRepository appUserRepository) {
+    public AdminUserController(AppUserRepository appUserRepository, ReservationRepository reservationRepository) {
         this.appUserRepository = appUserRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     @GetMapping("/users")
@@ -61,17 +65,12 @@ public class AdminUserController {
         if (optionalUser.isPresent()) {
             AppUser user = optionalUser.get();
             model.addAttribute("user", user);
-            return "user_details";
+            return "edit_user";
         } else {
             return "redirect:/admin/users";
         }
     }
 
-    @PostMapping("/users/{id}/delete")
-    public String deleteUser(@PathVariable("id") Long id) {
-        appUserRepository.deleteById(id);
-        return "redirect:/admin/users";
-    }
 
     @GetMapping("/bookings/statistics")
     public ResponseEntity<List<Object[]>> getBookingStatistics() {
@@ -100,6 +99,74 @@ public class AdminUserController {
     public ResponseEntity<List<Object[]>> getVehicleTypeStatistics() {
         List<Object[]> vehicleTypeStatistics = appUserRepository.countVehicleTypes();
         return ResponseEntity.ok(vehicleTypeStatistics);
+    }
+    @GetMapping("/users/{id}/kunden-profile")
+    public String showUserProfile(@PathVariable("id") Long id, Model model) {
+        Optional<AppUser> optionalUser = appUserRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            AppUser user = optionalUser.get();
+            model.addAttribute("user", user);
+
+            // Find user's reservations
+            List<Reservation> reservations = reservationRepository.findByAppUser(user);
+            model.addAttribute("reservations", reservations);
+
+            return "kunden-profile";
+        } else {
+            return "redirect:/admin/users";
+        }
+    }
+    @PostMapping("/users/{id}/kunden-profile/update")
+    public String updateUserProfile(@PathVariable("id") Long id, @ModelAttribute AppUser updatedUser) {
+        Optional<AppUser> optionalUser = appUserRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            AppUser user = optionalUser.get();
+            // Update user information
+            user.setFirstName(updatedUser.getFirstName());
+            user.setLastName(updatedUser.getLastName());
+
+            appUserRepository.save(user);
+            return "redirect:/admin/users/" + id + "/kunden-profile";
+        } else {
+            return "redirect:/admin/users";
+        }
+    }
+    @GetMapping("/users/{id}/edit")
+    public String showEditUserForm(@PathVariable("id") Long id, Model model) {
+        Optional<AppUser> optionalUser = appUserRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            AppUser user = optionalUser.get();
+            model.addAttribute("user", user); // Stellen Sie sicher, dass "user" als Vorlagenattribut hinzugefügt wird
+            return "edit_user";
+        } else {
+            return "redirect:/admin/users";
+        }
+    }
+    @PostMapping("/users/{id}/delete")
+    public String deleteUser(@PathVariable("id") Long id, Principal principal) {
+        Optional<AppUser> optionalUser = appUserRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            AppUser user = optionalUser.get();
+
+            // Benutzer löschen
+            appUserRepository.delete(user);
+        }
+        return "redirect:/admin/users";
+    }
+    @PostMapping("/users/{id}/edit")
+    public String updateUser(@PathVariable("id") Long id, @ModelAttribute AppUser appUser, Principal principal) {
+        Optional<AppUser> optionalUser = appUserRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            AppUser user = optionalUser.get();
+            // Update user information based on the form data
+            user.setFirstName(appUser.getFirstName());
+            user.setLastName(appUser.getLastName());
+            // Continue for all fields you want to update...
+
+            appUserRepository.save(user);
+
+        }
+        return "redirect:/admin/users/" + id;
     }
 
 }
