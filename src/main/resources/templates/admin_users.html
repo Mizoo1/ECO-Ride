@@ -111,6 +111,7 @@
     <canvas id="ageChart"></canvas>
     <canvas id="paymentMethodChart"></canvas>
     <canvas id="operatingSystemChart"></canvas>
+    <canvas id="bookedVehiclesChart"></canvas>
   </div>
 
 </main>
@@ -261,6 +262,38 @@
           })
           .catch(error => {
             console.error('Fehler beim Abrufen der Betriebssysteme:', error);
+          });
+  fetch('/admin/users/booked-vehicles')
+          .then(response => response.json())
+          .then(data => {
+            const labels = data.map(entry => entry[0]);
+            const counts = data.map(entry => entry[1]);
+
+            const ctx = document.getElementById('bookedVehiclesChart');
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: labels,
+                datasets: [{
+                  label: 'Am meisten gebuchte Fahrzeuge',
+                  data: counts,
+                  backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                  borderColor: 'rgba(255, 159, 64, 1)',
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    stepSize: 1
+                  }
+                }
+              }
+            });
+          })
+          .catch(error => {
+            console.error('Fehler beim Abrufen der am meisten gebuchten Fahrzeuge:', error);
           });
 </script>
 

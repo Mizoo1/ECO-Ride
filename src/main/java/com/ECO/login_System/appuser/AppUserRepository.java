@@ -40,6 +40,8 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
     @Query("SELECT u.operatingSystem, COUNT(u.operatingSystem) FROM AppUser u GROUP BY u.operatingSystem")
     List<Object[]> countOperatingSystems();
+    @Query("SELECT r.fahrzeug, COUNT(r.fahrzeug) FROM Reservation r GROUP BY r.fahrzeug")
+    List<Object[]> countMostBookedVehicles();
 
 
     @Transactional
