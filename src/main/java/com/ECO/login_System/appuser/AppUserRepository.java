@@ -33,10 +33,11 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     @Query("SELECT u.payMethod, COUNT(u.payMethod) FROM AppUser u GROUP BY u.payMethod")
     List<Object[]> countPaymentMethods();
 
-    @Query("SELECT EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM u.geburtsdatum), COUNT(u) " +
+    @Query("SELECT CAST(date_part('year', CURRENT_DATE) - date_part('year', u.geburtsdatum) AS INTEGER), COUNT(u) " +
             "FROM AppUser u " +
-            "GROUP BY EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM u.geburtsdatum)")
+            "GROUP BY CAST(date_part('year', CURRENT_DATE) - date_part('year', u.geburtsdatum) AS INTEGER)")
     List<Object[]> calculateAgeStatistics();
+
 
     @Query("SELECT u.operatingSystem, COUNT(u.operatingSystem) FROM AppUser u GROUP BY u.operatingSystem")
     List<Object[]> countOperatingSystems();
