@@ -98,10 +98,22 @@ public class AppUser implements UserDetails {
         this.operatingSystem = operatingSystem;
     }
 
-    public AppUser(String email, String password, AppUserRole appUserRole) {
+    public AppUser(String userName, String firstName, String lastName, String email, String password,
+                   String titel, String adresse, String plz, String stadt, String telefonnummer,
+                   String geburtsdatum, AppUserRole appUserRole) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.titel = titel;
+        this.adresse = adresse;
+        this.plz = plz;
+        this.stadt = stadt;
+        this.telefonnummer = telefonnummer;
+        this.geburtsdatum = geburtsdatum;
         this.appUserRole = appUserRole;
+
     }
 
     @Override
@@ -241,5 +253,8 @@ public class AppUser implements UserDetails {
     public void setOperatingSystem(String operatingSystem) {
 
         this.operatingSystem = operatingSystem;
+    }
+    public boolean isAdmin() {
+        return this.appUserRole == AppUserRole.ADMIN;
     }
 }

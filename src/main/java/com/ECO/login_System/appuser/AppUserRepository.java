@@ -3,6 +3,7 @@ package com.ECO.login_System.appuser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +25,9 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     @Query("SELECT u FROM AppUser u WHERE u.id = ?1 OR u.firstName LIKE %?1% OR u.lastName LIKE %?1% OR u.email LIKE %?1% OR u.tarif LIKE %?1%")
     List<AppUser> searchUsers(String keyword);
 
-    @Query("SELECT u FROM AppUser u WHERE u.id = ?2 OR LOWER(u.firstName) LIKE %?1% OR LOWER(u.lastName) LIKE %?1% OR LOWER(u.email) LIKE %?1% OR LOWER(u.tarif) LIKE %?1%")
-    List<AppUser> searchUsersByCriteria(String keyword, Long id);
+    @Query("SELECT u FROM AppUser u WHERE (u.id = :id OR LOWER(u.firstName) LIKE %:keyword% OR LOWER(u.lastName) LIKE %:keyword% OR LOWER(u.email) LIKE %:keyword% OR LOWER(u.tarif) LIKE %:keyword%)")
+    List<AppUser> searchUsersByCriteria(@Param("keyword") String keyword, @Param("id") Long id);
+
 
     @Query("SELECT u.tarif, COUNT(u.tarif) FROM AppUser u GROUP BY u.tarif")
     List<Object[]> countBookingsByTarif();

@@ -64,6 +64,7 @@ public class AdminUserController {
         return "admin_users";
     }
 
+
     @GetMapping("/users/{id}")
     public String showUserDetails(@PathVariable("id") Long id, Model model) {
         Optional<AppUser> optionalUser = appUserRepository.findById(id);

@@ -116,8 +116,17 @@ public class RegistrationService {
 
         AppUser appUser = new AppUser(
 
+                request.getUserName(),
+                request.getFirstName(),
+                request.getLastName(),
                 request.getEmail(),
                 request.getPassword(),
+                request.getTitel(),
+                request.getAdresse(),
+                request.getPlz(),
+                request.getStadt(),
+                request.getTelefonnummer(),
+                request.getGeburtsdatum(),
                 AppUserRole.ADMIN
 
         );
