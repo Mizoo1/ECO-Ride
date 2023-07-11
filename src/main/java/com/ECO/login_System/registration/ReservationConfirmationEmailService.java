@@ -55,7 +55,8 @@ public class ReservationConfirmationEmailService {
             helper.setFrom("hello@eco-ride.com");
 
             String htmlTemplate = readHtmlTemplateByStatus(status);
-
+            htmlTemplate = htmlTemplate.replace("{reservationDueDatum}", replaceNullWithEmptyString(reservation.getReservierungsDatum().toString()));
+            htmlTemplate = htmlTemplate.replace("{reservationDueDatum}", replaceNullWithEmptyString(reservation.getReservierungsDatum().toString()));
             htmlTemplate = htmlTemplate.replace("{reservationId}", replaceNullWithEmptyString(reservation.getId().toString()));
             htmlTemplate = htmlTemplate.replace("{reservationDatum}", replaceNullWithEmptyString(reservation.getDatum()));
             htmlTemplate = htmlTemplate.replace("{reservationZeit}", replaceNullWithEmptyString(reservation.getZeit()));

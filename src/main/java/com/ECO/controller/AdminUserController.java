@@ -5,6 +5,7 @@ import com.ECO.login_System.appuser.AppUserRepository;
 import com.ECO.login_System.appuser.Reservation;
 import com.ECO.login_System.appuser.ReservationStatus;
 import com.ECO.repository.ReservationRepository;
+import com.ECO.service.EcoService;
 import com.ECO.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +27,13 @@ public class AdminUserController {
     private final AppUserRepository appUserRepository;
     private final ReservationRepository reservationRepository;
     private final ReservationService reservationService;
+    private final EcoService ecoService;
     @Autowired
-    public AdminUserController(AppUserRepository appUserRepository, ReservationRepository reservationRepository, ReservationService reservationService) {
+    public AdminUserController(AppUserRepository appUserRepository, ReservationRepository reservationRepository, ReservationService reservationService, EcoService ecoService) {
         this.appUserRepository = appUserRepository;
         this.reservationRepository = reservationRepository;
         this.reservationService = reservationService;
+        this.ecoService = ecoService;
     }
 
     @GetMapping("/users")
@@ -79,11 +82,27 @@ public class AdminUserController {
     }
 
 
-    @GetMapping("/bookings/statistics")
+    @GetMapping("/users/bookings/statistics")
     public ResponseEntity<List<Object[]>> getBookingStatistics() {
         List<Object[]> bookingStatistics = appUserRepository.countBookingsByTarif();
         return ResponseEntity.ok(bookingStatistics);
     }
+    @GetMapping("/users/bookings/location-statistics")
+    public ResponseEntity<List<Object[]>> getLocationStatistics() {
+        List<Object[]> locationStatistics = reservationRepository.countLocations();
+        return ResponseEntity.ok(locationStatistics);
+    }
+    @GetMapping("/bookings/payment-method-date-statistics")
+    public ResponseEntity<List<Object[]>> getPaymentMethodDateStatistics() {
+        List<Object[]> paymentMethodDateStatistics = reservationRepository.countReservationsByPaymentMethodAndDate();
+        return ResponseEntity.ok(paymentMethodDateStatistics);
+    }
+    @GetMapping("/bookings/payment-method-time-statistics")
+    public ResponseEntity<List<Object[]>> getPaymentMethodTimeStatistics() {
+        List<Object[]> paymentMethodTimeStatistics = reservationRepository.countReservationsByPaymentMethodAndTime();
+        return ResponseEntity.ok(paymentMethodTimeStatistics);
+    }
+
 
     @GetMapping("/users/payment-methods")
     public ResponseEntity<List<Object[]>> getPaymentMethodStatistics() {
@@ -183,7 +202,10 @@ public class AdminUserController {
         }
         return "redirect:/admin/users/" + userId + "/kunden-profile";
     }
-
+    @GetMapping("/api/v/registration/logout")
+    public String getLogout() {
+        return ecoService.getLogout();
+    }
 
 
     private void updateFields(AppUser user, AppUser updatedUser) {

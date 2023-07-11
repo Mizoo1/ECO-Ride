@@ -9,7 +9,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -27,6 +30,8 @@ public class ReservationService {
 
     public void processReservation(Reservation reservation) {
         reservation.setStatus(ReservationStatus.RESERVED);
+        Date currentDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        reservation.setReservierungsDatum(currentDate);
         reservationRepository.save(reservation);
 
 
@@ -38,6 +43,8 @@ public class ReservationService {
                 .orElseThrow(() -> new NoSuchElementException("Could not find reservation " + reservationId));
 
         reservation.setStatus(ReservationStatus.CANCELLED);
+        Date currentDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        reservation.setReservierungsDatum(currentDate);
         reservationRepository.save(reservation);
 
 
@@ -48,6 +55,8 @@ public class ReservationService {
         Reservation reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new NoSuchElementException("Could not find reservation " + reservationId));
         reservation.setStatus(ReservationStatus.COMPLETED);
+        Date currentDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        reservation.setReservierungsDatum(currentDate);
         reservationRepository.save(reservation);
 
 
@@ -89,6 +98,8 @@ public class ReservationService {
 
         // Mark the reservation as missed
         reservation.setStatus(ReservationStatus.MISSED);
+        Date currentDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        reservation.setReservierungsDatum(currentDate);
         reservationRepository.save(reservation);
         emailService.sendReservationConfirmationEmail(reservation.getAppUser().getEmail(), ReservationStatus.MISSED, reservation.getAppUser(), reservation);
     }
