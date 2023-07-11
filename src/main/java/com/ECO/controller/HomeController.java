@@ -5,6 +5,7 @@ import com.ECO.login_System.registration.RegistrationService;
 import com.ECO.service.EcoService;
 import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,15 +53,14 @@ public class HomeController {
         return ecoService.getRegisterAdmin();
     }
     @GetMapping("/api/v/registration/logout")
-    public String getLogout() {
-        return ecoService.getLogout();
+    public String loginControllerLogout() {
+        SecurityContextHolder.clearContext();
+        return "redirect:/login?logout";
     }
     @RequestMapping("/profile")
     public ModelAndView zeigeProfil(Authentication authentication) {
         return ecoService.zeigeProfil(authentication);
     }
-
-
     @GetMapping("/api/v/registration/contact")
     public String getContactWithoutLogin() {
         return ecoService.getContactWithoutLogin();

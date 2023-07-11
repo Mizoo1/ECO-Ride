@@ -4,6 +4,7 @@ import com.ECO.login_System.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,6 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final AppUserService appUserService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
+    private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -29,20 +31,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v*/registration/**", "/api/v/registration/index", "/contact", "/login", "/reservierung", "/index")
+                .antMatchers("/api/v*/registration/**","contact","login","reservierung","index")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .loginPage("/api/v/registration/index")
-                .successHandler(authenticationSuccessHandler)
+                .loginPage("/admin/login")
+                .loginPage("/api/v/registration/login")
+                .successHandler(authenticationSuccessHandler) // Set the custom authentication success handler
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll();
     }
+
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -60,5 +64,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(appUserService);
         return provider;
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }
