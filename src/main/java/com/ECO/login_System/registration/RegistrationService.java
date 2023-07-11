@@ -131,8 +131,17 @@ public class RegistrationService {
                 request.getEmail(),
                 buildEmail(
 
+                        request.getUserName(),
+                        request.getFirstName(),
+                        request.getLastName(),
                         request.getEmail(),
                         request.getPassword(),
+                        request.getTitel(),
+                        request.getAdresse(),
+                        request.getPlz(),
+                        request.getStadt(),
+                        request.getTelefonnummer(),
+                        request.getGeburtsdatum(),
                         link
                 )
         );
@@ -169,7 +178,6 @@ public class RegistrationService {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line); // Ausgabe der gelesenen Zeile
                 htmlTemplate += line;
             }
 
@@ -201,7 +209,7 @@ public class RegistrationService {
 
         return htmlTemplate;
     }
-    private String buildEmail( String Email, String Password,  String link) {
+    private String buildEmail(String userName, String name, String lastName, String email, String password, String titel, String adresse, String plz, String stadt, String telefonnummer,String geburtsdatum, String link) {
         // HTML-Datei einlesen
         String htmlTemplate = "";
         try {
@@ -210,7 +218,6 @@ public class RegistrationService {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line); // Ausgabe der gelesenen Zeile
                 htmlTemplate += line;
             }
 
@@ -218,8 +225,18 @@ public class RegistrationService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        htmlTemplate = htmlTemplate.replace("{{name}}", name);
         htmlTemplate = htmlTemplate.replace("{{link}}", link);
-        htmlTemplate = htmlTemplate.replace("{{Email}}", Email);
+        htmlTemplate = htmlTemplate.replace("{{Email}}", email);
+        htmlTemplate = htmlTemplate.replace("{{Adresse}}", adresse);
+        htmlTemplate = htmlTemplate.replace("{{Plz}}", plz);
+        htmlTemplate = htmlTemplate.replace("{{Stadt}}", stadt);
+        htmlTemplate = htmlTemplate.replace("{{Telefonnummer}}", telefonnummer);
+        htmlTemplate = htmlTemplate.replace("{{Geburtsdatum}}", geburtsdatum);
+        htmlTemplate = htmlTemplate.replace("{{Titel}}", titel);
+        htmlTemplate = htmlTemplate.replace("{{LastName}}", lastName);
+        htmlTemplate = htmlTemplate.replace("{{userName}}", userName);
 
 
         return htmlTemplate;

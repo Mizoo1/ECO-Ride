@@ -40,7 +40,4 @@ public class Reservation {
     private String abholort;
     private String ort;
 
-    public boolean isBarrierefrei() {
-        return barrierefrei;
-    }
 }

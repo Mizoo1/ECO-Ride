@@ -10,6 +10,11 @@
   <h1 class="text-center mt-4">Edit User</h1>
 
   <form th:action="@{/admin/users/{id}/edit(id=${user.id})}" method="post">
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="enabled" th:name="enabled" th:checked="${user.enabled}" style="color: red;">
+      <label class="form-check-label" for="enabled" style="color: red;">Entsperrt</label>
+    </div>
+
     <div class="mb-3">
       <label for="firstName" class="form-label">First Name</label>
       <input type="text" class="form-control" id="firstName" th:name="firstName" th:value="${user.firstName}" placeholder="First Name">

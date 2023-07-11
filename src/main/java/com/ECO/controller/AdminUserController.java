@@ -3,7 +3,9 @@ package com.ECO.controller;
 import com.ECO.login_System.appuser.AppUser;
 import com.ECO.login_System.appuser.AppUserRepository;
 import com.ECO.login_System.appuser.Reservation;
+import com.ECO.login_System.appuser.ReservationStatus;
 import com.ECO.repository.ReservationRepository;
+import com.ECO.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,10 +25,12 @@ public class AdminUserController {
 
     private final AppUserRepository appUserRepository;
     private final ReservationRepository reservationRepository;
+    private final ReservationService reservationService;
     @Autowired
-    public AdminUserController(AppUserRepository appUserRepository, ReservationRepository reservationRepository) {
+    public AdminUserController(AppUserRepository appUserRepository, ReservationRepository reservationRepository, ReservationService reservationService) {
         this.appUserRepository = appUserRepository;
         this.reservationRepository = reservationRepository;
+        this.reservationService = reservationService;
     }
 
     @GetMapping("/users")
@@ -65,6 +69,7 @@ public class AdminUserController {
         Optional<AppUser> optionalUser = appUserRepository.findById(id);
         if (optionalUser.isPresent()) {
             AppUser user = optionalUser.get();
+            model.addAttribute("user", user);
             model.addAttribute("user", user);
             return "edit_user";
         } else {
@@ -164,6 +169,21 @@ public class AdminUserController {
         }
         return "redirect:/admin/users/" + id;
     }
+    @PostMapping("/users/{userId}/reservations/{reservationId}/cancel")
+    public String cancelReservation(@PathVariable("userId") Long userId,
+                                    @PathVariable("reservationId") Long reservationId) {
+        Optional<Reservation> optionalReservation = reservationRepository.findById(reservationId);
+        if (optionalReservation.isPresent()) {
+            Reservation reservation = optionalReservation.get();
+
+                reservation.setStatus(ReservationStatus.CANCELLED);
+                reservationRepository.save(reservation);
+
+        }
+        return "redirect:/admin/users/" + userId + "/kunden-profile";
+    }
+
+
 
     private void updateFields(AppUser user, AppUser updatedUser) {
         Field[] fields = AppUser.class.getDeclaredFields();
@@ -179,5 +199,4 @@ public class AdminUserController {
             }
         }
     }
-
 }
