@@ -20,6 +20,27 @@
         <p><strong>Geburtsdatum:</strong> <span th:text="${user.geburtsdatum}"></span></p>
         <p><strong>Tarif:</strong> <span th:text="${user.tarif}"></span></p>
 
+        <!-- Zeige die Reservierungen des Benutzers -->
+        <h3>Reservierungen:</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Status</th>
+                <th>Barrierefrei</th>
+                <!-- Weitere Spalten hinzufügen, je nach Bedarf -->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reservation : ${user.previousReservations}">
+                <td th:text="${reservation.id}"></td>
+                <td th:text="${reservation.status}"></td>
+                <td th:text="${reservation.barrierefrei}"></td>
+                <!-- Weitere Spalten hinzufügen, je nach Bedarf -->
+            </tr>
+            </tbody>
+        </table>
+
         <a th:href="@{/admin/users/{id}/edit(id=${user.id})}" class="btn btn-primary">Bearbeiten</a>
         <form th:action="@{/admin/users/{id}/delete(id=${user.id})}" method="post" onsubmit="return confirm('Möchten Sie das Benutzerkonto wirklich löschen?');">
             <button type="submit" class="btn btn-danger">Löschen</button>

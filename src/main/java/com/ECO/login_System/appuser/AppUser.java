@@ -23,7 +23,7 @@ import java.util.Collections;
 public class AppUser implements UserDetails {
 
 
-    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Reservation> previousReservations;
 
     @SequenceGenerator(

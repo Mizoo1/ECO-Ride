@@ -18,7 +18,74 @@
       <label for="lastName" class="form-label">Last Name</label>
       <input type="text" class="form-control" id="lastName" th:name="lastName" th:value="${user.lastName}" placeholder="Last Name">
     </div>
-    <!-- Add more form fields as needed -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" th:name="email" th:value="${user.email}" placeholder="Email">
+    </div>
+    <div class="mb-3">
+      <label for="phoneNumber" class="form-label">Phone Number</label>
+      <input type="text" class="form-control" id="phoneNumber" th:name="phoneNumber" th:value="${user.telefonnummer}" placeholder="Phone Number">
+    </div>
+    <div class="mb-3">
+      <label for="tarif" class="form-label">Tarif</label>
+      <input type="text" class="form-control" id="tarif" th:name="tarif" th:value="${user.tarif}" placeholder="Tarif">
+    </div>
+    <div class="mb-3">
+      <label for="payMethod" class="form-label">Payment Method</label>
+      <input type="text" class="form-control" id="payMethod" th:name="payMethod" th:value="${user.payMethod}" placeholder="Payment Method">
+    </div>
+    <div class="mb-3">
+      <label for="userName" class="form-label">Username</label>
+      <input type="text" class="form-control" id="userName" th:name="userName" th:value="${user.userName}" placeholder="Username">
+    </div>
+    <div class="mb-3">
+      <label for="titel" class="form-label">Title</label>
+      <input type="text" class="form-control" id="titel" th:name="titel" th:value="${user.titel}" placeholder="Title">
+    </div>
+    <div class="mb-3">
+      <label for="adresse" class="form-label">Address</label>
+      <input type="text" class="form-control" id="adresse" th:name="adresse" th:value="${user.adresse}" placeholder="Address">
+    </div>
+    <div class="mb-3">
+      <label for="plz" class="form-label">ZIP Code</label>
+      <input type="text" class="form-control" id="plz" th:name="plz" th:value="${user.plz}" placeholder="ZIP Code">
+    </div>
+    <div class="mb-3">
+      <label for="stadt" class="form-label">City</label>
+      <input type="text" class="form-control" id="stadt" th:name="stadt" th:value="${user.stadt}" placeholder="City">
+    </div>
+    <div class="mb-3">
+      <label for="geburtsdatum" class="form-label">Date of Birth</label>
+      <input type="text" class="form-control" id="geburtsdatum" th:name="geburtsdatum" th:value="${user.geburtsdatum}" placeholder="Date of Birth">
+    </div>
+    <div class="mb-3">
+      <label for="geburtsort" class="form-label">Place of Birth</label>
+      <input type="text" class="form-control" id="geburtsort" th:name="geburtsort" th:value="${user.geburtsort}" placeholder="Place of Birth">
+    </div>
+    <div class="mb-3">
+      <label for="fuehrerscheinnummer" class="form-label">Driver's License Number</label>
+      <input type="text" class="form-control" id="fuehrerscheinnummer" th:name="fuehrerscheinnummer" th:value="${user.fuehrerscheinnummer}" placeholder="Driver's License Number">
+    </div>
+    <div class="mb-3">
+      <label for="erteilungsdatum" class="form-label">Issuance Date</label>
+      <input type="text" class="form-control" id="erteilungsdatum" th:name="erteilungsdatum" th:value="${user.erteilungsdatum}" placeholder="Issuance Date">
+    </div>
+    <div class="mb-3">
+      <label for="ablaufdatum" class="form-label">Expiration Date</label>
+      <input type="text" class="form-control" id="ablaufdatum" th:name="ablaufdatum" th:value="${user.ablaufdatum}" placeholder="Expiration Date">
+    </div>
+    <div class="mb-3">
+      <label for="ausstellungsort" class="form-label">Place of Issue</label>
+      <input type="text" class="form-control" id="ausstellungsort" th:name="ausstellungsort" th:value="${user.ausstellungsort}" placeholder="Place of Issue">
+    </div>
+    <div class="mb-3">
+      <label for="personalausweisnummer" class="form-label">ID Card Number</label>
+      <input type="text" class="form-control" id="personalausweisnummer" th:name="personalausweisnummer" th:value="${user.personalausweisnummer}" placeholder="ID Card Number">
+    </div>
+    <div class="mb-3">
+      <label for="reisepassnummer" class="form-label">Passport Number</label>
+      <input type="text" class="form-control" id="reisepassnummer" th:name="reisepassnummer" th:value="${user.reisepassnummer}" placeholder="Passport Number">
+    </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
   </form>

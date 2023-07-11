@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Field;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,19 +155,29 @@ public class AdminUserController {
         return "redirect:/admin/users";
     }
     @PostMapping("/users/{id}/edit")
-    public String updateUser(@PathVariable("id") Long id, @ModelAttribute AppUser appUser, Principal principal) {
+    public String updateUser(@PathVariable("id") Long id, @ModelAttribute AppUser updatedUser) {
         Optional<AppUser> optionalUser = appUserRepository.findById(id);
         if (optionalUser.isPresent()) {
             AppUser user = optionalUser.get();
-            // Update user information based on the form data
-            user.setFirstName(appUser.getFirstName());
-            user.setLastName(appUser.getLastName());
-            // Continue for all fields you want to update...
-
+            updateFields(user, updatedUser);
             appUserRepository.save(user);
-
         }
         return "redirect:/admin/users/" + id;
+    }
+
+    private void updateFields(AppUser user, AppUser updatedUser) {
+        Field[] fields = AppUser.class.getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            try {
+                Object updatedValue = field.get(updatedUser);
+                if (updatedValue != null) {
+                    field.set(user, updatedValue);
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
