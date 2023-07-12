@@ -123,6 +123,7 @@ public class AppUser implements UserDetails {
         return Collections.singletonList(authority);
     }
 
+
     public Long getId() {
         return id;
     }
@@ -204,6 +205,7 @@ public class AppUser implements UserDetails {
     public Boolean getEnabled() {
         return enabled;
     }
+
 
     @Override
     public String getPassword() {

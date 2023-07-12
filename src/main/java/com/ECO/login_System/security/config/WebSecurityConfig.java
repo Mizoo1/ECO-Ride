@@ -31,22 +31,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v*/registration/**","contact","login","reservierung","index")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/api/v*/registration/**", "/contact", "/reservierung", "/index").permitAll()
+                .antMatchers("/admin/login").permitAll()
+                .antMatchers("/admin/users").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .loginPage("/admin/login")
-                .loginPage("/api/v/registration/login")
-                .successHandler(authenticationSuccessHandler) // Set the custom authentication success handler
+                .loginProcessingUrl("/login")
+                .successHandler(authenticationSuccessHandler)
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .logoutUrl("/logout")
+                .logoutSuccessHandler(customLogoutSuccessHandler)
+                .permitAll()
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/access-denied"); // Hinzufügen einer benutzerdefinierten Zugriffsverweigerungsseite
     }
-
 
     @Override
     public void configure(WebSecurity web) throws Exception {

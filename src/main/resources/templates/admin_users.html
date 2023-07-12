@@ -129,7 +129,7 @@
           <a class="nav-link" href="#">Settings</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/api/v/registration/logout/admin">Logout</a>
+          <a class="nav-link" href="/logout">Logout</a>
         </li>
       </ul>
     </div>
@@ -197,7 +197,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="user : ${users}" th:if="${user.appUserRole != user.appUserRole.ADMIN}">
+      <tr th:each="user : ${users}">
         <td th:text="${user.id}"></td>
         <td><a th:href="@{'/admin/users/' + ${user.id} + '/kunden-profile'}" th:text="${user.userName}"></a></td>
         <td th:text="${user.titel}"></td>
@@ -210,6 +210,8 @@
         <td th:text="${user.tarif}"></td>
       </tr>
       </tbody>
+
+
 
     </table>
   </div>
