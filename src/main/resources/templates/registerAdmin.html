@@ -10,9 +10,16 @@
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.min.css">
     <style>
-        /* Styles hier einfügen */
+        .parallax
+        {
+            background-image: url("/img/1.png");
+            min-height: 200px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     </style>
-    <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
 </head>
 <body>
 <!-- Navigation -->
@@ -20,96 +27,101 @@
 <!-- Parallax Section -->
 <div class="parallax">
     <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
-</div>
-<div class="container">
-    <div id="slider" class="carousel slide">
 
-        <form th:action="@{/api/v1/registration}" method="post" enctype="multipart/form-data">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="card personal-data" data-aos="fade-right">
-                        <h2 class="card-header">Personendaten</h2>
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label class="form-label">Titel:</label>
-                                <div class="btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-outline-secondary">
-                                        <input type="radio" class="btn-check" name="titel" id="herr" value="Herr" autocomplete="off">
-                                        <i class="bi bi-gender-male"></i> Herr
-                                    </label>
-                                    <label class="btn btn-outline-secondary">
-                                        <input type="radio" class="btn-check" name="titel" id="frau" value="Frau" autocomplete="off">
-                                        <i class="bi bi-gender-female"></i> Frau
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="userName" class="form-label">Benutzername:</label>
-                                <input type="text" id="userName" name="userName" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="firstName" class="form-label">Vorname:</label>
-                                <input type="text" id="firstName" name="firstName" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="lastName" class="form-label">Nachname:</label>
-                                <input type="text" id="lastName" name="lastName" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="geburtsdatum" class="form-label">Geburtsdatum:</label>
-                                <input type="date" id="geburtsdatum" name="geburtsdatum" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="geburtsort" class="form-label">Geburtsort:</label>
-                                <input type="text" id="geburtsort" name="geburtsort" class="form-control">
+<div class="container">
+    <form th:action="@{/api/v1/registration}" method="post" enctype="multipart/form-data">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#personal-data" data-toggle="tab" style="background-color: #5e00ff; color: white;">Personendaten</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#subscription" data-toggle="tab" style="background-color: #0066ff; color: white;">Abonnement und Kontakt</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="personal-data" class="tab-pane active">
+                <!-- Personal data  -->
+                <div class="card personal-data">
+                    <h2 class="card-header">Personendaten</h2>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Titel:</label>
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-outline-secondary">
+                                    <input type="radio" class="btn-check" name="titel" id="herr" value="Herr" autocomplete="off">
+                                    <i class="bi bi-gender-male"></i> Herr
+                                </label>
+                                <label class="btn btn-outline-secondary">
+                                    <input type="radio" class="btn-check" name="titel" id="frau" value="Frau" autocomplete="off">
+                                    <i class="bi bi-gender-female"></i> Frau
+                                </label>
                             </div>
                         </div>
-                        <div class="button-container">
-                            <button class="btn btn-primary" type="button" onclick="nextSlide()">Weiter</button>
+                        <div class="mb-3">
+                            <label for="userName" class="form-label">Benutzername:</label>
+                            <input type="text" id="userName" name="userName" class="form-control">
                         </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card subscription" data-aos="fade-left">
-                        <h2 class="card-header">Abonnement und Kontakt</h2>
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label for="adresse" class="form-label">Straße und Hausnummer:</label>
-                                <input type="text" id="adresse" name="adresse" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="plz" class="form-label">PLZ:</label>
-                                <input type="text" id="plz" name="plz" class="form-control" pattern="[0-9]+">
-                            </div>
-                            <div class="mb-3">
-                                <label for="stadt" class="form-label">Ort:</label>
-                                <input type="text" id="stadt" name="stadt" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label for="telefonnummer" class="form-label">Mobilnummer:</label>
-                                <input type="text" id="telefonnummer" name="telefonnummer" class="form-control" pattern="[0-9]+">
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">E-Mail:</label>
-                                <input type="email" id="email" name="email" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Passwort:</label>
-                                <input type="password" id="password" name="password" class="form-control" required>
-                            </div>
-                            <div class="button-container">
-                                <button class="btn btn-primary" type="submit">Registrieren</button>
-                            </div>
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">Vorname:</label>
+                            <input type="text" id="firstName" name="firstName" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Nachname:</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="geburtsdatum" class="form-label">Geburtsdatum:</label>
+                            <input type="date" id="geburtsdatum" name="geburtsdatum" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="geburtsort" class="form-label">Geburtsort:</label>
+                            <input type="text" id="geburtsort" name="geburtsort" class="form-control">
                         </div>
                     </div>
                 </div>
+
             </div>
-        </form>
-    </div>
+            <div id="subscription" class="tab-pane">
+                <!-- Abonnement und Kontakt  -->
+                <div class="card subscription">
+                    <h2 class="card-header">Abonnement und Kontakt</h2>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="adresse" class="form-label">Straße und Hausnummer:</label>
+                            <input type="text" id="adresse" name="adresse" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="plz" class="form-label">PLZ:</label>
+                            <input type="text" id="plz" name="plz" class="form-control" pattern="[0-9]+">
+                        </div>
+                        <div class="mb-3">
+                            <label for="stadt" class="form-label">Ort:</label>
+                            <input type="text" id="stadt" name="stadt" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefonnummer" class="form-label">Mobilnummer:</label>
+                            <input type="text" id="telefonnummer" name="telefonnummer" class="form-control" pattern="[0-9]+">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-Mail:</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Passwort:</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" style="background-color: green; color: white;" type="submit">Registrieren</button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
 </div>
-<!-- Parallax Section -->
-<div class="parallax">
-    <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
 </div>
 <!-- Footer -->
 <div class="footer">
@@ -120,23 +132,8 @@
 <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
 <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
-<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
-<script>
-    AOS.init();
-
-    var slider = document.getElementById("slider");
-    var carousel = new bootstrap.Carousel(slider);
-
-    function nextSlide() {
-        carousel.next();
-    }
-
-    function previousSlide() {
-        carousel.prev();
-    }
-</script>
 </body>
 </html>
