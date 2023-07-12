@@ -57,8 +57,5 @@ public class LoginController {
             return "login-admin";
         }
     }
-    @GetMapping("/access-denied")
-    public String showAccessDeniedPage() {
-        return "access-denied";
-    }
+
 }

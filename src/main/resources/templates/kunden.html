@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Kunden</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background: linear-gradient(90deg, rgb(231, 240, 232) 0%, rgb(222, 224, 232) 0%, rgb(230, 231, 214) 100%);
+    }
+    .chart-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .chart-wrapper {
+      flex: 1 1 300px;
+      max-width: 400px;
+      max-height: 400px;
+      position: relative;
+    }
+    .chart-wrapper canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .chart-expanded {
+      width: 1000px !important;
+      height: 600px !important;
+    }
+    .navbar {
+      background-color: #343a40;
+    }
+    .navbar-brand {
+      color: #fff;
+      font-weight: bold;
+      font-size: 24px;
+    }
+    .navbar-brand:hover {
+      color: #fff;
+    }
+    .navbar-nav .nav-link {
+      color: #fff;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #fff;
+    }
+    h1 {
+      color: #343a40;
+      font-size: 36px;
+      font-weight: bold;
+      margin-top: 40px;
+    }
+    .footer {
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0px;
+      padding: 0 300px;
+    }
+    .table {
+      background-color: #fff;
+    }
+    .table th {
+      background-color: #343a40;
+      color: #fff;
+      font-weight: bold;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    .footer {
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+    }
+    .footer a {
+      color: #fff;
+    }
+    .footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .status-cell {
+      font-weight: bold;
+      text-align: center;
+    }
+    .enabled {
+      color: green;
+    }
+
+    .disabled {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="/admin/users/">ECO-RIDE</a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/users/">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/users/kunden">Kunden</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <h1 class="text-center mt-4">Unsere Kunden</h1>
+
+  <div class="mt-4" style="margin-left: -500px;">
+    <table class="table table-striped" style="width: calc(100% - 40px);">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Benutzer</th>
+        <th>Titel</th>
+        <th>Vorname</th>
+        <th>Nachname</th>
+        <th>Email</th>
+        <th>PersonalID</th>
+        <th>Telefon</th>
+        <th>Geburtsdatum</th>
+        <th>Führerscheinnummer</th>
+        <th>Bezahlmethode</th>
+        <th>Tarif</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr th:each="user : ${users}" th:if="${user.appUserRole != user.appUserRole.ADMIN}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.title}"></td>
+        <td><a th:href="@{'/admin/users/' + ${user.id} + '/kunden-profile'}" th:text="${user.userName}"></a></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.personalausweisnummer}"></td>
+        <td th:text="${user.telefonnummer}"></td>
+        <td th:text="${user.geburtsdatum}"></td>
+        <td th:text="${user.fuehrerscheinnummer}"></td>
+        <td th:text="${user.payMethod}"></td>
+        <td th:text="${user.tarif}"></td>
+        <td th:text="${user.enabled}" class="status-cell" th:classappend="${user.enabled} ? 'enabled' : 'disabled'"></td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+<!-- Footer -->
+<footer class="footer mt-auto py-3">
+  <div class="container">
+    <span>&copy; 2023 ECO-RIDE. All rights reserved.</span>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  function getAllUsers() {
+    fetch('/admin/users')
+            .then(response => response.json())
+            .then(data => {
+              const users = data;
+
+              const tableBody = document.querySelector('tbody');
+              tableBody.innerHTML = '';
+
+              users.forEach(user => {
+                const row = document.createElement('tr');
+
+                const idCell = document.createElement('td');
+                idCell.textContent = user.id;
+                row.appendChild(idCell);
+
+                tableBody.appendChild(row);
+              });
+            })
+            .catch(error => {
+              console.error('Fehler beim Abrufen der Benutzerdaten:', error);
+            });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    getAllUsers();
+  });
+
+</script>
+</body>
+</html>

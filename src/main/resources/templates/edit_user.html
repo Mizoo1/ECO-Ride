@@ -1,102 +1,203 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Edit User</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background: linear-gradient(90deg, rgb(231, 240, 232) 0%, rgb(175, 184, 205) 0%, rgb(184, 186, 152) 100%);
+    }
+
+    .navbar {
+      background-color: #343a40;
+    }
+
+    .navbar-brand {
+      color: #fff;
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    .navbar-brand:hover {
+      color: #fff;
+    }
+
+    .navbar-nav .nav-link {
+      color: #fff;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #fff;
+    }
+
+    .footer {
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+      width: 100%;
+    }
+
+    .footer a {
+      color: #fff;
+    }
+
+    .footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .footer {
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0px;
+      padding: 0 300px;
+    }
+    .my-form {
+      margin-bottom: 70px;
+    }
+    .table {
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
+
 <body>
-<main class="container">
-  <h1 class="text-center mt-4">Edit User</h1>
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="#">ECO-RIDE</a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/users/">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/users/kunden">Kunden</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container text-white">
+  <main class="container">
+    <h1 class="text-center mt-4">Edit User</h1>
 
-  <form th:action="@{/admin/users/{id}/edit(id=${user.id})}" method="post">
-    <div class="form-check mb-3">
-      <input class="form-check-input" type="checkbox" id="enabled" th:name="enabled" th:checked="${user.enabled}" style="color: red;">
-      <label class="form-check-label" for="enabled" style="color: red;">Entsperrt</label>
-    </div>
+    <form class="my-form" th:action="@{/admin/users/{id}/edit(id=${user.id})}" method="post">
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" id="enabled" th:name="enabled" th:checked="${user.enabled}" style="color: red;">
+        <label class="form-check-label" for="enabled" style="color: red;">Entsperrt</label>
+      </div>
 
-    <div class="mb-3">
-      <label for="firstName" class="form-label">First Name</label>
-      <input type="text" class="form-control" id="firstName" th:name="firstName" th:value="${user.firstName}" placeholder="First Name">
-    </div>
-    <div class="mb-3">
-      <label for="lastName" class="form-label">Last Name</label>
-      <input type="text" class="form-control" id="lastName" th:name="lastName" th:value="${user.lastName}" placeholder="Last Name">
-    </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" th:name="email" th:value="${user.email}" placeholder="Email">
-    </div>
-    <div class="mb-3">
-      <label for="phoneNumber" class="form-label">Phone Number</label>
-      <input type="text" class="form-control" id="phoneNumber" th:name="phoneNumber" th:value="${user.telefonnummer}" placeholder="Phone Number">
-    </div>
-    <div class="mb-3">
-      <label for="tarif" class="form-label">Tarif</label>
-      <input type="text" class="form-control" id="tarif" th:name="tarif" th:value="${user.tarif}" placeholder="Tarif">
-    </div>
-    <div class="mb-3">
-      <label for="payMethod" class="form-label">Payment Method</label>
-      <input type="text" class="form-control" id="payMethod" th:name="payMethod" th:value="${user.payMethod}" placeholder="Payment Method">
-    </div>
-    <div class="mb-3">
-      <label for="userName" class="form-label">Username</label>
-      <input type="text" class="form-control" id="userName" th:name="userName" th:value="${user.userName}" placeholder="Username">
-    </div>
-    <div class="mb-3">
-      <label for="titel" class="form-label">Title</label>
-      <input type="text" class="form-control" id="titel" th:name="titel" th:value="${user.titel}" placeholder="Title">
-    </div>
-    <div class="mb-3">
-      <label for="adresse" class="form-label">Address</label>
-      <input type="text" class="form-control" id="adresse" th:name="adresse" th:value="${user.adresse}" placeholder="Address">
-    </div>
-    <div class="mb-3">
-      <label for="plz" class="form-label">ZIP Code</label>
-      <input type="text" class="form-control" id="plz" th:name="plz" th:value="${user.plz}" placeholder="ZIP Code">
-    </div>
-    <div class="mb-3">
-      <label for="stadt" class="form-label">City</label>
-      <input type="text" class="form-control" id="stadt" th:name="stadt" th:value="${user.stadt}" placeholder="City">
-    </div>
-    <div class="mb-3">
-      <label for="geburtsdatum" class="form-label">Date of Birth</label>
-      <input type="text" class="form-control" id="geburtsdatum" th:name="geburtsdatum" th:value="${user.geburtsdatum}" placeholder="Date of Birth">
-    </div>
-    <div class="mb-3">
-      <label for="geburtsort" class="form-label">Place of Birth</label>
-      <input type="text" class="form-control" id="geburtsort" th:name="geburtsort" th:value="${user.geburtsort}" placeholder="Place of Birth">
-    </div>
-    <div class="mb-3">
-      <label for="fuehrerscheinnummer" class="form-label">Driver's License Number</label>
-      <input type="text" class="form-control" id="fuehrerscheinnummer" th:name="fuehrerscheinnummer" th:value="${user.fuehrerscheinnummer}" placeholder="Driver's License Number">
-    </div>
-    <div class="mb-3">
-      <label for="erteilungsdatum" class="form-label">Issuance Date</label>
-      <input type="text" class="form-control" id="erteilungsdatum" th:name="erteilungsdatum" th:value="${user.erteilungsdatum}" placeholder="Issuance Date">
-    </div>
-    <div class="mb-3">
-      <label for="ablaufdatum" class="form-label">Expiration Date</label>
-      <input type="text" class="form-control" id="ablaufdatum" th:name="ablaufdatum" th:value="${user.ablaufdatum}" placeholder="Expiration Date">
-    </div>
-    <div class="mb-3">
-      <label for="ausstellungsort" class="form-label">Place of Issue</label>
-      <input type="text" class="form-control" id="ausstellungsort" th:name="ausstellungsort" th:value="${user.ausstellungsort}" placeholder="Place of Issue">
-    </div>
-    <div class="mb-3">
-      <label for="personalausweisnummer" class="form-label">ID Card Number</label>
-      <input type="text" class="form-control" id="personalausweisnummer" th:name="personalausweisnummer" th:value="${user.personalausweisnummer}" placeholder="ID Card Number">
-    </div>
-    <div class="mb-3">
-      <label for="reisepassnummer" class="form-label">Passport Number</label>
-      <input type="text" class="form-control" id="reisepassnummer" th:name="reisepassnummer" th:value="${user.reisepassnummer}" placeholder="Passport Number">
-    </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="thead-dark">
+          <tr>
+            <th>Field</th>
+            <th>Value</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Title</td>
+            <td><input type="text" class="form-control" th:name="titel" th:value="${user.titel}" placeholder="Titel"></td>
+          </tr>
+          <tr>
+            <td>Username</td>
+            <td><input type="text" class="form-control" th:name="userName" th:value="${user.userName}" placeholder="Username"></td>
+          </tr>
+          <tr>
+            <td>First Name</td>
+            <td><input type="text" class="form-control" th:name="firstName" th:value="${user.firstName}" placeholder="First Name"></td>
+          </tr>
+          <tr>
+            <td>Last Name</td>
+            <td><input type="text" class="form-control" th:name="lastName" th:value="${user.lastName}" placeholder="Last Name"></td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td><input type="email" class="form-control" th:name="email" th:value="${user.email}" placeholder="Email"></td>
+          </tr>
+          <tr>
+            <td>Phone Number</td>
+            <td><input type="text" class="form-control" th:name="phoneNumber" th:value="${user.telefonnummer}" placeholder="Phone Number"></td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td><input type="text" class="form-control" th:name="adresse" th:value="${user.adresse}" placeholder="Adresse"></td>
+          </tr>
+          <tr>
+            <td>ZIP Code</td>
+            <td><input type="text" class="form-control" th:name="plz" th:value="${user.plz}" placeholder="PLZ"></td>
+          </tr>
+          <tr>
+            <td>City</td>
+            <td><input type="text" class="form-control" th:name="stadt" th:value="${user.stadt}" placeholder="Stadt"></td>
+          </tr>
+          <tr>
+            <td>Date of Birth</td>
+            <td><input type="text" class="form-control" th:name="geburtsdatum" th:value="${user.geburtsdatum}" placeholder="Geburtsdatum"></td>
+          </tr>
+          <tr>
+            <td>Place of Birth</td>
+            <td><input type="text" class="form-control" th:name="geburtsort" th:value="${user.geburtsort}" placeholder="Gebutrtsort"></td>
+          </tr>
+          <tr>
+            <td>Driver's License Number</td>
+            <td><input type="text" class="form-control" th:name="fuehrerscheinnummer" th:value="${user.fuehrerscheinnummer}" placeholder="FührerscheinNr"></td>
+          </tr>
+          <tr>
+            <td>Issuance Date</td>
+            <td><input type="text" class="form-control" th:name="erteilungsdatum" th:value="${user.erteilungsdatum}" placeholder="Erteilungsdatum"></td>
+          </tr>
+          <tr>
+            <td>Expiration Date</td>
+            <td><input type="text" class="form-control" th:name="ablaufdatum" th:value="${user.ablaufdatum}" placeholder="Ablaufdatum"></td>
+          </tr>
+          <tr>
+            <td>Place of Issue</td>
+            <td><input type="text" class="form-control" th:name="ausstellungsort" th:value="${user.ausstellungsort}" placeholder="Aussetllungsort"></td>
+          </tr>
+          <tr>
+            <td>ID Card Number</td>
+            <td><input type="text" class="form-control" th:name="personalausweisnummer" th:value="${user.personalausweisnummer}" placeholder="AusweisNr"></td>
+          </tr>
+          <tr>
+            <td>Passport Number</td>
+            <td><input type="text" class="form-control" th:name="reisepassnummer" th:value="${user.reisepassnummer}" placeholder="ReisepassNr"></td>
+          </tr>
+          <tr>
+            <td>Tarif</td>
+            <td><input type="text" class="form-control" th:name="tarif" th:value="${user.tarif}" placeholder="Tarif"></td>
+          </tr>
+          <tr>
+            <td>Payment Method</td>
+            <td><input type="text" class="form-control" th:name="payMethod" th:value="${user.payMethod}" placeholder="Payment Method"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-  </form>
-</main>
+      <button type="submit" class="btn btn-primary" style="margin-bottom: 30px;">Speichern</button>
 
-<!-- Bootstrap JS (ensure the correct URL) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    </form>
+  </main>
+  <footer class="footer mt-auto py-3" style="position: fixed; bottom: 0; width: 100%;">
+    <div class="container">
+      <span>&copy; 2023 ECO-RIDE. All rights reserved.</span>
+    </div>
+  </footer>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

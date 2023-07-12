@@ -141,7 +141,7 @@ public class AdminUserController {
 
             return "kunden-profile";
         } else {
-            return "redirect:/admin/users";
+            return "redirect:/admin/users/";
         }
     }
     @PostMapping("/users/{id}/kunden-profile/update")
@@ -156,7 +156,7 @@ public class AdminUserController {
             appUserRepository.save(user);
             return "redirect:/admin/users/" + id + "/kunden-profile";
         } else {
-            return "redirect:/admin/users";
+            return "redirect:/admin/users/";
         }
     }
     @GetMapping("/users/{id}/edit")
@@ -167,7 +167,7 @@ public class AdminUserController {
             model.addAttribute("user", user); // Stellen Sie sicher, dass "user" als Vorlagenattribut hinzugefügt wird
             return "edit_user";
         } else {
-            return "redirect:/admin/users";
+            return "redirect:/admin/users/";
         }
     }
     @PostMapping("/users/{id}/delete")
@@ -179,7 +179,7 @@ public class AdminUserController {
             // Benutzer löschen
             appUserRepository.delete(user);
         }
-        return "redirect:/admin/users";
+        return "redirect:/admin/users/";
     }
     @PostMapping("/users/{id}/edit")
     public String updateUser(@PathVariable("id") Long id, @ModelAttribute AppUser updatedUser) {
@@ -190,6 +190,13 @@ public class AdminUserController {
             appUserRepository.save(user);
         }
         return "redirect:/admin/users/" + id;
+    }
+    @GetMapping("/users/kunden")
+    public String zeigKunden(Model model) {
+        List<AppUser> users = appUserRepository.findAll();
+        model.addAttribute("users", users);
+
+        return "kunden";
     }
     @PostMapping("/users/{userId}/reservations/{reservationId}/cancel")
     public String cancelReservation(@PathVariable("userId") Long userId,

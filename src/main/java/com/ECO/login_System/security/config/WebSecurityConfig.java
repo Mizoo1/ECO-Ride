@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Configuration
 @AllArgsConstructor
@@ -50,6 +51,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage("/access-denied"); // Hinzufügen einer benutzerdefinierten Zugriffsverweigerungsseite
+    }
+    @GetMapping("/access-denied")
+    public String showAccessDeniedPage() {
+        return "access-denied";
     }
 
     @Override
