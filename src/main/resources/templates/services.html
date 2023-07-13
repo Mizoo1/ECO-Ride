@@ -10,75 +10,98 @@
     <link rel="icon" href="/img/Logo.png" type="image/png">
 
     <style>
-        .parallax
-        {
-            background-image: url("/img/1_1_1.jpg");
-            min-height: 1000px;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        .parallax h1,
-        #services-section h2,
-        #services-section h4,
-        #services-section p,
-        .text-white,
-        .text-center
-        {
-            color: #ffffff;
+        :root {
+            --color-white: #ffffff;
+            --color-gray: rgba(64, 64, 64, 0.5);
+            --font-family-base: 'neue-schriftart', Helvetica, sans-serif;
+            --font-family-header: 'Roboto Condensed', Helvetica, sans-serif;
+            --background-img: url("/img/1_1_1.jpg");
         }
 
-        .card-body
-        {
-            background: rgba(64, 64, 64, 0.5);
-            border: 2px solid rgba(64, 64, 64, 0.5);
+        *, html {
+            margin: 0;
+            padding: 0;
         }
-        h1
-        {
-            font-family: 'Roboto Condensed', Helvetica, sans-serif;
+
+        .parallax, html {
+            height: 100%;
+            background: var(--background-img) no-repeat center center fixed;
+            background-size: cover;
+            font-family: var(--font-family-base);
+        }
+
+        .container {
+            color: var(--color-white);
+            min-height: calc(100% - 100px);
+            overflow-y: auto;
+        }
+
+        .parallax h1, .text-white, .text-center,
+        #services-section h2,
+        #services-section h4,
+        #services-section p {
+            color: var(--color-white);
+        }
+
+        .card-body {
+            background: var(--color-gray);
+            border: 2px solid var(--color-gray);
+        }
+
+        h1 {
+            font-family: var(--font-family-header);
             font-weight: 700;
             font-size: 48px;
             text-align: center;
             animation: fadeIn_h 2s ease-in-out;
         }
 
-        h4.service-title
-        {
+        h4.service-title {
             font-weight: bold;
             font-size: 24px;
         }
-        @keyframes fadeIn_h
-        {
-            0%
-            {
+
+        @keyframes fadeIn_h {
+            0% {
                 opacity: 0;
                 transform: scale(0.8);
             }
-            100%
-            {
+            100% {
                 opacity: 1;
                 transform: scale(1);
             }
         }
-        #services-section,
-        .service-box,
-        .service-title
-        {
+
+        #services-section, .service-box, .service-title {
             padding-bottom: 1%;
         }
 
-        .service-description
-        {
+        .service-description {
             line-height: 1.5;
             font-size: 18px;
         }
 
-        body
-        {
-            font-family: "neue-schriftart", Georgia, sans-serif;
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 54px;
+            width: 100%;
+            background-color: var(--color-white);
+            color: #808080;
+            text-align: center;
         }
+
+        .footer span, .footer a, .footer a:hover {
+            color: #808080;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
     </style>
+
     <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
 </head>
 <body>
@@ -113,9 +136,11 @@
 </section>
 
 <!-- Footer -->
-<div class="footer">
-    <div th:replace="fragments/footer.html::footer"></div>
-</div>
+<footer class="footer mt-auto py-3">
+    <div class="container">
+        <span>&copy; 2023 ECO-RIDE. All rights reserved.</span>
+    </div>
+</footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
