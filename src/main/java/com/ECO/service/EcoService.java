@@ -52,6 +52,7 @@ public class EcoService {
         AppUser userDetails = (AppUser) authentication.getPrincipal();
         ModelAndView modelAndView = new ModelAndView("contact");
         String userName = userDetails.getUserName();
+        modelAndView.addObject("userName", userName);
         modelAndView.addObject("userDetails", userDetails);
         return modelAndView;
     }

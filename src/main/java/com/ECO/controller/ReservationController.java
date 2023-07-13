@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -29,11 +30,21 @@ public class ReservationController {
     }
 
     @GetMapping
-    public String showReservationForm(Model model) {
-        model.addAttribute("reservierung ", new Reservation());
-        return "reservierung";
+    public ModelAndView showReservationForm(Model model,Authentication authentication) {
+        AppUser userDetails = (AppUser) authentication.getPrincipal();
+        ModelAndView modelAndView = new ModelAndView("reservierung");
+        String userName = userDetails.getUserName();
+        modelAndView.addObject("userName", userName);
+        return modelAndView;
     }
 
+    public ModelAndView getReservierung(Authentication authentication) {
+        AppUser userDetails = (AppUser) authentication.getPrincipal();
+        ModelAndView modelAndView = new ModelAndView("reservierung");
+        String userName = userDetails.getUserName();
+        modelAndView.addObject("userName", userName);
+        return modelAndView;
+    }
     @PostMapping
     public String submitReservationForm(@ModelAttribute("reservation") Reservation reservation,
                                         @RequestParam(name = "panne", required = false) boolean panne) {
