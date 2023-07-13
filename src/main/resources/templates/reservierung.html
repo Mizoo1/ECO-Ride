@@ -46,7 +46,8 @@
                     <td>
                         <form action="/reservierung/cancelReservation" method="POST">
                             <input type="hidden"name="reservationId" th:value="${reservation.id}">
-                            <button type="submit" class="btn btn-danger">Stornieren</button>
+                            <button type="submit" class="btn btn-danger" id="stornierenButton">Stornieren</button>
+
                         </form>
                     </td>
                 </tr>
@@ -68,24 +69,24 @@
 
                 <div class="form-group">
                     <label for="zeit">Zeit:</label>
-                    <input type="time" class="form-control" id="zeit" name="zeit">
+                    <input type="time" class="form-control" id="zeit" name="zeit" required>
                 </div>
                 <div class="form-group">
                     <label for="datum">Datum:</label>
-                    <input type="date" class="form-control" id="datum" name="datum">
+                    <input type="date" class="form-control" id="datum" name="datum" required>
                 </div>
                 <div class="form-group">
                     <label for="abholort">Abholort:</label>
-                    <input type="text" class="form-control" id="abholort" name="abholort">
+                    <input type="text" class="form-control" id="abholort" name="abholort" required>
                 </div>
                 <div class="form-group">
                     <label for="ort">Ort:</label>
-                    <input type="text" class="form-control" id="ort" name="ort">
+                    <input type="text" class="form-control" id="ort" name="ort" required>
                 </div>
 
                 <div class="form-group">
                     <label for="fahrzeug">Fahrzeug:</label>
-                    <select class="form-control" id="fahrzeug" name="fahrzeug" onchange="showFieldsByVehicleType()">
+                    <select class="form-control" id="fahrzeug" name="fahrzeug" onchange="showFieldsByVehicleType()" required>
                         <option value="" disabled selected>Bitte wählen</option>
                         <option value="PKW">PKW</option>
                         <option value="LKW">LKW</option>
@@ -203,7 +204,8 @@
                         <label for="barrierefrei">Ja</label>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="submitForm()">Reservieren</button>
+                <button type="button" class="btn btn-primary" id="reservierenButton" onclick="submitForm()">Reservieren</button>
+
             </form>
         </div>
     </div>
@@ -281,20 +283,38 @@
 
 <script>
     function submitForm() {
-        var formData = $("#myForm").serializeArray();
-        $.ajax({
-            type: "POST",
-            url: "/reservierung",
-            data: formData,
-            success: function(data){
-                alert('Reservierung erfolgreich!');
-                location.reload();
-            },
-            error: function(){
-                alert('Fehler bei der Reservierung. Bitte versuchen Sie es erneut.');
-            }
-        });
+        // Überprüfen, ob alle erforderlichen Felder ausgefüllt sind
+        var zeit = document.getElementById("zeit").value;
+        var datum = document.getElementById("datum").value;
+        var abholort = document.getElementById("abholort").value;
+        var ort = document.getElementById("ort").value;
+        var fahrzeug = document.getElementById("fahrzeug").value;
+
+        if (zeit && datum && abholort && ort && fahrzeug) {
+            // Schaltfläche deaktivieren
+            document.getElementById("reservierenButton").disabled = true;
+
+            var formData = $("#myForm").serializeArray();
+            $.ajax({
+                type: "POST",
+                url: "/reservierung",
+                data: formData,
+                success: function(data) {
+                    // Zeigt das Bootstrap-Modal mit Erfolgsmeldung an
+                    $('#successModal').modal('show');
+                    location.reload();
+                },
+                complete: function() {
+                    // Schaltfläche aktivieren
+                    document.getElementById("reservierenButton").disabled = false;
+                }
+            });
+        } else {
+            // Zeigen Sie eine Fehlermeldung an oder tun Sie etwas, um den Benutzer darauf hinzuweisen, dass alle Felder ausgefüllt werden müssen, bevor die Reservierung durchgeführt werden kann
+            alert("Bitte füllen Sie alle Felder aus, bevor Sie die Reservierung vornehmen.");
+        }
     }
+
     function showFieldsByVehicleType() {
         var selectedVehicle = document.getElementById("fahrzeug").value;
 
@@ -447,7 +467,41 @@
             });
         }
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        var stornierenButton = document.getElementById('stornierenButton');
 
+        stornierenButton.addEventListener('click', function(event) {
+
+            event.preventDefault();
+
+            // Deaktiviere die Schaltfläche nach dem Klicken
+            stornierenButton.disabled = true;
+
+            // Sende das Formular
+            var form = stornierenButton.closest('form');
+            form.submit();
+        });
+    });
 </script>
+<div id="errorContainer"></div>
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Reservierung erfolgreich!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Schließen">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <i class="fas fa-check-circle fa-4x text-success"></i>
+                <p>Ihre Reservierung wurde erfolgreich abgeschlossen.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
