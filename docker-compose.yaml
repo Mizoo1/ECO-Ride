@@ -2,9 +2,9 @@ version: '3.1'
 
 services:
   harald:
-    image: eco_ride
-#    build:
-#      dockerfile: Dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: matrex:latest
     ports:
       - "8080:8080"
-      
