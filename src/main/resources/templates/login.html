@@ -10,72 +10,110 @@
   <style>
     html, body {
       height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: "neue-schriftart", Helvetica, sans-serif;
+      background: url("/img/1_1_1.jpg") no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
     }
 
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+
+    .container {
+      color: #ffffff;
+      min-height: calc(100% - 100px);
+      overflow-y: auto;
+    }
+    h1, h2, h4, p,.text-center  {
+      color: #ffffff;
+    }
+    h2 {
+      font-family: 'Roboto Condensed', Helvetica, sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      text-align: center;
+    }
+    p {
+      font-size: 18px;
     }
 
-    .content {
-      flex-grow: 1;
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 54px;
+      width: 100%;
+      background-color: #fff;
+      color: #808080;
+      text-align: center;
     }
 
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 30px;
+    .footer span
+    {
+      color: #808080;
     }
 
-    .logo {
-      width: 200px; /* adjust the width as needed */
+    .footer a
+    {
+      color: #808080;
     }
-    .btn-animate {
-      transition: transform .3s;
+
+    .footer a:hover {
+      color: #808080;
+      text-decoration: underline;
     }
-    .btn-animate:hover {
-      transform: scale(1.1);
+    .navbar {
+      background-color: #ffffff;
     }
+
   </style>
   <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
 </head>
 <body>
-<div class="wrapper">
-  <!-- Navigation -->
-  <div th:replace="fragments/navWithoutLogin::nav"></div>
 
-  <div class="content">
+
+<div class="navbar" style="background-color: #ffffff;" th:replace="fragments/navWithoutLogin::nav"></div>
+
+
+<div class="wrapper">
+
     <div class="container mt-5">
       <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="logo-container">
             <img src="/img/Logo.png" alt="Logo" class="logo">
           </div>
-          <h2 class="text-center mb-4">Anmelden</h2>
-          <form action="/login" method="post">
-            <div class="form-group">
-              <label for="username">E-Mail</label>
-              <input type="text" id="username" name="username" class="form-control" required autofocus>
-            </div>
-            <div class="form-group">
-              <label for="password">Passwort</label>
-              <input type="password" id="password" name="password" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-animate">Anmelden</button>
-          </form>
-          <p class="text-center mt-3">Noch keinen Account? <a href="/api/v/registration/register">Hier registrieren</a></p>
+          <div class="content-bg">
+            <h2 class="text-center mb-4">Anmelden</h2>
+            <form action="/login" method="post">
+              <div class="form-group">
+                <label for="username">E-Mail</label>
+                <input type="text" id="username" name="username" class="form-control" required autofocus>
+              </div>
+              <div class="form-group">
+                <label for="password">Passwort</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-animate">Anmelden</button>
+            </form>
+            <p class="text-center mt-3">Noch keinen Account? <a href="/api/v/registration/register">Hier registrieren</a></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <div class="footer">
-    <div th:replace="fragments/footer.html::footer"></div>
-  </div>
 </div>
+
+
+<!-- Footer -->
+<footer class="footer mt-auto py-3">
+  <div class="container">
+    <span>&copy; 2023 ECO-RIDE. All rights reserved.</span>
+  </div>
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>

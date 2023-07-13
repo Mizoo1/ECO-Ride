@@ -10,25 +10,36 @@
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.min.css">
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: "neue-schriftart", Helvetica, sans-serif;
+        }
         .parallax {
-            background-image: url("/img/1_0.jpg");
-            min-height: 1000px;
+            background-image: url("/img/1_1_1.jpg");
+
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
+            min-height: calc(100% - 54px);
         }
 
         .parallax h1 {
             color: #ffffff;
-            font-family: 'Roboto Condensed', Georgia, sans-serif;
+            font-family: 'Roboto Condensed', Helvetica, sans-serif;
             font-weight: 700;
             font-size: 36px;
             text-align: center;
             animation: fadeIn_h 2s ease-in-out;
         }
+        .container {
+            min-height: calc(100% - 54px);
+            overflow-y: auto;
+        }
 
-        .container, .text-white, .text-center {
+         .text-white, .text-center {
             color: #ffffff;
         }
 
@@ -44,7 +55,7 @@
         }
 
         .card-body {
-            color: #f1f1f1; /* Helle Textfarbe */
+            color: #f1f1f1;
         }
 
         .btn-primary {
@@ -52,9 +63,7 @@
             color: white;
         }
 
-        body {
-            font-family: "neue-schriftart", Georgia, sans-serif;
-        }
+
 
         @keyframes fadeIn_h {
             0% {
@@ -65,6 +74,29 @@
                 opacity: 1;
                 transform: scale(1);
             }
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 54px;
+            width: 100%;
+            background-color: #fff;
+            color: #808080;
+            text-align: center;
+        }
+
+        .footer span {
+            color: #808080;
+        }
+
+        .footer a {
+            color: #808080;
+        }
+
+        .footer a:hover {
+            color: #808080;
+            text-decoration: underline;
         }
     </style>
 
@@ -273,9 +305,11 @@
     </div>
 </div>
 <!-- Footer -->
-<div class="footer">
-    <div th:replace="fragments/footer.html::footer"></div>
-</div>
+<footer class="footer mt-auto py-3">
+    <div class="container">
+        <span>&copy; 2023 ECO-RIDE. All rights reserved.</span>
+    </div>
+</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/jquery-ui/jquery-ui.min.js"></script>

@@ -5,10 +5,12 @@
     <title>Autovermietung</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     <style>
         .parallax
         {
-            background-image: url("/img/1.png");
+            background-image: url("/img/1_1_1.jpg");
             min-height: 1000px;
             background-attachment: fixed;
             background-position: center;
@@ -21,7 +23,6 @@
         #services-section p,
         .text-white,
         #reviews-section,
-        #about-section,
         .text-center,
         #newsletter-section,
         #werbungAbtal
@@ -39,7 +40,6 @@
         }
         .carousel-container,
         #reviews-section,
-        #about-section,
         #faq-section,
         .card,
         #newsletter-section,
@@ -58,20 +58,22 @@
 
         h1
         {
-            font-family: 'Roboto Condensed', Georgia, sans-serif;
+            font-family: 'Roboto Condensed', Helvetica, sans-serif;
             font-weight: 700;
             font-size: 36px;
             text-align: center;
             animation: fadeIn_h 2s ease-in-out;
+            margin-top: 20px;
         }
 
         h2
         {
-            font-family: 'Roboto Condensed', Georgia, sans-serif;
+            font-family: 'Roboto Condensed', Helvetica, sans-serif;
             font-weight: 700;
             font-size: 28px;
             text-align: center;
             animation: fadeIn_h 2s ease-in-out;
+            margin-top: 20px;
         }
         @keyframes fadeIn_h
         {
@@ -86,28 +88,17 @@
                 transform: scale(1);
             }
         }
-        #services-section,
         #reviews-section
         {
             margin: 0 auto;
             width: 70%;
         }
 
-        .service-box,
         .review-box
         {
             text-align: center;
         }
 
-        .service-title
-        {
-            padding-bottom: 1%;
-        }
-
-        .service-description
-        {
-            line-height: 1.5;
-        }
         .review-text
         {
             padding-top: 3%;
@@ -128,7 +119,7 @@
         }
         body
         {
-            font-family: "neue-schriftart", Georgia, sans-serif;
+            font-family: "neue-schriftart", Helvetica, sans-serif;
         }
 
     </style>
@@ -138,10 +129,10 @@
 <div th:replace="fragments/nav::nav"></div>
 
 
-<!-- Parallax Section -->
+
 <div class="parallax">
     <div id="werbungAbtal" class="container p-5">
-        <h2 data-aos="fade-up" style="color: yellow;">Werbung <br> فقد للابطال <br>^-^</h2>
+        <h2 data-aos="fade-up" style="color: yellow;">Werbung <br> xxxxx <br>^-^</h2>
     </div>
 
     <h1 class="text-white text-center p-5">Willkommen bei ECO RIDE, <br> Ihrem Tor zu erstklassiger, umweltfreundlicher Mobilität <br> und exzellentem Kundenservice!</h1>
@@ -149,47 +140,21 @@
     <div id="carouselExampleIndicators" class="carousel slide carousel-container" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="/img/2_0.png" class="carousel-image" alt="Car 1">
+                <img src="/img/3_0.png" class="carousel-image" alt="Car 1">
             </div>
             <div class="carousel-item">
-                <img src="/img/2_1.png" class="carousel-image" alt="Car 2">
+                <img src="/img/3_1.png" class="carousel-image" alt="Car 2">
             </div>
             <div class="carousel-item">
-                <img src="/img/2_2.png" class="carousel-image" alt="Car 3">
+                <img src="/img/3_2.png" class="carousel-image" alt="Car 3">
             </div>
             <div class="carousel-item">
-                <img src="/img/2_3.png" class="carousel-image" alt="Car 3">
+                <img src="/img/3_3.png" class="carousel-image" alt="Car 3">
             </div>
             <div class="carousel-item">
-                <img src="/img/2_5.png" class="carousel-image" alt="Car 3">
+                <img src="/img/3_5.png" class="carousel-image" alt="Car 3">
             </div>
         </div>
-    </div>
-    <!-- Begin Parallax Section -->
-    <h1 class="text-center py-3 text-white">Was unsere Kunden sagen</h1>
-    <div id="reviews-section" class="container p-5">
-        <div class="row text-center">
-            <!-- First Review -->
-            <div class="col-lg-6 review-box" data-aos="fade-right">
-                <p class="review-text text-white">"Toller Service und tolle Autos!" - Kunde 1</p>
-            </div>
-            <!-- Second Review -->
-            <div class="col-lg-6 review-box" data-aos="fade-left">
-                <p class="review-text text-white">"Sehr zufrieden mit dem Preis und dem Service!" - Kunde 2</p>
-            </div>
-        </div>
-    </div>
-
-    <h1 class="text-white text-center p-5">Umleitungfürbuchen</h1>
-    <!-- About Us Section -->
-    <h2 class="text-center" data-aos="fade-down">Über Uns</h2>
-    <div id="about-section" class="container p-5">
-        <p data-aos="fade-up">
-            Wir sind ein engagiertes Team von Autoenthusiasten, das sich zum Ziel gesetzt hat,
-            Ihnen den besten Autovermietungsservice zu bieten. Seit unserer Gründung im Jahr 2023
-            haben wir unermüdlich daran gearbeitet, eine große Auswahl an Fahrzeugen zu
-            erschwinglichen Preisen anzubieten und einen herausragenden Kundenservice zu bieten.
-        </p>
     </div>
 
     <!-- Gallery Section -->
@@ -299,7 +264,7 @@
                                 <li>Kostenlose Stornierung bis 24h vor Fahrtantritt</li>
                                 <li>Rund um die Uhr Pannenhilfe</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-outline-primary">Jetzt buchen</button>
+                            <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="location.href='/reservierung'">Jetzt buchen</button>
                         </div>
                     </div>
                 </div>
@@ -319,7 +284,7 @@
                                 <li>Rund um die Uhr Pannenhilfe</li>
                                 <li>Gratis Navigationssystem</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-outline-success">Jetzt buchen</button>
+                            <button type="button" class="btn btn-lg btn-block btn-outline-success" onclick="location.href='/reservierung'">Jetzt buchen</button>
                         </div>
                     </div>
                 </div>
@@ -340,7 +305,7 @@
                                 <li>Gratis Navigationssystem</li>
                                 <li>Priorität bei Fahrzeugauswahl</li>
                             </ul>
-                            <button type="button" class="btn btn-lg btn-block btn-outline-danger">Jetzt buchen</button>
+                            <button type="button" class="btn btn-lg btn-block btn-outline-danger" onclick="location.href='/reservierung'">Jetzt buchen</button>
                         </div>
                     </div>
                 </div>
@@ -348,6 +313,19 @@
         </div>
     </div>
 
+    <h1 class="text-center py-3 text-white">Was unsere Kunden sagen</h1>
+    <div id="reviews-section" class="container p-5">
+        <div class="row text-center">
+
+            <div class="col-lg-6 review-box" data-aos="fade-right">
+                <p class="review-text text-white">"Toller Service und tolle Autos!" - Kunde 1</p>
+            </div>
+
+            <div class="col-lg-6 review-box" data-aos="fade-left">
+                <p class="review-text text-white">"Sehr zufrieden mit dem Preis und dem Service!" - Kunde 2</p>
+            </div>
+        </div>
+    </div>
     <!-- FAQ Section -->
     <h1 class="text-center" data-aos="fade-down">Häufig gestellte Fragen</h1>
     <div id="faq-section" class="container p-5">
@@ -484,7 +462,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Weitere Fragen hier einfügen -->
         </div>
     </div>
 
@@ -511,7 +488,7 @@
 <div class="footer">
     <div th:replace="fragments/footer.html::footer"></div>
 </div>
-</div>
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
