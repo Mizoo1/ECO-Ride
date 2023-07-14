@@ -42,11 +42,8 @@ public class AdminUserController {
     public String showAdminUsersPage(Model model) {
         List<AppUser> users = appUserRepository.findAll();
         model.addAttribute("users", users);
-
-        // Rufen Sie alle Tarifarten ab und fügen Sie sie dem Model hinzu
         List<String> tarifTypes = appUserRepository.getAllTarifTypes();
         model.addAttribute("tarifTypes", tarifTypes);
-
         return "admin_users";
     }
 
@@ -59,8 +56,7 @@ public class AdminUserController {
                 Long id = Long.parseLong(keyword);
                 users = appUserRepository.searchUsersByCriteria(keyword, id);
             } catch (NumberFormatException e) {
-                // Handle the case where the keyword is not a valid Long value
-                users = new ArrayList<>(); // Or any other appropriate action
+                users = new ArrayList<>();
             }
         } else {
             users = appUserRepository.searchUsersByCriteria(keyword, null);
@@ -68,7 +64,6 @@ public class AdminUserController {
         model.addAttribute("users", users);
         return "admin_users";
     }
-
 
     @GetMapping("/users/{id}")
     public String showUserDetails(@PathVariable("id") Long id, Model model) {
@@ -82,7 +77,6 @@ public class AdminUserController {
             return "redirect:/admin/users";
         }
     }
-
 
     @GetMapping("/users/bookings/statistics")
     public ResponseEntity<List<Object[]>> getBookingStatistics() {
@@ -104,7 +98,6 @@ public class AdminUserController {
         List<Object[]> paymentMethodTimeStatistics = reservationRepository.countReservationsByPaymentMethodAndTime();
         return ResponseEntity.ok(paymentMethodTimeStatistics);
     }
-
 
     @GetMapping("/users/payment-methods")
     public ResponseEntity<List<Object[]>> getPaymentMethodStatistics() {
@@ -149,7 +142,6 @@ public class AdminUserController {
         Optional<AppUser> optionalUser = appUserRepository.findById(id);
         if (optionalUser.isPresent()) {
             AppUser user = optionalUser.get();
-            // Update user information
             user.setFirstName(updatedUser.getFirstName());
             user.setLastName(updatedUser.getLastName());
 
@@ -231,4 +223,5 @@ public class AdminUserController {
             }
         }
     }
+
 }

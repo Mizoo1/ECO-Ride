@@ -18,21 +18,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter
+{
     private final AppUserService appUserService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
     private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
-
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception
+    {
         http
                 .csrf().disable()
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v*/registration/**", "/contact", "/reservierung", "/index").permitAll()
+                .antMatchers("/api/v*/registration/**", "/contact", "/reservierung", "/index")
+                .permitAll()
                 .antMatchers("/admin/login").permitAll()
                 .antMatchers("/admin/users").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
@@ -50,34 +51,37 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .exceptionHandling()
-                .accessDeniedPage("/access-denied"); // Hinzufügen einer benutzerdefinierten Zugriffsverweigerungsseite
+                .accessDeniedPage("/access-denied");
     }
     @GetMapping("/access-denied")
-    public String showAccessDeniedPage() {
+    public String showAccessDeniedPage()
+    {
         return "access-denied";
     }
-
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/css/**", "/img/**", "/js/**", "/api/v*/registration/**","contact","reservierung","index");
+    public void configure(WebSecurity web) throws Exception
+    {
+        web.ignoring().antMatchers("/css/**", "/img/**",
+                "/js/**", "/api/v*/registration/**",
+                "contact","reservierung","index");
     }
-
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception
+    {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
-
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
+    public DaoAuthenticationProvider daoAuthenticationProvider()
+    {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(appUserService);
         return provider;
     }
-
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
+    public AuthenticationManager authenticationManagerBean() throws Exception
+    {
         return super.authenticationManagerBean();
     }
 }

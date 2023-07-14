@@ -8,10 +8,12 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
-public class MailConfig {
+public class MailConfig
+{
 
     @Bean
-    public JavaMailSender javaMailSender() {
+    public JavaMailSender javaMailSender()
+    {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
@@ -21,7 +23,6 @@ public class MailConfig {
         // Enable STARTTLS for the SMTP connection
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.smtp.starttls.enable", "true");
-
         return mailSender;
     }
 

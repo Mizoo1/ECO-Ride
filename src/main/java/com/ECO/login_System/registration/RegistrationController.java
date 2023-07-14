@@ -31,16 +31,12 @@ public class RegistrationController {
 
  */
 @GetMapping(path = "confirm")
-public ResponseEntity<String> confirm(@RequestParam("token") String token, Model model) {
-    String confirmationResult = registrationService.confirmToken(token);
-    // Create a Thymeleaf context and add necessary data
-    Context context = new Context();
-    context.setVariable("confirmationResult", confirmationResult);
-
-    // Render the HTML template
-    String renderedHtml = templateEngine.process("confirmed", context);
-
-    // Return the rendered HTML as a response with appropriate headers and status
-    return ResponseEntity.ok().body(renderedHtml);
-}
+public ResponseEntity<String> confirm(@RequestParam("token") String token)
+    {
+        String confirmationResult = registrationService.confirmToken(token);
+        Context context = new Context();
+        context.setVariable("confirmationResult", confirmationResult);
+        String renderedHtml = templateEngine.process("confirmed", context);
+        return ResponseEntity.ok().body(renderedHtml);
+    }
 }

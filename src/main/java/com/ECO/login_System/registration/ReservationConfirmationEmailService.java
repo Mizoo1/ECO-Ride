@@ -11,18 +11,14 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Optional;
 
 @Service
-public class ReservationConfirmationEmailService {
-
+public class ReservationConfirmationEmailService
+{
     private final JavaMailSender mailSender;
 
     @Value("${email.reservation.confirmation.subject}")
@@ -36,24 +32,25 @@ public class ReservationConfirmationEmailService {
 
     @Value("${email.reservation.completed.subject}")
     private String completedEmailSubject;
-
     @Autowired
-    public ReservationConfirmationEmailService(JavaMailSender mailSender) {
+    public ReservationConfirmationEmailService(JavaMailSender mailSender)
+    {
         this.mailSender = mailSender;
-
     }
 
-    public void sendReservationConfirmationEmail(String to, ReservationStatus status, AppUser appUser,Reservation reservation) {
-        try {
+    public void sendReservationConfirmationEmail(String to,
+                                                 ReservationStatus status,
+                                                 AppUser appUser,
+                                                 Reservation reservation
+    ) {
+        try
+        {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-
-            // Set the recipient, subject, and the sender
             helper.setTo(to);
             String emailSubject = getEmailSubjectByStatus(status);
             helper.setSubject(emailSubject);
             helper.setFrom("hello@eco-ride.com");
-
             String htmlTemplate = readHtmlTemplateByStatus(status);
             htmlTemplate = htmlTemplate.replace("{reservationDueDatum}", replaceNullWithEmptyString(reservation.getReservierungsDatum().toString()));
             htmlTemplate = htmlTemplate.replace("{reservationDueDatum}", replaceNullWithEmptyString(reservation.getReservierungsDatum().toString()));
@@ -73,26 +70,22 @@ public class ReservationConfirmationEmailService {
             htmlTemplate = htmlTemplate.replace("{reservationModelMotorad}", replaceNullWithEmptyString(reservation.getModelMotorad()));
             htmlTemplate = htmlTemplate.replace("{reservationMotoradMarke}", replaceNullWithEmptyString(reservation.getMotoradMarke()));
             htmlTemplate = htmlTemplate.replace("{reservationAnhaengerSize}", replaceNullWithEmptyString(reservation.getAnhaengerSize()));
-
             String userName = appUser.getUserName();
             String email = appUser.getEmail();
             htmlTemplate = htmlTemplate.replace("{userName}", replaceNullWithEmptyString(userName));
             htmlTemplate = htmlTemplate.replace("{email}", replaceNullWithEmptyString(email));
             helper.setText(htmlTemplate, true);
 
-            // Send the email
             mailSender.send(mimeMessage);
-        } catch (MessagingException e) {
-            // Handle the exception
+        } catch (MessagingException e)
+        {
             e.printStackTrace();
         }
     }
-
-
-
-
-    private String getEmailSubjectByStatus(ReservationStatus status) {
-        switch (status) {
+    private String getEmailSubjectByStatus(ReservationStatus status)
+    {
+        switch (status)
+        {
             case RESERVED:
                 return confirmationEmailSubject;
             case CANCELLED:
@@ -105,30 +98,29 @@ public class ReservationConfirmationEmailService {
                 return "";
         }
     }
-
-    private String readHtmlTemplateByStatus(ReservationStatus status) {
-        try {
-            // Read the HTML template file based on the status
+    private String readHtmlTemplateByStatus(ReservationStatus status)
+    {
+        try
+        {
             String templateFileName = getTemplateFileNameByStatus(status);
             Resource resource = new ClassPathResource("templates/" + templateFileName);
             InputStream inputStream = resource.getInputStream();
             byte[] htmlBytes = StreamUtils.copyToByteArray(inputStream);
-
-            // Convert the bytes to a string using UTF-8 encoding
             return new String(htmlBytes, StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            // Handle the exception
+        } catch (Exception e)
+        {
             e.printStackTrace();
-            return ""; // Return an empty string if the template cannot be read
+            return "";
         }
     }
-
-    private String replaceNullWithEmptyString(String value) {
+    private String replaceNullWithEmptyString(String value)
+    {
         return value != null ? value : "";
     }
-
-    private String getTemplateFileNameByStatus(ReservationStatus status) {
-        switch (status) {
+    private String getTemplateFileNameByStatus(ReservationStatus status)
+    {
+        switch (status)
+        {
             case RESERVED:
                 return "reservation_confirmation.html";
             case CANCELLED:

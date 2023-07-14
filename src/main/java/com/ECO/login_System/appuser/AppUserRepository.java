@@ -12,51 +12,40 @@ import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface AppUserRepository extends JpaRepository<AppUser, Long> {
-
+public interface AppUserRepository extends JpaRepository<AppUser, Long>
+{
     Optional<AppUser> findByEmail(String email);
-
     @Query("SELECT DISTINCT u.tarif FROM AppUser u")
     List<String> getAllTarifTypes();
-
     @Query("SELECT COUNT(u) FROM AppUser u WHERE u.tarif = ?1")
     int getUserCountByTarif(String tarif);
-
     @Query("SELECT u FROM AppUser u WHERE u.id = ?1 OR u.firstName LIKE %?1% OR u.lastName LIKE %?1% OR u.email LIKE %?1% OR u.tarif LIKE %?1%")
     List<AppUser> searchUsers(String keyword);
-
     @Query("SELECT u FROM AppUser u WHERE (u.id = :id OR LOWER(u.firstName) LIKE %:keyword% OR LOWER(u.lastName) LIKE %:keyword% OR LOWER(u.email) LIKE %:keyword% OR LOWER(u.tarif) LIKE %:keyword%)")
     List<AppUser> searchUsersByCriteria(@Param("keyword") String keyword, @Param("id") Long id);
 
-
     @Query("SELECT u.tarif, COUNT(u.tarif) FROM AppUser u GROUP BY u.tarif")
     List<Object[]> countBookingsByTarif();
-
     @Query("SELECT u.payMethod, COUNT(u.payMethod) FROM AppUser u GROUP BY u.payMethod")
     List<Object[]> countPaymentMethods();
-
     @Query("SELECT EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM TO_DATE(u.geburtsdatum, 'YYYY-MM-DD')), COUNT(u) " +
             "FROM AppUser u " +
             "GROUP BY EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM TO_DATE(u.geburtsdatum, 'YYYY-MM-DD'))")
     List<Object[]> calculateAgeStatistics();
-
     @Query("SELECT u.operatingSystem, COUNT(u.operatingSystem) FROM AppUser u GROUP BY u.operatingSystem")
     List<Object[]> countOperatingSystems();
     @Query("SELECT r.fahrzeug, COUNT(r.fahrzeug) FROM Reservation r GROUP BY r.fahrzeug")
     List<Object[]> countMostBookedVehicles();
     @Query("SELECT r.fahrzeug, COUNT(r.fahrzeug) FROM Reservation r GROUP BY r.fahrzeug")
     List<Object[]> countVehicleTypes();
-
     @Transactional
     @Modifying
     @Query("UPDATE AppUser a SET a.enabled = TRUE WHERE a.email = ?1")
     int enableAppUser(String email);
-
     @Transactional
     @Modifying
     @Query("DELETE FROM ConfirmationToken c WHERE c.appUser.id = ?1")
     void deleteConfirmationTokenByUserId(Long userId);
-
     List<AppUser> findByUserName(String userName);
 
 }

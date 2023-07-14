@@ -14,11 +14,11 @@ import java.util.Optional;
 
 
 @RestController
-public class UserController {
-
+public class UserController
+{
     private final AppUserService appUserService;
-    private AppUserRepository appUserRepository;
-    private RegistrationService registrationService;
+    private final AppUserRepository appUserRepository;
+    private final RegistrationService registrationService;
     @Autowired
     public UserController(AppUserService appUserService,AppUserRepository appUserRepository,RegistrationService registrationService) {
         this.appUserService = appUserService;
@@ -32,7 +32,7 @@ public class UserController {
         String operatingSystem = registrationService.getOperatingSystemFromUserAgent(userAgent);
         appUser.setOperatingSystem(operatingSystem);
         appUserService.updateAppUser(id, appUser);
-        return "redirect:/user/{id}";
+        return "redirect:/user/" +id;
     }
     @DeleteMapping("/deleteUser/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") Long id) {

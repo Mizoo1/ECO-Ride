@@ -1,6 +1,5 @@
 package com.ECO.login_System.registration;
 
-
 import com.ECO.login_System.appuser.AppUser;
 import com.ECO.login_System.appuser.AppUserRepository;
 import com.ECO.login_System.appuser.AppUserRole;
@@ -12,16 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
-
-
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.Scanner;
 
 @Service
 //@AllArgsConstructor
-public class RegistrationService {
-
+public class RegistrationService
+{
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
@@ -36,16 +32,14 @@ public class RegistrationService {
         this.emailSender = emailSender;
         this.appUserRepository = appUserRepository;
     }
-
-
-
-    public String registerUser(RegistrationRequest request, HttpServletRequest servletRequest) {
+    public String registerUser(RegistrationRequest request, HttpServletRequest servletRequest)
+    {
         boolean isValidEmail = emailValidator.test(request.getEmail());
 
-        if (!isValidEmail) {
+        if (!isValidEmail)
+        {
             throw new IllegalStateException("email not valid");
         }
-
         AppUser appUser = new AppUser(
                 request.getUserName(),
                 request.getFirstName(),
@@ -107,13 +101,14 @@ public class RegistrationService {
         return token;
     }
 
-    public String registerAdmin(RegistrationRequest request, HttpServletRequest servletRequest) {
+    public String registerAdmin(RegistrationRequest request, HttpServletRequest servletRequest)
+    {
         boolean isValidEmail = emailValidator.test(request.getEmail());
 
-        if (!isValidEmail) {
+        if (!isValidEmail)
+        {
             throw new IllegalStateException("email not valid");
         }
-
         AppUser appUser = new AppUser(
 
                 request.getUserName(),
@@ -128,11 +123,9 @@ public class RegistrationService {
                 request.getTelefonnummer(),
                 request.getGeburtsdatum(),
                 AppUserRole.ADMIN
-
         );
 
         String token = appUserService.signUpUser(appUser);
-
         String serverUrl = servletRequest.getRequestURL().toString();
         String link = serverUrl + "/confirm?token=" + token;
 
@@ -158,43 +151,63 @@ public class RegistrationService {
     }
 
     @Transactional
-    public String confirmToken(String token) {
+    public String confirmToken(String token)
+    {
         ConfirmationToken confirmationToken = confirmationTokenService
                 .getToken(token)
                 .orElseThrow(() ->
                         new IllegalStateException("token not found"));
 
-        if (confirmationToken.getConfirmedAt() != null) {
+        if (confirmationToken.getConfirmedAt() != null)
+        {
             throw new IllegalStateException("email already confirmed");
         }
-
         LocalDateTime expiredAt = confirmationToken.getExpiresAt();
-
-        if (expiredAt.isBefore(LocalDateTime.now())) {
+        if (expiredAt.isBefore(LocalDateTime.now()))
+        {
             throw new IllegalStateException("token expired");
         }
-
         confirmationTokenService.setConfirmedAt(token);
         appUserService.enableAppUser(
                 confirmationToken.getAppUser().getEmail());
         return "confirmed";
     }
-    private String buildEmail(String userName, String name, String lastName, String email, String password, String titel, String adresse, String plz, String stadt, String telefonnummer, String geburtsdatum, String geburtsort, String fuehrerscheinnummer, String erteilungsdatum, String ablaufdatum, String ausstellungsort, String personalausweisnummer, String reisepassnummer, String tarif, String link, String payMethod) {
+    private String buildEmail(String userName,
+                              String name,
+                              String lastName,
+                              String email,
+                              String password,
+                              String titel,
+                              String adresse,
+                              String plz,
+                              String stadt,
+                              String telefonnummer,
+                              String geburtsdatum,
+                              String geburtsort,
+                              String fuehrerscheinnummer,
+                              String erteilungsdatum,
+                              String ablaufdatum,
+                              String ausstellungsort,
+                              String personalausweisnummer,
+                              String reisepassnummer,
+                              String tarif,
+                              String link,
+                              String payMethod)
+    {
         String htmlTemplate = "";
         try {
             InputStream inputStream = getClass().getResourceAsStream("/templates/email_template.html");
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null)
+            {
                 htmlTemplate += line;
             }
-
             reader.close();
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
-
         htmlTemplate = htmlTemplate.replace("{{name}}", name);
         htmlTemplate = htmlTemplate.replace("{{link}}", link);
         htmlTemplate = htmlTemplate.replace("{{Email}}", email);
@@ -218,23 +231,34 @@ public class RegistrationService {
 
         return htmlTemplate;
     }
-    private String buildEmail(String userName, String name, String lastName, String email, String password, String titel, String adresse, String plz, String stadt, String telefonnummer,String geburtsdatum, String link) {
-        // HTML-Datei einlesen
+    private String buildEmail(String userName,
+                              String name,
+                              String lastName,
+                              String email,
+                              String password,
+                              String titel,
+                              String adresse,
+                              String plz,
+                              String stadt,
+                              String telefonnummer,
+                              String geburtsdatum,
+                              String link)
+    {
         String htmlTemplate = "";
         try {
             InputStream inputStream = getClass().getResourceAsStream("/templates/email_template.html");
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null)
+            {
                 htmlTemplate += line;
             }
-
             reader.close();
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
-
         htmlTemplate = htmlTemplate.replace("{{name}}", name);
         htmlTemplate = htmlTemplate.replace("{{link}}", link);
         htmlTemplate = htmlTemplate.replace("{{Email}}", email);
@@ -246,31 +270,36 @@ public class RegistrationService {
         htmlTemplate = htmlTemplate.replace("{{Titel}}", titel);
         htmlTemplate = htmlTemplate.replace("{{LastName}}", lastName);
         htmlTemplate = htmlTemplate.replace("{{userName}}", userName);
-
-
         return htmlTemplate;
     }
-    public String getOperatingSystemFromServletRequest(HttpServletRequest servletRequest) {
+    public String getOperatingSystemFromServletRequest(HttpServletRequest servletRequest)
+    {
         String userAgent = servletRequest.getHeader("User-Agent");
         return getOperatingSystemFromUserAgent(userAgent);
     }
-    public String getOperatingSystemFromUserAgent(String userAgent) {
+    public String getOperatingSystemFromUserAgent(String userAgent)
+    {
         String operatingSystem = "Unknown";
 
-        if (userAgent != null) {
-            if (userAgent.contains("Windows")) {
+        if (userAgent != null)
+        {
+            if (userAgent.contains("Windows"))
+            {
                 operatingSystem = "Windows";
-            } else if (userAgent.contains("Mac")) {
+            } else if (userAgent.contains("Mac"))
+            {
                 operatingSystem = "Mac";
-            } else if (userAgent.contains("Linux")) {
+            } else if (userAgent.contains("Linux"))
+            {
                 operatingSystem = "Linux";
-            } else if (userAgent.contains("Android")) {
+            } else if (userAgent.contains("Android"))
+            {
                 operatingSystem = "Android";
-            } else if (userAgent.contains("iOS")) {
+            } else if (userAgent.contains("iOS"))
+            {
                 operatingSystem = "iOS";
             }
         }
-
         return operatingSystem;
     }
 }
