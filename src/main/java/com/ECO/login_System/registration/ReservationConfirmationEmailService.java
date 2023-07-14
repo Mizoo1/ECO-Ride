@@ -37,7 +37,14 @@ public class ReservationConfirmationEmailService
     {
         this.mailSender = mailSender;
     }
-
+    /**
+     * Sendet eine Reservierungsbestätigungs-E-Mail an den Empfänger.
+     *
+     * @param to          Die E-Mail-Adresse des Empfängers.
+     * @param status      Der Status der Reservierung.
+     * @param appUser     Der AppUser, der die Reservierung vorgenommen hat.
+     * @param reservation Die Reservierung.
+     */
     public void sendReservationConfirmationEmail(String to,
                                                  ReservationStatus status,
                                                  AppUser appUser,

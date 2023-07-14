@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Repository-Schnittstelle für den Zugriff auf die Datenbank für die Entität AppUser.
+ */
 @Repository
 @Transactional(readOnly = true)
 public interface AppUserRepository extends JpaRepository<AppUser, Long>

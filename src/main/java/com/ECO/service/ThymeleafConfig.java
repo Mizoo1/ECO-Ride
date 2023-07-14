@@ -10,6 +10,10 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 @Configuration
 public class ThymeleafConfig implements WebMvcConfigurer
 {
+    /** Die Annotation '@Bean' wird auf einer Methode verwendet,
+     *  um anzugeben, dass ihre Rückgabe ein Bean ist,
+     * das im Spring-Anwendungskontext verwaltet werden soll.
+     */
     @Bean
     public ClassLoaderTemplateResolver templateResolver()
     {

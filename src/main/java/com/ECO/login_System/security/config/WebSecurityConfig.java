@@ -24,6 +24,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
     private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
+    /**
+     * Konfiguriert die Sicherheitseinstellungen für HTTP-Anfragen.
+     *
+     * @param http Der HttpSecurity-Objekt für die Konfiguration.
+     * @throws Exception Bei Fehlern während der Konfiguration.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
@@ -58,6 +64,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     {
         return "access-denied";
     }
+    /**
+     * Konfiguriert das Ignorieren bestimmter Ressourcen.
+     *
+     * @param web Das WebSecurity-Objekt für die Konfiguration.
+     * @throws Exception Bei Fehlern während der Konfiguration.
+     */
     @Override
     public void configure(WebSecurity web) throws Exception
     {
@@ -65,11 +77,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 "/js/**", "/api/v*/registration/**",
                 "contact","reservierung","index");
     }
+    /**
+     * Konfiguriert den AuthenticationManagerBuilder mit dem AuthenticationProvider.
+     *
+     * @param auth Der AuthenticationManagerBuilder.
+     * @throws Exception Bei Fehlern während der Konfiguration.
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
+    /**
+     * Erstellt den DaoAuthenticationProvider.
+     *
+     * @return Der DaoAuthenticationProvider.
+     */
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider()
     {

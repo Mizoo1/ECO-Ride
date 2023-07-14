@@ -32,6 +32,14 @@ public class RegistrationService
         this.emailSender = emailSender;
         this.appUserRepository = appUserRepository;
     }
+    /**
+     * Registriert einen neuen Benutzer.
+     *
+     * @param request         Das Registrierungsanforderungsobjekt.
+     * @param servletRequest  Das HttpServletRequest-Objekt.
+     * @return Der Bestätigungstoken für die Registrierung.
+     * @throws IllegalStateException Falls die E-Mail-Adresse ungültig ist.
+     */
     public String registerUser(RegistrationRequest request, HttpServletRequest servletRequest)
     {
         boolean isValidEmail = emailValidator.test(request.getEmail());
@@ -100,7 +108,14 @@ public class RegistrationService
 
         return token;
     }
-
+    /**
+     * Registriert einen neuen Administrator.
+     *
+     * @param request         Das Registrierungsanforderungsobjekt.
+     * @param servletRequest  Das HttpServletRequest-Objekt.
+     * @return Der Bestätigungstoken für die Registrierung.
+     * @throws IllegalStateException Falls die E-Mail-Adresse ungültig ist.
+     */
     public String registerAdmin(RegistrationRequest request, HttpServletRequest servletRequest)
     {
         boolean isValidEmail = emailValidator.test(request.getEmail());
@@ -149,10 +164,18 @@ public class RegistrationService
         );
         return token;
     }
-
+    /**
+     * Bestätigt den Registrierungstoken.
+     *
+     * @param token Der Registrierungstoken.
+     * @return Die Bestätigungsmeldung.
+     * @throws IllegalStateException Falls der Token nicht gefunden wurde, bereits bestätigt ist oder abgelaufen ist.
+     */
     @Transactional
     public String confirmToken(String token)
     {
+        // Holt den ConfirmationToken anhand des Tokens ab oder wirft eine Ausnahme,
+        // falls der Token nicht gefunden wird
         ConfirmationToken confirmationToken = confirmationTokenService
                 .getToken(token)
                 .orElseThrow(() ->
@@ -272,11 +295,23 @@ public class RegistrationService
         htmlTemplate = htmlTemplate.replace("{{userName}}", userName);
         return htmlTemplate;
     }
+    /**
+     * Extrahiert das Betriebssystem aus dem HttpServletRequest.
+     *
+     * @param servletRequest Das HttpServletRequest-Objekt.
+     * @return Das extrahierte Betriebssystem.
+     */
     public String getOperatingSystemFromServletRequest(HttpServletRequest servletRequest)
     {
         String userAgent = servletRequest.getHeader("User-Agent");
         return getOperatingSystemFromUserAgent(userAgent);
     }
+    /**
+     * Extrahiert das Betriebssystem aus dem User-Agent-String.
+     *
+     * @param userAgent Der User-Agent-String.
+     * @return Das extrahierte Betriebssystem.
+     */
     public String getOperatingSystemFromUserAgent(String userAgent)
     {
         String operatingSystem = "Unknown";

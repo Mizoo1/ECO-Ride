@@ -1,6 +1,7 @@
 package com.ECO.login_System.appuser;
 
-public enum AppUserRole {
+public enum AppUserRole
+{
     USER,
     ADMIN
 }

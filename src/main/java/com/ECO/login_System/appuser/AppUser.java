@@ -63,7 +63,7 @@ public class AppUser implements UserDetails
     private Boolean enabled = false;
 
 
-
+    //Konstruktor für die Erstellung eines AppUsers mit allen erforderlichen Feldern.
     public AppUser(String userName,
                    String firstName,
                    String lastName,
@@ -110,7 +110,7 @@ public class AppUser implements UserDetails
         this.payMethod = payMethod;
         this.operatingSystem = operatingSystem;
     }
-
+    //Konstruktor für die Erstellung eines AppUsers mit den minimal erforderlichen Feldern.
     public AppUser(String userName,
                    String firstName,
                    String lastName,
@@ -138,6 +138,11 @@ public class AppUser implements UserDetails
         this.appUserRole = appUserRole;
 
     }
+    /**
+     * Gibt die Berechtigungen (Rollen) des AppUsers zurück.
+     *
+     * @return Die Berechtigungen des AppUsers.
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
@@ -234,7 +239,8 @@ public class AppUser implements UserDetails
     public boolean isEnabled() {
         return enabled;
     }
-    public void setOperatingSystem(String operatingSystem) {
+    public void setOperatingSystem(String operatingSystem)
+    {
 
         this.operatingSystem = operatingSystem;
     }

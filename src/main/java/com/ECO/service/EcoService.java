@@ -52,9 +52,12 @@ public class EcoService
     }
     public ModelAndView getContact(Authentication authentication)
     {
+        // Extrahiere den authentifizierten Benutzer aus der Authentifizierungsinformation
         AppUser userDetails = (AppUser) authentication.getPrincipal();
         ModelAndView modelAndView = new ModelAndView("contact");
         String userName = userDetails.getUserName();
+        // Füge den Benutzernamen und die Benutzerdetails zum ModelAndView hinzu,
+        // um sie an die Kontaktseite zu übergeben
         modelAndView.addObject("userName", userName);
         modelAndView.addObject("userDetails", userDetails);
         return modelAndView;

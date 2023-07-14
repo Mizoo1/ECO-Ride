@@ -20,6 +20,10 @@ public class MyErrorControllerTest
 {
     @Autowired
     private MockMvc mockMvc;
+    /**
+     * Testet die handleError-Methode des MyErrorController. Die Annotation @WithMockUser
+     * wird verwendet, um einen simulierten Benutzer für den Test bereitzustellen.
+     */
     @Test
     @WithMockUser
     public void testHandleError() throws Exception {

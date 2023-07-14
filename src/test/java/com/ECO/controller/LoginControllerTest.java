@@ -17,7 +17,10 @@ public class LoginControllerTest {
 
     @InjectMocks
     private LoginController loginController;
-
+    /**
+     * Setup-Methode, die vor jedem Test ausgeführt wird. Initialisiert die Mocks und
+     * konfiguriert das MockMvc-Objekt.
+     */
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -29,14 +32,24 @@ public class LoginControllerTest {
                 .setViewResolvers(viewResolver)
                 .build();
     }
+    /**
+     * Testet die showLogin-Methode des LoginController. Erwartet, dass der Status der
+     * Antwort OK ist und dass die Antwortansicht "login" ist.
+     */
     @Test
-    public void testShowLogin() throws Exception {
+    public void testShowLogin() throws Exception
+    {
         mockMvc.perform(get("/login"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("login"));
     }
+    /**
+     * Testet die showAdminLogin-Methode des LoginController. Erwartet, dass der Status
+     * der Antwort OK ist und dass die Antwortansicht "login-admin" ist.
+     */
     @Test
-    public void testShowAdminLogin() throws Exception {
+    public void testShowAdminLogin() throws Exception
+    {
         mockMvc.perform(get("/admin/login"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("login-admin"));

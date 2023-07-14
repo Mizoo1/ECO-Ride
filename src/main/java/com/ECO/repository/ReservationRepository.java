@@ -17,8 +17,19 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>
     List<Reservation> findAllByAppUserAndStatusNot(AppUser appUser, ReservationStatus status);
     List<Reservation> findAllByStatus(ReservationStatus status);
     List<Reservation> findByAppUser(AppUser appUser);
+    /**
+     * Zählt die Anzahl der Benutzer pro Stadt.
+     *
+     * @return Eine Liste von Objekten, bestehend aus Stadt und Anzahl der Benutzer in dieser Stadt.
+     */
     @Query("SELECT a.stadt, COUNT(a) FROM AppUser a GROUP BY a.stadt")
     List<Object[]> countLocations();
+    /**
+     * Zählt die Anzahl der Benutzer pro Stadt, Geburtsort und Zahlungsmethode.
+     *
+     * @return Eine Liste von Objekten, bestehend aus Stadt, Geburtsort,
+     * Zahlungsmethode und Anzahl der Benutzer für jede Kombination.
+     */
     @Query("SELECT a.stadt, a.geburtsort, a.payMethod, COUNT(a) FROM AppUser a GROUP BY a.stadt, a.geburtsort, a.payMethod")
     List<Object[]> countLocationPaymentMethod();
     @Query("SELECT r.appUser.payMethod, r.reservierungsDatum, COUNT(r) " +

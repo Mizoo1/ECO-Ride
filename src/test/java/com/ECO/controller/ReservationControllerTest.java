@@ -33,7 +33,11 @@ public class ReservationControllerTest {
 
     @InjectMocks
     private ReservationController reservationController;
-
+    /**
+     * Testet die Methode submitReservationForm() des ReservationController.
+     * Diese Methode überprüft, ob die Methode korrekt umleitet und ob der ReservationService
+     * korrekt aufgerufen wird.
+     */
     @Test
     public void testSubmitReservationForm()
     {
@@ -51,6 +55,11 @@ public class ReservationControllerTest {
         assertEquals("redirect:/reservierung/confirmation", result);
         verify(reservationService, times(1)).processReservation(any(Reservation.class));
     }
+    /**
+     * Testet die Methode cancelReservation() des ReservationController.
+     * Diese Methode überprüft, ob die Methode korrekt umleitet und ob der ReservationService
+     * korrekt aufgerufen wird.
+     */
     @Test
     public void testCancelReservation()
     {

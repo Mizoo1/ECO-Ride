@@ -32,7 +32,11 @@ public class UserControllerTest
     {
         MockitoAnnotations.initMocks(this);
     }
-
+    /**
+     * Testet die Methode updateUser() des UserController.
+     * Diese Methode überprüft, ob die Methode korrekt umleitet und ob die Dienste
+     * korrekt aufgerufen werden.
+     */
     @Test
     public void testUpdateUser()
     {
@@ -45,7 +49,11 @@ public class UserControllerTest
         String response = userController.updateUser(id, user, request);
         assertEquals("redirect:/user/1", response);
     }
-
+    /**
+     * Testet die Methode deleteUser() des UserController.
+     * Diese Methode überprüft, ob die Methode korrekt ausgeführt wird und ob
+     * das AppUserRepository korrekt aufgerufen wird.
+     */
     @Test
     public void testDeleteUser()
     {

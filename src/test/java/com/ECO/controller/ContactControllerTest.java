@@ -31,7 +31,10 @@ public class ContactControllerTest {
     {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
-
+    /**Test prüft, ob das Senden eines POST-Anforderung
+     * an die URL "/api/v/registration/submit_form"
+     * ohne Anmeldung richtig umgeleitet wird.
+     * */
     @Test
     public void submitFormWithoutLoginTest() throws Exception
     {
@@ -42,7 +45,9 @@ public class ContactControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/api/v/registration/contact?success"));
     }
-
+    /**Test prüft, ob das Senden eines POST-Anforderung
+     * an die URL "/submit_form" mit Anmeldung richtig umgeleitet wird.
+     * */
     @Test
     public void submitFormWithLoginTest() throws Exception
     {

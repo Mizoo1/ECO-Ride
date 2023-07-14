@@ -119,6 +119,11 @@ class HomeControllerTest
         assertEquals(expectedModelAndView.getModel().
                 get("userDetails"), response.getModel().get("userDetails"));
     }
+    /**
+     * Testet die getServices-Methode des HomeController.
+     * Stellt sicher, dass die Methode den erwarteten String zurückgibt,
+     * wenn ein Nutzer nicht angemeldet ist.
+     */
     @Test
     public void testGetServices()
     {
@@ -126,6 +131,11 @@ class HomeControllerTest
         String response = homeController.getServices();
         assertEquals("serviceWithoutLogin", response);
     }
+    /**
+     * Testet die getServicesWithoutLogin-Methode des HomeController.
+     * Stellt sicher, dass die Methode ein ModelAndView-Objekt mit
+     * den richtigen Daten zurückgibt.
+     */
     @Test
     public void testGetServicesWithoutLogin()
     {
@@ -139,6 +149,11 @@ class HomeControllerTest
         assertEquals(expectedModelAndView.getViewName(), response.getViewName());
         assertEquals(expectedModelAndView.getModel().get("userName"), response.getModel().get("userName"));
     }
+    /**
+     * Testet die getAbout-Methode des HomeController.
+     * Stellt sicher, dass die Methode den erwarteten String zurückgibt,
+     * wenn ein Nutzer nicht angemeldet ist.
+     */
     @Test
     public void testGetAbout()
     {
