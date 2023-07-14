@@ -13,12 +13,4 @@ public class EcoRepository {
 
 
 
-    public String getAboutWithoutLogin() {
-        return "aboutWithoutLogin";
-    }
-
-
-    public String getServicesWithoutLogin() {
-        return "serviceWithoutLogin";
-    }
 }

@@ -250,7 +250,7 @@ public class RegistrationService {
 
         return htmlTemplate;
     }
-    private String getOperatingSystemFromServletRequest(HttpServletRequest servletRequest) {
+    public String getOperatingSystemFromServletRequest(HttpServletRequest servletRequest) {
         String userAgent = servletRequest.getHeader("User-Agent");
         return getOperatingSystemFromUserAgent(userAgent);
     }

@@ -76,8 +76,9 @@ public class EcoService {
         modelAndView.addObject("userName", userName);
         return modelAndView;
     }
-    public String getAboutWithoutLogin() {
-        return ecoRepository.getAboutWithoutLogin();
+    public String getAboutWithoutLogin()
+    {
+        return "aboutWithoutLogin";
     }
 
     public ModelAndView getServices(Authentication authentication) {
@@ -87,8 +88,9 @@ public class EcoService {
         modelAndView.addObject("userName", userName);
         return modelAndView;
     }
-    public String getServicesWithoutLogin() {
-        return ecoRepository.getServicesWithoutLogin();
+    public String getServicesWithoutLogin()
+    {
+        return "serviceWithoutLogin";
     }
 
 
