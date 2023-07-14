@@ -25,7 +25,8 @@ public class EcoService {
         modelAndView.addObject("userName", userName);
         return modelAndView;
     }
-    public ModelAndView zeigeProfil(Authentication authentication) {
+    public ModelAndView zeigeProfil(Authentication authentication)
+    {
         AppUser userDetails = (AppUser) authentication.getPrincipal();
         ModelAndView modelAndView = new ModelAndView("profile");
         String userName = userDetails.getUserName();
@@ -34,14 +35,14 @@ public class EcoService {
         return modelAndView;
     }
     public String getHomeWithoutLogin() {
-        return ecoRepository.getHomeWithoutLogin();
+        return "indexWithoutLogin";
     }
 
     public String getRegister() {
-        return ecoRepository.getRegister();
+        return "register";
     }
     public String getRegisterAdmin() {
-        return ecoRepository.getRegisterAdmin();
+        return "registerAdmin";
     }
 
     public String getLogout() {
@@ -63,8 +64,9 @@ public class EcoService {
         modelAndView.addObject("userName", userName);
         return modelAndView;
     }
-    public String getContactWithoutLogin() {
-        return ecoRepository.getContactWithoutLogin();
+    public String getContactWithoutLogin()
+    {
+        return "contactWithoutLogin";
     }
 
     public ModelAndView getAbout(Authentication authentication) {
