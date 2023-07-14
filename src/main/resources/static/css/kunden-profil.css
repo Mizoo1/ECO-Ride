@@ -1,0 +1,37 @@
+body {
+    background: linear-gradient(90deg, rgb(231, 240, 232) 0%, rgb(175, 184, 205) 0%, rgb(184, 186, 152) 100%);
+}
+
+.navbar {
+    background-color: #343a40;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.navbar-brand:hover {
+    color: #fff;
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #fff;
+}
+.footer {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+}
+.footer a {
+    color: #fff;
+}
+.footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}

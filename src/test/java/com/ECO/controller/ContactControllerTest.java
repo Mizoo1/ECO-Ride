@@ -22,8 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ContactControllerTest {
-
+public class ContactControllerTest
+{
     private MockMvc mockMvc;
 
     @BeforeEach
@@ -31,7 +31,6 @@ public class ContactControllerTest {
     {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
-
     @Test
     public void submitFormWithoutLoginTest() throws Exception
     {

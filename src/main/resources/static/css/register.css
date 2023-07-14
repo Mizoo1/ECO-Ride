@@ -1,54 +1,88 @@
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #f2f2f2;
-  font-family: Arial, sans-serif;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "neue-schriftart", Helvetica, sans-serif;
+}
+.parallax {
+  background-image: url("/img/1_1_1.jpg");
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: calc(100% - 54px);
 }
 
+.parallax h1 {
+  color: #ffffff;
+  font-family: 'Roboto Condensed', Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  text-align: center;
+  animation: fadeIn_h 2s ease-in-out;
+}
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  flex: 1;
+  min-height: calc(100% - 54px);
+  overflow-y: auto;
 }
 
-.content {
-  flex: 1;
-}
-
-.slider-card {
-  display: none;
-}
-
-.slider-card.active {
-  display: block;
+.text-white, .text-center {
+  color: #ffffff;
 }
 
 .card {
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  background: rgba(64, 64, 64, 0.5);
+  border: 2px solid rgba(64, 64, 64, 0.5);
 }
 
 .card-header {
-  background-color: #0046be;
   color: #ffffff;
-  border-radius: 10px 10px 0 0;
-  padding: 10px 20px;
-}
-
-.form-label {
   font-weight: bold;
+  font-size: 24px;
 }
 
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+.card-body {
+  color: #f1f1f1;
 }
 
+.btn-primary {
+  background-color: green;
+  color: white;
+}
+
+
+
+@keyframes fadeIn_h {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 .footer {
-  margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 54px;
+  width: 100%;
+  background-color: #fff;
+  color: #808080;
+  text-align: center;
+}
+
+.footer span {
+  color: #808080;
+}
+
+.footer a {
+  color: #808080;
+}
+
+.footer a:hover {
+  color: #808080;
+  text-decoration: underline;
 }

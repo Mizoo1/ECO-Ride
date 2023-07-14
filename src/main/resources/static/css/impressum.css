@@ -1,0 +1,71 @@
+body {
+    background-color: #f8f9fa;
+}
+
+h1, h2 {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.info {
+    margin-bottom: 20px;
+}
+
+.info p {
+    margin: 0;
+    color: #666;
+}
+
+.disclaimer {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.disclaimer p {
+    color: #000;
+    line-height: 1.6;
+}
+
+.disclaimer p.warning {
+    color: red;
+    font-style: italic;
+}
+.fade-in {
+    opacity: 0;
+    animation: fadeInAnimation 2s ease-in-out forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.blink {
+    animation: blinkAnimation 1s infinite;
+}
+
+@keyframes blinkAnimation {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+.content-wrapper {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.footer {
+    margin-top: auto;
+}

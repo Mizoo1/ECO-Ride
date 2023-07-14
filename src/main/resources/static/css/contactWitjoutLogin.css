@@ -1,0 +1,85 @@
+.main-content {
+    background-image: url("/img/1_1_1.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+form[action='/api/v/registration/submit_form'] {
+    max-width: 800px;
+    margin-bottom: 100px;
+}
+
+.main-content h2, .form-group label, .alert {
+    color: #ffffff;
+}
+
+form {
+    background: rgba(64, 64, 64, 0.5);
+    border: 2px solid rgba(64, 64, 64, 0.5);
+    padding: 20px;
+}
+
+#map {
+    height: 550px;
+    width: 800px;
+    border: 1px solid #ccc;
+}
+
+#map-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    max-width: 800px;
+}
+
+h1 {
+    font-family: 'Roboto Condensed', Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    text-align: center;
+    animation: fadeIn_h 2s ease-in-out;
+}
+
+h2 {
+    font-family: 'Roboto Condensed', Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    text-align: center;
+    animation: fadeIn_h 2s ease-in-out;
+}
+
+textarea#message {
+    height: 200px;
+}
+
+@keyframes fadeIn_h {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    #findNearestContainer {
+        width: 100%;
+        text-align: center;
+    }
+
+    form[action='/api/v/registration/submit_form'],
+    #map-container {
+        max-width: 100%;
+    }
+}

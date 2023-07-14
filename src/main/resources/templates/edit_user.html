@@ -5,68 +5,8 @@
   <meta charset="UTF-8">
   <title>Edit User</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    body {
-      background: linear-gradient(90deg, rgb(231, 240, 232) 0%, rgb(175, 184, 205) 0%, rgb(184, 186, 152) 100%);
-    }
-
-    .navbar {
-      background-color: #343a40;
-    }
-
-    .navbar-brand {
-      color: #fff;
-      font-weight: bold;
-      font-size: 24px;
-    }
-
-    .navbar-brand:hover {
-      color: #fff;
-    }
-
-    .navbar-nav .nav-link {
-      color: #fff;
-    }
-
-    .navbar-nav .nav-link:hover {
-      color: #fff;
-    }
-
-    .footer {
-      background-color: #343a40;
-      color: #fff;
-      text-align: center;
-      width: 100%;
-    }
-
-    .footer a {
-      color: #fff;
-    }
-
-    .footer a:hover {
-      color: #fff;
-      text-decoration: underline;
-    }
-
-    .footer {
-      background-color: #343a40;
-      color: #fff;
-      text-align: center;
-      width: 100%;
-      position: fixed;
-      bottom: 0;
-      left: 0px;
-      padding: 0 300px;
-    }
-    .my-form {
-      margin-bottom: 70px;
-    }
-    .table {
-      margin-bottom: 20px;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/edit_user.css">
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg">
   <a class="navbar-brand" href="#">ECO-RIDE</a>
@@ -90,13 +30,11 @@
 <div class="container text-white">
   <main class="container">
     <h1 class="text-center mt-4">Edit User</h1>
-
     <form class="my-form" th:action="@{/admin/users/{id}/edit(id=${user.id})}" method="post">
       <div class="form-check mb-3">
         <input class="form-check-input" type="checkbox" id="enabled" th:name="enabled" th:checked="${user.enabled}" style="color: red;">
         <label class="form-check-label" for="enabled" style="color: red;">Entsperrt</label>
       </div>
-
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
           <thead class="thead-dark">
@@ -185,9 +123,7 @@
           </tbody>
         </table>
       </div>
-
       <button type="submit" class="btn btn-primary" style="margin-bottom: 30px;">Speichern</button>
-
     </form>
   </main>
   <footer class="footer mt-auto py-3" style="position: fixed; bottom: 0; width: 100%;">
@@ -199,5 +135,4 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>

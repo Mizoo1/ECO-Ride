@@ -5,47 +5,14 @@
   <title>Anmelden als Admin</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/login.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="icon" href="/img/Logo.png" type="image/png">
-  <style>
-    html, body {
-      height: 100%;
-    }
-
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .content {
-      flex-grow: 1;
-    }
-
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-
-    .logo {
-      width: 200px; /* adjust the width as needed */
-    }
-    .btn-animate {
-      transition: transform .3s;
-    }
-    .btn-animate:hover {
-      transform: scale(1.1);
-    }
-  </style>
   <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
 </head>
 <body>
 <div class="wrapper">
-  <!-- Navigation -->
   <div th:replace="fragments/navWithoutLogin::nav"></div>
-
   <div class="content">
     <div class="container mt-5">
       <div class="row justify-content-center">
@@ -70,13 +37,10 @@
       </div>
     </div>
   </div>
-
-  <!-- Footer -->
   <div class="footer">
     <div th:replace="fragments/footer.html::footer"></div>
   </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>

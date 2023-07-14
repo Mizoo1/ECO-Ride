@@ -1,0 +1,32 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.error-status {
+    font-size: 68px;
+    color: #dc3545;
+    margin-bottom: 30px;
+    animation: bounce 0.5s infinite;
+}
+
+.error-message {
+    font-size: 24px;
+    margin-bottom: 150px;
+}
+
+.footer {
+    margin-top: auto;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}

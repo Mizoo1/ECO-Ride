@@ -5,107 +5,13 @@
     <title>Dinstleistungen</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/service.css">
     <script src="https://kit.fontawesome.com/13bb240f97.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="icon" href="/img/Logo.png" type="image/png">
-
-    <style>
-        :root {
-            --color-white: #ffffff;
-            --color-gray: rgba(64, 64, 64, 0.5);
-            --font-family-base: 'neue-schriftart', Helvetica, sans-serif;
-            --font-family-header: 'Roboto Condensed', Helvetica, sans-serif;
-            --background-img: url("/img/1_1_1.jpg");
-        }
-
-        *, html {
-            margin: 0;
-            padding: 0;
-        }
-
-        .parallax, html {
-            height: 100%;
-            background: var(--background-img) no-repeat center center fixed;
-            background-size: cover;
-            font-family: var(--font-family-base);
-        }
-
-        .container {
-            color: var(--color-white);
-            min-height: calc(100% - 100px);
-            overflow-y: auto;
-        }
-
-        .parallax h1, .text-white, .text-center,
-        #services-section h2,
-        #services-section h4,
-        #services-section p {
-            color: var(--color-white);
-        }
-
-        .card-body {
-            background: var(--color-gray);
-            border: 2px solid var(--color-gray);
-        }
-
-        h1 {
-            font-family: var(--font-family-header);
-            font-weight: 700;
-            font-size: 48px;
-            text-align: center;
-            animation: fadeIn_h 2s ease-in-out;
-        }
-
-        h4.service-title {
-            font-weight: bold;
-            font-size: 24px;
-        }
-
-        @keyframes fadeIn_h {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        #services-section, .service-box, .service-title {
-            padding-bottom: 1%;
-        }
-
-        .service-description {
-            line-height: 1.5;
-            font-size: 18px;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            height: 54px;
-            width: 100%;
-            background-color: var(--color-white);
-            color: #808080;
-            text-align: center;
-        }
-
-        .footer span, .footer a, .footer a:hover {
-            color: #808080;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-    </style>
-
     <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
 </head>
 <body>
-<!-- Navigation -->
 <div th:replace="fragments/nav::nav"></div>
 <div class="parallax">
     <h1 class="text-center py-5 text-white">Unsere Dienstleistungen</h1>
@@ -132,10 +38,7 @@
         </div>
     </div>
 </div>
-
 </section>
-
-<!-- Footer -->
 <footer class="footer mt-auto py-3">
     <div class="container">
         <span>&copy; 2023 ECO-RIDE. All rights reserved.</span>

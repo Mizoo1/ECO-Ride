@@ -6,63 +6,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/profil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        .card {
-            border: none;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-header {
-            background-color: #f8f9fa;
-            border-bottom: none;
-        }
-
-        .card-title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .card-footer {
-            background-color: #f8f9fa;
-            border-top: none;
-        }
-
-        .effect:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .attribute-title {
-            color: black;
-        }
-
-        .attribute-value {
-            color: green;
-            animation: fadeIn_h 2s ease-in-out;
-        }
-        h1 {
-            font-family: 'Roboto Condensed', Arial, sans-serif;
-            font-weight: 700;
-            font-size: 36px;
-            text-align: center;
-            animation: fadeIn_h 2s ease-in-out;
-        }
-        @keyframes fadeIn_h {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-    </style>
 </head>
 <body>
 <div th:replace="fragments/nav.html::nav"></div>
@@ -169,7 +114,6 @@
             </button>
         </div>
     </div>
-
     <!-- Edit Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
          aria-hidden="true">
@@ -239,7 +183,6 @@
             </div>
         </div>
     </div>
-
     <!-- Delete Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
          aria-hidden="true">
@@ -261,7 +204,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <!-- Footer -->
 <div class="footer">
@@ -269,83 +211,6 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script>
-    document.getElementById('saveButton').addEventListener('click', saveChanges);
-
-    function saveChanges() {
-        var titel = document.getElementById('titelInput').value;
-        var userName = document.getElementById('userNameInput').value;
-        var email = document.getElementById('emailInput').value;
-        var adresse = document.getElementById('adresseInput').value;
-        var plz = document.getElementById('plzInput').value;
-        var stadt = document.getElementById('stadtInput').value;
-        var telefonnummer = document.getElementById('telefonnummerInput').value;
-        var fuehrerscheinnummer = document.getElementById('fuehrerscheinnummerInput').value;
-        var ablaufdatum = document.getElementById('ablaufdatumInput').value;
-        var tarif = document.getElementById('tarifInput').value;
-        var userId = document.getElementById('id').textContent;
-
-        // AJAX-Aufruf oder andere Methoden, um die Daten zu speichern
-        // Beispiel:
-        $.ajax({
-            url: '/updateUser/' + userId,
-            type: 'PUT',
-            data: JSON.stringify({
-                titel: titel,
-                userName: userName,
-                email: email,
-                adresse: adresse,
-                plz: plz,
-                stadt: stadt,
-                telefonnummer: telefonnummer,
-                fuehrerscheinnummer: fuehrerscheinnummer,
-                ablaufdatum: ablaufdatum,
-                tarif: tarif
-            }),
-            contentType: 'application/json',
-            success: function (data) {
-                // Erfolgsbehandlung
-                // Aktualisiere die angezeigten Benutzerdaten
-                document.getElementById('titel').innerText = titel;
-                document.getElementById('userName').innerText = userName;
-                document.getElementById('email').innerText = email;
-                document.getElementById('adresse').innerText = adresse;
-                document.getElementById('plz').innerText = plz;
-                document.getElementById('stadt').innerText = stadt;
-                document.getElementById('telefonnummer').innerText = telefonnummer;
-                document.getElementById('fuehrerscheinnummer').innerText = fuehrerscheinnummer;
-                document.getElementById('ablaufdatum').innerText = ablaufdatum;
-                document.getElementById('tarif').innerText = tarif;
-
-                $('#editModal').modal('hide');
-            },
-            error: function (xhr, status, error) {
-                // Fehlerbehandlung
-                console.error(error);
-            }
-        });
-    }
-
-    document.getElementById('confirmDeleteButton').addEventListener('click', deleteAccount);
-
-    function deleteAccount() {
-        var userId = document.getElementById('id').textContent;
-
-        // AJAX request to delete the user account
-        $.ajax({
-            url: '/deleteUser/' + userId,
-            type: 'DELETE',
-            success: function (data) {
-                // Success handling
-                // Redirect to the login page or any other desired action
-                window.location.href = "/login";
-            },
-            error: function (xhr, status, error) {
-                // Error handling
-                console.error(error);
-            }
-        });
-    }
-</script>
+<script src="/js/profil.js"></script>
 </body>
 </html>

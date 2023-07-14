@@ -5,88 +5,14 @@
   <title>Anmelden</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/impressum.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="icon" href="/img/Logo.png" type="image/png">
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-
-    h1, h2 {
-      color: #333;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    p {
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .info {
-      margin-bottom: 20px;
-    }
-
-    .info p {
-      margin: 0;
-      color: #666;
-    }
-
-    .disclaimer {
-      border-top: 1px solid #ddd;
-      padding-top: 20px;
-    }
-
-    .disclaimer p {
-      color: #000;
-      line-height: 1.6;
-    }
-
-    .disclaimer p.warning {
-      color: red;
-      font-style: italic;
-    }
-    .fade-in {
-      opacity: 0;
-      animation: fadeInAnimation 2s ease-in-out forwards;
-    }
-
-    @keyframes fadeInAnimation {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    .blink {
-      animation: blinkAnimation 1s infinite;
-    }
-
-    @keyframes blinkAnimation {
-      0% { opacity: 0; }
-      50% { opacity: 1; }
-      100% { opacity: 0; }
-    }
-    .content-wrapper {
-      flex: 1;
-      overflow-y: auto; /* Enable vertical scroll if content exceeds container height */
-    }
-
-    .footer {
-      margin-top: auto;
-    }
-  </style>
   <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
 </head>
 <body>
 <div class="wrapper">
-  <!-- Navigation -->
   <div th:replace="fragments/navWithoutLogin::nav"></div>
-
   <div class="container fade-in content-wrapper">
     <h1>Impressum</h1>
     <div class="info">
@@ -112,11 +38,9 @@
       <p>Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des Autors.</p>
       <p>Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet und als solche gekennzeichnet. Solltest du trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis.</p>
     </div>
-
   </div>
   <div th:replace="fragments/footer.html::footer"></div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>

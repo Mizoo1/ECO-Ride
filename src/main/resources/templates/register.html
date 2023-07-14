@@ -6,105 +6,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="icon" href="/img/Logo.png" type="image/png">
-    <!-- Font Icon -->
+    <link rel="stylesheet" href="/css/register.css">
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.min.css">
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: "neue-schriftart", Helvetica, sans-serif;
-        }
-        .parallax {
-            background-image: url("/img/1_1_1.jpg");
-
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            min-height: calc(100% - 54px);
-        }
-
-        .parallax h1 {
-            color: #ffffff;
-            font-family: 'Roboto Condensed', Helvetica, sans-serif;
-            font-weight: 700;
-            font-size: 36px;
-            text-align: center;
-            animation: fadeIn_h 2s ease-in-out;
-        }
-        .container {
-            min-height: calc(100% - 54px);
-            overflow-y: auto;
-        }
-
-         .text-white, .text-center {
-            color: #ffffff;
-        }
-
-        .card {
-            background: rgba(64, 64, 64, 0.5);
-            border: 2px solid rgba(64, 64, 64, 0.5);
-        }
-
-        .card-header {
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 24px;
-        }
-
-        .card-body {
-            color: #f1f1f1;
-        }
-
-        .btn-primary {
-            background-color: green;
-            color: white;
-        }
-
-
-
-        @keyframes fadeIn_h {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            height: 54px;
-            width: 100%;
-            background-color: #fff;
-            color: #808080;
-            text-align: center;
-        }
-
-        .footer span {
-            color: #808080;
-        }
-
-        .footer a {
-            color: #808080;
-        }
-
-        .footer a:hover {
-            color: #808080;
-            text-decoration: underline;
-        }
-    </style>
-
 </head>
 <body>
-<!-- Navigation -->
 <div th:replace="fragments/navWithoutLogin::nav"></div>
-<!-- Parallax Section -->
 <div class="parallax">
     <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
 
@@ -129,7 +36,6 @@
             <div class="content">
                 <div class="tab-content">
                     <div id="personal-data" class="tab-pane active">
-                        <!-- Personal data form hier einfügen -->
                         <div class="card personal-data">
                             <h2 class="card-header">Personendaten</h2>
                             <div class="card-body">
@@ -170,7 +76,6 @@
                         </div>
                     </div>
                     <div id="subscription" class="tab-pane">
-                        <!-- Abonnement und Kontakt form hier einfügen -->
                         <div class="card subscription">
                             <h2 class="card-header">Abonnement und Kontakt</h2>
                             <div class="card-body">
@@ -202,7 +107,6 @@
                         </div>
                     </div>
                     <div id="driving-license" class="tab-pane">
-                        <!-- Führerschein form hier einfügen -->
                         <div class="card driving-license">
                             <h2 class="card-header">Führerschein</h2>
                             <div class="card-body">
@@ -234,7 +138,6 @@
                         </div>
                     </div>
                     <div id="payment-method" class="tab-pane">
-                        <!-- Bezahlmethode form hier einfügen -->
                         <div class="card payment-method">
                             <h2 class="card-header">Bezahlmethode</h2>
                             <div class="card-body">
@@ -295,7 +198,6 @@
                                         <button type="submit" class="btn btn-light btn-lg" style="background-color: forestgreen;" data-mdb-ripple-color="dark">Registrieren</button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -304,7 +206,6 @@
         </form>
     </div>
 </div>
-<!-- Footer -->
 <footer class="footer mt-auto py-3">
     <div class="container">
         <span>&copy; 2023 ECO-RIDE. All rights reserved.</span>
@@ -318,39 +219,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="vendor/jquery-ui/jquery-ui.min.js"></script>
-<!-- Fügen Sie den folgenden Code am Ende des HTML-Dokuments ein -->
-<script>
-    $(document).ready(function() {
-        $('form').submit(function(event) {
-            var form = $(this);
-            var inputs = form.find('input[type="text"], input[type="date"], input[type="email"], input[type="password"], select');
-            var checkboxes = form.find('input[type="checkbox"]');
-            var filled = true;
-
-            inputs.each(function() {
-                if ($(this).val() === '') {
-                    filled = false;
-                    return false; // Exit the loop if an empty field is found
-                }
-            });
-
-            checkboxes.each(function() {
-                if (!$(this).is(':checked')) {
-                    filled = false;
-                    return false; // Exit the loop if a checkbox is not checked
-                }
-            });
-
-            if (!filled) {
-                event.preventDefault(); // Prevent form submission
-
-                // Show warning modal
-                $('#warningModal').modal('show');
-                return false;
-            }
-        });
-    });
-</script>
+<script src="/js/register.js"></script>
+<!-- Warnung-->
 <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

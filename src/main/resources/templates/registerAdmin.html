@@ -22,12 +22,9 @@
     </style>
 </head>
 <body>
-<!-- Navigation -->
 <div th:replace="fragments/navWithoutLogin::nav"></div>
-<!-- Parallax Section -->
 <div class="parallax">
     <h1 class="text-white text-center p-5">Willkommen bei unserer Autovermietung</h1>
-
 <div class="container">
     <form th:action="@{/api/v1/registration}" method="post" enctype="multipart/form-data">
         <ul class="nav nav-tabs">
@@ -79,7 +76,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div id="subscription" class="tab-pane">
                 <!-- Abonnement und Kontakt  -->
@@ -113,13 +109,10 @@
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-primary" style="background-color: green; color: white;" type="submit">Registrieren</button>
-
                     </div>
                 </div>
-
             </div>
         </div>
-
     </form>
 </div>
 </div>

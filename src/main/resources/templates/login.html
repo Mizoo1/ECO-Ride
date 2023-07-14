@@ -5,81 +5,14 @@
   <title>Anmelden</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/login.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="icon" href="/img/Logo.png" type="image/png">
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: "neue-schriftart", Helvetica, sans-serif;
-      background: url("/img/1_1_1.jpg") no-repeat center center fixed;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-    }
-
-
-    .container {
-      color: #ffffff;
-      min-height: calc(100% - 100px);
-      overflow-y: auto;
-    }
-    h1, h2, h4, p,.text-center  {
-      color: #ffffff;
-    }
-    h2 {
-      font-family: 'Roboto Condensed', Helvetica, sans-serif;
-      font-weight: 700;
-      font-size: 36px;
-      text-align: center;
-    }
-    p {
-      font-size: 18px;
-    }
-
-
-    .footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      height: 54px;
-      width: 100%;
-      background-color: #fff;
-      color: #808080;
-      text-align: center;
-    }
-
-    .footer span
-    {
-      color: #808080;
-    }
-
-    .footer a
-    {
-      color: #808080;
-    }
-
-    .footer a:hover {
-      color: #808080;
-      text-decoration: underline;
-    }
-    .navbar {
-      background-color: #ffffff;
-    }
-
-  </style>
   <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
 </head>
 <body>
-
-
 <div class="navbar" style="background-color: #ffffff;" th:replace="fragments/navWithoutLogin::nav"></div>
-
-
 <div class="wrapper">
-
     <div class="container mt-5">
       <div class="row justify-content-center">
         <div class="col-md-6">
@@ -104,17 +37,12 @@
         </div>
       </div>
     </div>
-
 </div>
-
-
-<!-- Footer -->
 <footer class="footer mt-auto py-3">
   <div class="container">
     <span>&copy; 2023 ECO-RIDE. All rights reserved.</span>
   </div>
 </footer>
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>

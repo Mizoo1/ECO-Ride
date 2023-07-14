@@ -1,0 +1,45 @@
+#map {
+    height: 400px;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+#map-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+@keyframes fadeIn_h {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+h1 {
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    text-align: center;
+    animation: fadeIn_h 2s ease-in-out;
+}
+
+h2 {
+    font-family: 'Roboto Condensed', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    text-align: center;
+    animation: fadeIn_h 2s ease-in-out;
+}
+textarea#message {
+    height: 200px;
+}
+@media screen and (max-width: 768px) {
+    #findNearestContainer {
+        width: 100%;
+        text-align: center;
+    }
+}

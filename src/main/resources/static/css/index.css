@@ -1,0 +1,113 @@
+.parallax
+{
+    background-image: url("/img/1_1_1.jpg");
+    min-height: 1000px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.parallax h1,
+#services-section h2,
+#services-section h4,
+#services-section p,
+.text-white,
+#reviews-section,
+.text-center,
+#newsletter-section,
+#werbungAbtal
+{
+    color: #ffffff;
+}
+
+.btn-animate
+{
+    transition: transform .3s;
+}
+.btn-animate:hover
+{
+    transform: scale(1.1);
+}
+.carousel-container,
+#reviews-section,
+#faq-section,
+.card,
+#newsletter-section,
+#werbungAbtal
+{
+    background: rgba(64, 64, 64, 0.5);
+    border: 2px solid rgba(64, 64, 64, 0.5);
+}
+
+.carousel-image
+{
+    width: 50%;
+    margin: auto;
+    display: block;
+}
+
+h1
+{
+    font-family: 'Roboto Condensed', Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    text-align: center;
+    animation: fadeIn_h 2s ease-in-out;
+    margin-top: 20px;
+}
+
+h2
+{
+    font-family: 'Roboto Condensed', Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    text-align: center;
+    animation: fadeIn_h 2s ease-in-out;
+    margin-top: 20px;
+}
+@keyframes fadeIn_h
+{
+    0%
+    {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100%
+    {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+#reviews-section
+{
+    margin: 0 auto;
+    width: 70%;
+}
+
+.review-box
+{
+    text-align: center;
+}
+
+.review-text
+{
+    padding-top: 3%;
+    line-height: 1.5;
+}
+.btn-link
+{
+    color: #f1f1f1; /* Helle Textfarbe */
+}
+
+.btn-link:hover
+{
+    color: #c1c1c1; /* Helle Textfarbe beim Darüberfahren */
+}
+.card-body
+{
+    color: #f1f1f1; /* Helle Textfarbe */
+}
+body
+{
+    font-family: "neue-schriftart", Helvetica, sans-serif;
+}
