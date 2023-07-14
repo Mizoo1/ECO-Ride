@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Geschäftsbedingungen</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="/img/Logo.png" type="image/png">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        h1, h2 {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation -->
+<div th:replace="fragments/navWithoutLogin::nav"></div>
+<div class="container py-5">
+    <h1 class="text-center mb-4">Geschäftsbedingungen</h1>
+
+    <h2>1. Allgemeine Bedingungen</h2>
+    <p>Die folgenden Bedingungen regeln die Nutzung unserer Autovermietungsdienste. Indem Sie unsere Dienste nutzen, akzeptieren Sie diese Bedingungen in vollem Umfang.</p>
+
+    <h2>2. Buchung und Reservierung</h2>
+    <p>2.1. Um ein Fahrzeug bei uns zu mieten, müssen Sie mindestens 18 Jahre alt sein und einen gültigen Führerschein vorweisen.</p>
+    <p>2.2. Reservierungen können online über unsere Website oder telefonisch vorgenommen werden. Wir behalten uns das Recht vor, Reservierungen abzulehnen, falls keine Fahrzeuge verfügbar sind oder aus anderen Gründen.</p>
+
+    <h2>3. Zahlungen und Gebühren</h2>
+    <p>3.1. Die Zahlung für die Fahrzeugmiete erfolgt gemäß den zum Zeitpunkt der Buchung geltenden Preisen und Gebühren.</p>
+    <p>3.2. Zusätzliche Gebühren können für Versicherungen, Treibstoff, Zusatzausstattung und andere Optionen anfallen. Diese werden Ihnen vor Abschluss der Buchung mitgeteilt.</p>
+
+    <h2>4. Stornierung und Änderungen</h2>
+    <p>4.1. Stornierungen müssen rechtzeitig gemeldet werden, um eine Rückerstattung zu erhalten. Die genauen Stornierungsbedingungen sind in unseren Richtlinien festgelegt.</p>
+    <p>4.2. Änderungen an Reservierungen können je nach Verfügbarkeit und Bedingungen vorgenommen werden. Gebühren können anfallen.</p>
+
+    <h2>5. Haftung und Versicherung</h2>
+    <p>5.1. Während der Mietdauer sind Sie als Mieter für das Fahrzeug verantwortlich und haften für Schäden, Verlust oder Diebstahl des Fahrzeugs.</p>
+    <p>5.2. Es wird empfohlen, eine geeignete Versicherung abzuschließen, um sich gegen Unfälle, Schäden und Diebstahl abzusichern.</p>
+
+    <h2>6. Datenschutz</h2>
+    <p>6.1. Wir verarbeiten personenbezogene Daten gemäß unserer Datenschutzerklärung.</p>
+    <p>6.2. Ihre personenbezogenen Daten werden nur für die Zwecke der Buchung und Vermietung verwendet und nicht an Dritte weitergegeben, es sei denn, dies ist gesetzlich vorgeschrieben.</p>
+
+    <h2>7. Rechtliche Bestimmungen</h2>
+    <p>7.1. Diese Geschäftsbedingungen unterliegen den Gesetzen des Landes, in dem unsere Autovermietungsfirma registriert ist.</p>
+    <p>7.2. Streitigkeiten im Zusammenhang mit diesen Bedingungen unterliegen der ausschließlichen Gerichtsbarkeit der zuständigen Gerichte.</p>
+
+    <p>Dies sind allgemeine Bedingungen und dienen nur als Beispiel. Passen Sie sie entsprechend den spezifischen Anforderungen Ihres Unternehmens an.</p>
+</div>
+<!-- Footer -->
+<div class="footer">
+    <div th:replace="fragments/footer.html::footer"></div>
+</div>
+</body>
+
+</html>

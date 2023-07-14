@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil von ${userDetails.userName}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .card {
+            border: none;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            border-bottom: none;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-footer {
+            background-color: #f8f9fa;
+            border-top: none;
+        }
+
+        .effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .attribute-title {
+            color: black; /* Rote Farbe für Attribut-Titel */
+        }
+
+        .attribute-value {
+            color: green; /* Blaue Farbe für Attribut-Antworten */
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/nav.html::nav"></div>
+<div class="container">
+    <div class="card effect">
+        <div class="card-header">
+            <h1 class="card-title">Profil von ${userDetails.userName}</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table">
+                        <tr>
+                            <td class="attribute-title">ID:</td>
+                            <td class="attribute-value" id="id" th:text="${userDetails.id}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Titel:</td>
+                            <td class="attribute-value" id="titel" th:text="${userDetails.titel}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Benutzername:</td>
+                            <td class="attribute-value" id="userName" th:text="${userDetails.userName}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Firstname:</td>
+                            <td class="attribute-value" id="firstname" th:text="${userDetails.firstName}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Lastname:</td>
+                            <td class="attribute-value" id="lastname" th:text="${userDetails.lastName}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Email:</td>
+                            <td class="attribute-value" id="email" th:text="${userDetails.email}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Passwort:</td>
+                            <td class="attribute-value" id="password" text="**********"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                        <tr>
+                            <td class="attribute-title">Adresse:</td>
+                            <td class="attribute-value" id="adresse" th:text="${userDetails.adresse}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">PLZ:</td>
+                            <td class="attribute-value" id="plz" th:text="${userDetails.plz}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Stadt:</td>
+                            <td class="attribute-value" id="stadt" th:text="${userDetails.stadt}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Telefonnummer:</td>
+                            <td class="attribute-value" id="telefonnummer" th:text="${userDetails.telefonnummer}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Geburtsdatum:</td>
+                            <td class="attribute-value" id="geburtsdatum" th:text="${userDetails.geburtsdatum}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Geburtsort:</td>
+                            <td class="attribute-value" id="geburtsort" th:text="${userDetails.geburtsort}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Fuehrerscheinnummer:</td>
+                            <td class="attribute-value" id="fuehrerscheinnummer" th:text="${userDetails.fuehrerscheinnummer}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Ablaufdatum:</td>
+                            <td class="attribute-value" id="ablaufdatum" th:text="${userDetails.ablaufdatum}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Ausstellungsort:</td>
+                            <td class="attribute-value" id="ausstellungsort" th:text="${userDetails.ausstellungsort}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Personalausweisnummer:</td>
+                            <td class="attribute-value" id="personalausweisnummer" th:text="${userDetails.personalausweisnummer}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Reisepassnummer:</td>
+                            <td class="attribute-value" id="reisepassnummer" th:text="${userDetails.reisepassnummer}"></td>
+                        </tr>
+                        <tr>
+                            <td class="attribute-title">Tarif:</td>
+                            <td class="attribute-value" id="tarif" th:text="${userDetails.tarif}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">
+                Editieren
+            </button>
+            <button type="button" class="btn btn-danger" id="deleteButton" data-toggle="modal"
+                    data-target="#deleteModal">
+                Konto Löschen
+            </button>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Daten bearbeiten</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <div class="form-group">
+                            <label for="titelInput">Titel</label>
+                            <input type="text" class="form-control" id="titelInput" th:value="${userDetails.titel}">
+                        </div>
+                        <div class="form-group">
+                            <label for="userNameInput">Benutzername</label>
+                            <input type="text" class="form-control" id="userNameInput"
+                                   th:value="${userDetails.userName}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emailInput">Email</label>
+                            <input type="email" class="form-control" id="emailInput" th:value="${userDetails.email}">
+                        </div>
+                        <div class="form-group">
+                            <label for="adresseInput">Adresse</label>
+                            <input type="text" class="form-control" id="adresseInput"
+                                   th:value="${userDetails.adresse}">
+                        </div>
+                        <div class="form-group">
+                            <label for="plzInput">PLZ</label>
+                            <input type="text" class="form-control" id="plzInput" th:value="${userDetails.plz}">
+                        </div>
+                        <div class="form-group">
+                            <label for="stadtInput">Stadt</label>
+                            <input type="text" class="form-control" id="stadtInput" th:value="${userDetails.stadt}">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefonnummerInput">Telefonnummer</label>
+                            <input type="text" class="form-control" id="telefonnummerInput"
+                                   th:value="${userDetails.telefonnummer}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fuehrerscheinnummerInput">Fuehrerscheinnummer</label>
+                            <input type="text" class="form-control" id="fuehrerscheinnummerInput"
+                                   th:value="${userDetails.fuehrerscheinnummer}">
+                        </div>
+                        <div class="form-group">
+                            <label for="ablaufdatumInput">Ablaufdatum</label>
+                            <input type="text" class="form-control" id="ablaufdatumInput"
+                                   th:value="${userDetails.ablaufdatum}">
+                        </div>
+                        <div class="form-group">
+                            <label for="tarifInput">Tarif</label>
+                            <input type="text" class="form-control" id="tarifInput" th:value="${userDetails.tarif}">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn btn-primary" id="saveButton">Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Konto löschen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Sind Sie sicher, dass Sie Ihr Konto löschen möchten?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButton">Löschen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Footer -->
+<div class="footer">
+    <div th:replace="fragments/footer.html::footer"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('saveButton').addEventListener('click', saveChanges);
+
+    function saveChanges() {
+        var titel = document.getElementById('titelInput').value;
+        var userName = document.getElementById('userNameInput').value;
+        var email = document.getElementById('emailInput').value;
+        var adresse = document.getElementById('adresseInput').value;
+        var plz = document.getElementById('plzInput').value;
+        var stadt = document.getElementById('stadtInput').value;
+        var telefonnummer = document.getElementById('telefonnummerInput').value;
+        var fuehrerscheinnummer = document.getElementById('fuehrerscheinnummerInput').value;
+        var ablaufdatum = document.getElementById('ablaufdatumInput').value;
+        var tarif = document.getElementById('tarifInput').value;
+        var userId = document.getElementById('id').textContent;
+
+        // AJAX-Aufruf oder andere Methoden, um die Daten zu speichern
+        // Beispiel:
+        $.ajax({
+            url: '/updateUser/' + userId,
+            type: 'PUT',
+            data: JSON.stringify({
+                titel: titel,
+                userName: userName,
+                email: email,
+                adresse: adresse,
+                plz: plz,
+                stadt: stadt,
+                telefonnummer: telefonnummer,
+                fuehrerscheinnummer: fuehrerscheinnummer,
+                ablaufdatum: ablaufdatum,
+                tarif: tarif
+            }),
+            contentType: 'application/json',
+            success: function (data) {
+                // Erfolgsbehandlung
+                // Aktualisiere die angezeigten Benutzerdaten
+                document.getElementById('titel').innerText = titel;
+                document.getElementById('userName').innerText = userName;
+                document.getElementById('email').innerText = email;
+                document.getElementById('adresse').innerText = adresse;
+                document.getElementById('plz').innerText = plz;
+                document.getElementById('stadt').innerText = stadt;
+                document.getElementById('telefonnummer').innerText = telefonnummer;
+                document.getElementById('fuehrerscheinnummer').innerText = fuehrerscheinnummer;
+                document.getElementById('ablaufdatum').innerText = ablaufdatum;
+                document.getElementById('tarif').innerText = tarif;
+
+                $('#editModal').modal('hide');
+            },
+            error: function (xhr, status, error) {
+                // Fehlerbehandlung
+                console.error(error);
+            }
+        });
+    }
+
+    document.getElementById('confirmDeleteButton').addEventListener('click', deleteAccount);
+
+    function deleteAccount() {
+        var userId = document.getElementById('id').textContent;
+
+        // AJAX request to delete the user account
+        $.ajax({
+            url: '/deleteUser/' + userId,
+            type: 'DELETE',
+            success: function (data) {
+                // Success handling
+                // Redirect to the login page or any other desired action
+                window.location.href = "/login";
+            },
+            error: function (xhr, status, error) {
+                // Error handling
+                console.error(error);
+            }
+        });
+    }
+</script>
+</body>
+</html>
